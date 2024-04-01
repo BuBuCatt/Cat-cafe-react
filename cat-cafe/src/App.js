@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Adopt from './pages/Adopt';
 import ShoppingCart from './pages/ShoppingCart';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,8 +19,11 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/adopt" element={<Adopt />} />
         <Route path="/cart" element={<ShoppingCart />} />
+        
       </Routes>
+      <Footer/>
     </Router>
+    
   );
 }
 
