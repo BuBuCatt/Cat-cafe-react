@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "name": "Whiskers",
+      "age": "2 years",
+      "breed": "British Shorthair",
+      "description": "A calm and dignified kitty who loves to lounge in the sun.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Paws",
+      "age": "6 months",
+      "breed": "Maine Coon",
+      "description": "A playful kitten with a love for string toys and cuddles.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Socks",
+      "age": "1 year",
+      "breed": "Tabby",
+      "description": "An adventurous cat with a curious personality.",
+      "adoptionStatus": "Adopted"
+    },
+    {
+      "id": 4,
+      "name": "Ginger",
+      "age": "3 years",
+      "breed": "Persian",
+      "description": "A serene and beautiful cat with a gentle disposition.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 5,
+      "name": "Coco",
+      "age": "4 years",
+      "breed": "Siamese",
+      "description": "A chatty feline who enjoys being the center of attention.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 6,
+      "name": "Shadow",
+      "age": "2 years",
+      "breed": "Russian Blue",
+      "description": "A shy and graceful cat, Shadow warms up quickly to kindness.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 7,
+      "name": "Mittens",
+      "age": "5 months",
+      "breed": "Bengal",
+      "description": "A little bundle of energy with striking markings.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 8,
+      "name": "Oliver",
+      "age": "1 year",
+      "breed": "Scottish Fold",
+      "description": "Oliver loves a good scratch and will purr your ear off for one.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 9,
+      "name": "Bella",
+      "age": "2 years",
+      "breed": "Sphynx",
+      "description": "Bella enjoys company and will often seek out a warm lap.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 10,
+      "name": "Luna",
+      "age": "3 years",
+      "breed": "Ragdoll",
+      "description": "With her blue eyes and soft fur, Luna is a delight to pet.",
+      "adoptionStatus": "Adopted"
+    },
+    {
+      "id": 11,
+      "name": "Simba",
+      "age": "4 months",
+      "breed": "Munchkin",
+      "description": "Simba may be small, but his heart is mighty.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 12,
+      "name": "Max",
+      "age": "2 years",
+      "breed": "Abyssinian",
+      "description": "Max is a playful explorer who's always on the hunt for fun.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 13,
+      "name": "Daisy",
+      "age": "6 months",
+      "breed": "Norwegian Forest Cat",
+      "description": "Daisy is as sweet as she is fluffy, which is to say very!",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 14,
+      "name": "Oscar",
+      "age": "7 years",
+      "breed": "American Shorthair",
+      "description": "Oscar is a seasoned snuggler and a friend to all he meets.",
+      "adoptionStatus": "Available"
+    },
+    {
+      "id": 15,
+      "name": "Zoe",
+      "age": "3 years",
+      "breed": "Turkish Angora",
+      "description": "Zoe has a regal bearing and a soft, silky coat.",
+      "adoptionStatus": "Available"
+    }
+  ]
+  

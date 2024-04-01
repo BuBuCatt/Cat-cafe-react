@@ -1,0 +1,108 @@
+[
+    {
+      "id": 1,
+      "name": "Classic Americano",
+      "description": "Rich espresso with hot water for a smooth, robust coffee.",
+      "price": 2.50,
+      "category": "Coffee"
+    },
+    {
+      "id": 2,
+      "name": "Caramel Macchiato",
+      "description": "Freshly steamed milk with vanilla-flavored syrup, marked with espresso and caramel drizzle.",
+      "price": 3.75,
+      "category": "Coffee"
+    },
+    {
+      "id": 3,
+      "name": "Espresso Shot",
+      "description": "Intensely bold and flavorful espresso shot with a golden crema on top.",
+      "price": 1.95,
+      "category": "Espresso"
+    },
+    {
+      "id": 4,
+      "name": "Blueberry Muffin",
+      "description": "Moist, fluffy muffin filled with juicy blueberries.",
+      "price": 2.25,
+      "category": "Pastry"
+    },
+    {
+      "id": 5,
+      "name": "Cappuccino",
+      "description": "A classic combination of rich espresso topped with frothy milk foam.",
+      "price": 3.00,
+      "category": "Coffee"
+    },
+    {
+      "id": 6,
+      "name": "Chai Latte",
+      "description": "A creamy blend of spicy chai tea and steamed milk.",
+      "price": 3.50,
+      "category": "Tea"
+    },
+    {
+      "id": 7,
+      "name": "Green Tea",
+      "description": "Refreshing and delicate green tea sourced from the best picks.",
+      "price": 2.00,
+      "category": "Tea"
+    },
+    {
+      "id": 8,
+      "name": "Iced Coffee",
+      "description": "Freshly brewed coffee served over ice for a crisp, cool taste.",
+      "price": 2.50,
+      "category": "Cold Brews"
+    },
+    {
+      "id": 9,
+      "name": "Lemon Poppy Seed Cake",
+      "description": "Light and zesty lemon cake dotted with poppy seeds.",
+      "price": 3.00,
+      "category": "Pastry"
+    },
+    {
+      "id": 10,
+      "name": "Vanilla Bean Frappé",
+      "description": "Iced blend of coffee, milk, and rich vanilla bean flavor.",
+      "price": 4.00,
+      "category": "Frappé"
+    },
+    {
+      "id": 11,
+      "name": "Hot Chocolate",
+      "description": "Steamed milk with chocolate syrup, topped with whipped cream.",
+      "price": 2.75,
+      "category": "Chocolate"
+    },
+    {
+      "id": 12,
+      "name": "Matcha Latte",
+      "description": "Finely ground matcha green tea mixed with steamed milk.",
+      "price": 3.75,
+      "category": "Tea"
+    },
+    {
+      "id": 13,
+      "name": "Bagel with Cream Cheese",
+      "description": "Toasted bagel served with a generous spread of cream cheese.",
+      "price": 2.75,
+      "category": "Pastry"
+    },
+    {
+      "id": 14,
+      "name": "Vegan Banana Bread",
+      "description": "Moist banana bread made with wholesome vegan ingredients.",
+      "price": 2.95,
+      "category": "Vegan"
+    },
+    {
+      "id": 15,
+      "name": "Iced Matcha Tea",
+      "description": "Chilled matcha tea, lightly sweetened and served with ice.",
+      "price": 3.00,
+      "category": "Cold Brews"
+    }
+  ]
+  
