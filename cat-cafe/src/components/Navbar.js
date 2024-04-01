@@ -2,6 +2,10 @@ import React from 'react';
 import { Navbar, Nav, FormControl, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import  '../styles/home.css'
+
 
 function NavBar() {
   return (
@@ -36,8 +40,12 @@ function NavBar() {
       </Button> */}
     </Form>
 
-        <Nav>
-        <Button as={Link} to="/login" variant="dark">Login</Button>
+
+        <Nav  >
+            <Button as={Link} to="/cart" variant="dark" className="me-2">
+                <FontAwesomeIcon icon={faShoppingCart} />
+            </Button>
+            <Button as={Link} to="/login" variant="dark">Login</Button>
         </Nav>
         </Navbar.Collapse>
     </Navbar>
