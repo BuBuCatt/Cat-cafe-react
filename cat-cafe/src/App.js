@@ -9,6 +9,7 @@ import Menu from './pages/Menu';
 import Adopt from './pages/Adopt';
 import ShoppingCart from './pages/ShoppingCart';
 import Footer from './components/Footer';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/adopt" element={<Adopt />} />
           <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/login" element={<Login />} />
           
         </Routes>
 
