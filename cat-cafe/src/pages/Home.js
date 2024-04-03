@@ -8,14 +8,14 @@ import  '../styles/home.css'
 const Home = (props) => {
 
 
-  console.log("here is home"+ props.loginU)
+  console.log("here is home"+ props.loginUser)
 
   return (
     <>
 
-      { props.loginU ? (
+      { props.loginUser ? (
        
-        <span>Welcome,{props.loginU && props.loginU.username}</span>
+        <span>Welcome,{props.loginUser && props.loginUser.username}</span>
 
       ):(
         <span>Welcome, Guest!</span>

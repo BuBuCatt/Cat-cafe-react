@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter,  Routes, Route } from 'react-router-dom';
 import Links from './components/Links';
 import { useState, useEffect } from 'react';
 import NavBar from './components/Navbar';
@@ -56,6 +56,13 @@ const Auth = (userObj)=>{
   console.log("app" + userObj.pass)
 }
 
+// logout
+const userLogout=()=>{
+        
+  setLoginUser(null);
+
+}
+
 
 
   return (
@@ -63,14 +70,15 @@ const Auth = (userObj)=>{
       <NavBar />
 
         <Routes>
-        <Route path="/" element={<Links loginU={loginUser}/>}>
-            <Route path="/home" element={<Home loginU={loginUser} />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/adopt" element={<Adopt />} />
-            <Route path="/cart" element={<ShoppingCart />} />
-            <Route path="/login" element={<LoginPage auth={Auth} loginU={loginUser}  />}  />
-            <Route path="/logout"  element={<Logout />} />
-          </Route>
+          <Route path="/" element={<Links loginUser={loginUser} />}>
+              <Route index element={<Home loginUser={loginUser} />} />
+              <Route path="home" element={<Home />} />
+              <Route path="menu" element={<Menu />} />
+              <Route path="adopt" element={<Adopt />} />
+              <Route path="cart" element={<ShoppingCart />} />
+              <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="logout"  element={<Logout userLogout = {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+            </Route>
           
         </Routes>
 
