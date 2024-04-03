@@ -10,7 +10,7 @@ import  '../styles/home.css'
 function NavBar() {
   return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
-      <Navbar.Brand as={Link} to="/" className="mr-auto">
+      <Navbar.Brand as={Link} to="/home" className="mr-auto">
         <img
           src={logo}
           width="100"
@@ -46,6 +46,7 @@ function NavBar() {
                 <FontAwesomeIcon icon={faShoppingCart} />
             </Button>
             <Button as={Link} to="/login" variant="dark">Login</Button>
+            {/* <Button as={Link} to="/logout" variant="dark">Logout</Button> */}
         </Nav>
         </Navbar.Collapse>
     </Navbar>
