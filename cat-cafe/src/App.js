@@ -5,13 +5,16 @@ import Links from './components/Links';
 import { useState, useEffect } from 'react';
 import NavBar from './components/Navbar';
 import Home from './pages/Home';
-import Menu from './pages/Menu';
+import Menu from './pages/Cafe';
 import Adopt from './pages/Adopt';
 import ShoppingCart from './pages/ShoppingCart';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import Logout from './components/Logout';
 import FileService from "./services/FileService";
+import Cafe from './pages/Cafe';
+import Shop from './pages/Shop';
+
 
 function App() {
   const [users, setUsers]=useState(null);
@@ -73,8 +76,9 @@ const userLogout=()=>{
           <Route path="/" element={<Links loginUser={loginUser} />}>
               <Route index element={<Home loginUser={loginUser} auth={Auth} />} />
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth}/>} />
-              <Route path="menu" element={<Menu />} />
               <Route path="adopt" element={<Adopt />} />
+              <Route path="cafe" element={<Cafe />} />
+              <Route path="shop" element={<Shop />} />
               <Route path="cart" element={<ShoppingCart />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
@@ -82,7 +86,7 @@ const userLogout=()=>{
           
         </Routes>
 
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
     
   );

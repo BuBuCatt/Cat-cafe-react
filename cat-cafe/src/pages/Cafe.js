@@ -1,7 +1,7 @@
 // src/pages/Menu.js
 import React from 'react';
 
-const Menu = () => {
+const Cafe = () => {
   return (
     <div>
       <h1>Menu Page</h1>
@@ -11,4 +11,4 @@ const Menu = () => {
   );
 }
 
-export default Menu;
+export default Cafe;

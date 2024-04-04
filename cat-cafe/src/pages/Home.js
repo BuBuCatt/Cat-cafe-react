@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import  '../styles/home.css'
+import NavImg from "../components/NavImg";
 
 
 
@@ -23,6 +24,7 @@ const Home = (props) => {
       )}
 
       <HeroSection/>
+      {/* <NavImg/> */}
      
       
     </>

@@ -27,7 +27,7 @@ function NavBar(props) {
       <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mx-auto me-3">
         <Nav.Link as={Link}  to="/home">Home</Nav.Link>
-        <Nav.Link as={Link}  to="/adopt-cat">Adopt Cat</Nav.Link>
+        <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
         <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
         <Nav.Link as={Link}  to="/shop">Shop</Nav.Link>
       </Nav>
