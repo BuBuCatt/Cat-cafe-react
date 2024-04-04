@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 export default function Links(props) {
   return (
     <>
-        <Navbar bg="light" expand="lg">
+        {/* <Navbar bg="light" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -22,7 +22,7 @@ export default function Links(props) {
             <LinkContainer to="/shop">
               <Nav.Link>Shop</Nav.Link>
             </LinkContainer>
-            {/* Conditional rendering based on login state */}
+           
             {!props.loginUser ? (
               <LinkContainer to="/login">
                 <Nav.Link>Login</Nav.Link>
@@ -34,7 +34,7 @@ export default function Links(props) {
             )}
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
       {/* This Outlet will render the child components/routes */}
       <Outlet />
     </>

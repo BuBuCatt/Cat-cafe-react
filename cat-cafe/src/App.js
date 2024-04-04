@@ -19,12 +19,12 @@ function App() {
 
 
   useEffect(()=>{
-
+// read the users file then get the data 
 
  
         FileService.read("customers").then(
             (response)=>{
-                setUsers(response.data);// Set users state with loaded data
+                setUsers(response.data);// Set users state with loaded data in users 
                 console.log("User Obj" + response.data);
             },
             (rej)=>{
@@ -67,17 +67,17 @@ const userLogout=()=>{
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar loginUser={loginUser} userLogout={userLogout} />
 
         <Routes>
           <Route path="/" element={<Links loginUser={loginUser} />}>
-              <Route index element={<Home loginUser={loginUser} />} />
-              <Route path="home" element={<Home />} />
+              <Route index element={<Home loginUser={loginUser} auth={Auth} />} />
+              <Route path="home" element={<Home  loginUser={loginUser} auth={Auth}/>} />
               <Route path="menu" element={<Menu />} />
               <Route path="adopt" element={<Adopt />} />
               <Route path="cart" element={<ShoppingCart />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="logout"  element={<Logout userLogout = {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+              <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           
         </Routes>
