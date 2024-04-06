@@ -32,7 +32,7 @@ function NavBar(props) {
         <Nav.Link as={Link}  to="/shop">Shop</Nav.Link>
       </Nav>
 
-      <Form inline  className="search-bar me-3 " >
+      <Form className="search-bar me-3 " >
       <FormControl
         type="text"
         placeholder="Searching"

@@ -1,0 +1,10 @@
+/* adopt.css */
+.carousel-caption {
+    bottom: initial;
+    top: 10%;
+    color:  #555;
+  }
+
+  .carousel-item img {
+    opacity: 0.6;
+  }

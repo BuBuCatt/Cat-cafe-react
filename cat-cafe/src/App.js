@@ -5,7 +5,6 @@ import Links from './components/Links';
 import { useState, useEffect } from 'react';
 import NavBar from './components/Navbar';
 import Home from './pages/Home';
-import Menu from './pages/Cafe';
 import Adopt from './pages/Adopt';
 import ShoppingCart from './pages/ShoppingCart';
 import Footer from './components/Footer';
@@ -16,28 +15,58 @@ import Cafe from './pages/Cafe';
 import Shop from './pages/Shop';
 
 
+
 function App() {
-  const [users, setUsers]=useState(null);
-  const [loginUser,setLoginUser] = useState(null);
+  // customers
+  const [users, setUsers]=useState(null);// json file user/ customers
+  const [loginUser,setLoginUser] = useState(null); // login user 
+  // cafe Menu
+  const [menu , setMenu]= useState(null); // cafe menu 
+  // cats
+  const [cats , setCats] = useState(null); // adopt cats
+
+  // File error handling 
+  const [error, setError] = useState(null); // file error handling
 
 
   useEffect(()=>{
 // read the users file then get the data 
 
- 
+        // Read the customer json file
         FileService.read("customers").then(
             (response)=>{
-                setUsers(response.data);// Set users state with loaded data in users 
-                console.log("User Obj" + response.data);
+                setUsers(response.data);// Set users state with loaded data in users -> users
+                console.log("Json file customers Obj : " + response.data);
             },
             (rej)=>{
                 console.log(rej);// Log errors if file reading fails
+                setError(rej.message || "An error occurred while reading the customers file.");
             }
         )
+         //read cafe menu json file
+        FileService.read("menu").then(
+          (response)=>{
+            setMenu(response.data);// Set Menu state with loaded data  -> cafe menu
+              console.log("Json file Cafe Menu Obj : " + response.data);
+          },
+          (rej)=>{
+              console.log(rej);// Log errors if file reading fails
+              setError(rej.message || "An error occurred while reading the menu file.");
+          }
+      )
 
+      //read cafe menu json file
+        FileService.read("cats").then(
+          (response)=>{
+            setCats(response.data);// Set Cats state with loaded data  -> Adopt Cats
+              console.log("Json file Adopt Cats Obj : " + response.data);
+          },
+          (rej)=>{
+              console.log(rej);// Log errors if file reading fails
+              setError(rej.message || "An error occurred while reading the cats file.");
+          }
+      )
 
-
-    
     
 },[]);
 
@@ -76,8 +105,8 @@ const userLogout=()=>{
           <Route path="/" element={<Links loginUser={loginUser} />}>
               <Route index element={<Home loginUser={loginUser} auth={Auth} />} />
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth}/>} />
-              <Route path="adopt" element={<Adopt />} />
-              <Route path="cafe" element={<Cafe />} />
+              <Route path="adopt" element={<Adopt cats={cats}/>} />
+              <Route path="cafe" element={<Cafe menu={menu}/>} />
               <Route path="shop" element={<Shop />} />
               <Route path="cart" element={<ShoppingCart />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />

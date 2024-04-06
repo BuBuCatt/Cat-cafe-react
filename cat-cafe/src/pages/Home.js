@@ -1,7 +1,7 @@
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import  '../styles/home.css'
-import NavImg from "../components/NavImg";
+
 
 
 
@@ -9,7 +9,7 @@ import NavImg from "../components/NavImg";
 const Home = (props) => {
 
 
-  console.log("here is home"+ props.loginUser)
+  //console.log("here is home"+ props.loginUser)
 
   return (
     <>
@@ -24,7 +24,7 @@ const Home = (props) => {
       )}
 
       <HeroSection/>
-      {/* <NavImg/> */}
+     
      
       
     </>

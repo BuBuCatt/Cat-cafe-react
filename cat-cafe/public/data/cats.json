@@ -1,143 +1,143 @@
 [
     {
-      "id": 1,
-      "name": "Whiskers",
-      "age": "2 years",
-      "breed": "British Shorthair",
-      "description": "A calm and dignified kitty who loves to lounge in the sun.",
+      "cid": 1,
+      "catName": "Whiskers",
+      "cataAge": "2 years",
+      "catBreed": "British Shorthair",
+      "catDescription": "A calm and dignified kitty who loves to lounge in the sun.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/British Shorthair-01.jpg"
+      "catImage":"./data/img/British Shorthair-01.jpg"
 
     },
     {
-      "id": 2,
-      "name": "Paws",
-      "age": "6 months",
-      "breed": "Maine Coon",
-      "description": "A playful kitten with a love for string toys and cuddles.",
+      "cid": 2,
+      "catName": "Paws",
+      "cataAge": "6 months",
+      "catBreed": "Maine Coon",
+      "catDescription": "A playful kitten with a love for string toys and cuddles.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Maine Coon-02.jpg"
+      "catImage":"./data/img/Maine Coon-02.jpg"
     },
     {
-      "id": 3,
-      "name": "Socks",
-      "age": "1 year",
-      "breed": "Tabby",
-      "description": "An adventurous cat with a curious personality.",
+      "cid": 3,
+      "catName": "Socks",
+      "cataAge": "1 year",
+      "catBreed": "Tabby",
+      "catDescription": "An adventurous cat with a curious personality.",
       "adoptionStatus": "Adopted",
-      "imageUrl":"./data/img/Tabby-03.jpg"
+      "catImage":"./data/img/Tabby-03.jpg"
     },
     {
-      "id": 4,
-      "name": "Ginger",
-      "age": "3 years",
-      "breed": "Persian",
-      "description": "A serene and beautiful cat with a gentle disposition.",
+      "cid": 4,
+      "catName": "Ginger",
+      "cataAge": "3 years",
+      "catBreed": "Persian",
+      "catDescription": "A serene and beautiful cat with a gentle disposition.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Persian-04.jpg"
+      "catImage":"./data/img/Persian-04.jpg"
     },
     {
-      "id": 5,
-      "name": "Coco",
-      "age": "4 years",
-      "breed": "Siamese",
-      "description": "A chatty feline who enjoys being the center of attention.",
+      "cid": 5,
+      "catName": "Coco",
+      "cataAge": "4 years",
+      "catBreed": "Siamese",
+      "catDescription": "A chatty feline who enjoys being the center of attention.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Siamese-05.jpg"
+      "catImage":"./data/img/Siamese-05.jpg"
     },
     {
-      "id": 6,
-      "name": "Shadow",
-      "age": "2 years",
-      "breed": "Tabby",
-      "description": "A shy and graceful cat, Shadow warms up quickly to kindness.",
+      "cid": 6,
+      "catName": "Shadow",
+      "cataAge": "2 years",
+      "catBreed": "Tabby",
+      "catDescription": "A shy and graceful cat, Shadow warms up quickly to kindness.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tabby-06.jpg"
+      "catImage":"./data/img/Tabby-06.jpg"
     },
     {
-      "id": 7,
-      "name": "Mittens",
-      "age": "2 years",
-      "breed": "Moggie",
-      "description": "A little bundle of energy with striking markings.",
+      "cid": 7,
+      "catName": "Mittens",
+      "cataAge": "2 years",
+      "catBreed": "Moggie",
+      "catDescription": "A little bundle of energy with striking markings.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Moggie-07.jpg"
+      "catImage":"./data/img/Moggie-07.jpg"
     },
     {
-      "id": 8,
-      "name": "Oliver",
-      "age": "1 year",
-      "breed": "Tabby",
-      "description": "Oliver loves a good scratch and will purr your ear off for one.",
+      "cid": 8,
+      "catName": "Oliver",
+      "cataAge": "1 year",
+      "catBreed": "Tabby",
+      "catDescription": "Oliver loves a good scratch and will purr your ear off for one.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tabby-08.jpg"
+      "catImage":"./data/img/Tabby-08.jpg"
     },
     {
-      "id": 9,
-      "name": "Bella",
-      "age": "2 years",
-      "breed": "Harlequin",
-      "description": "Bella is a companionable Harlequin known for her striking coat and sociable nature.",
+      "cid": 9,
+      "catName": "Bella",
+      "cataAge": "2 years",
+      "catBreed": "Harlequin",
+      "catDescription": "Bella is a companionable Harlequin known for her striking coat and sociable nature.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Harlequin-09.jpg"
+      "catImage":"./data/img/Harlequin-09.jpg"
 
     },
     {
-        "id": 10,
-        "name": "Oreo",
-        "age": "3 years",
-        "breed": "Tuxedo",
-        "description": "Oreo, with his striking black and white 'tuxedo' markings, has a charming personality to match his elegant coat. His soft fur and friendly demeanor make him a wonderful companion.",
+        "cid": 10,
+        "catName": "Oreo",
+        "cataAge": "3 years",
+        "catBreed": "Tuxedo",
+        "catDescription": "Oreo, with his striking black and white 'tuxedo' markings, has a charming personality to match his elegant coat. His soft fur and friendly demeanor make him a wonderful companion.",
         "adoptionStatus": "Adopted",
-        "imageUrl":"./data/img/Tuxedo-10.jpg"
+        "catImage":"./data/img/Tuxedo-10.jpg"
 
       }
       
       ,
     {
-      "id": 11,
-      "name": "Simba",
-      "age": "4 months",
-      "breed": "Munchkin",
-      "description": "Simba may be small, but his heart is mighty.",
+      "cid": 11,
+      "catName": "Simba",
+      "cataAge": "4 months",
+      "catBreed": "Munchkin",
+      "catDescription": "Simba may be small, but his heart is mighty.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Tuxedo-10.jpg"
     },
     {
-      "id": 12,
-      "name": "Max",
-      "age": "2 years",
-      "breed": "American Shorthair",
-      "description": "Max is a playful explorer who's always on the hunt for fun.",
+      "cid": 12,
+      "catName": "Max",
+      "cataAge": "2 years",
+      "catBreed": "American Shorthair",
+      "catDescription": "Max is a playful explorer who's always on the hunt for fun.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Tuxedo-10.jpg"
     },
     {
-      "id": 13,
-      "name": "Daisy",
-      "age": "6 months",
-      "breed": "Tuxedo",
-      "description": "Daisy is as sweet as she is fluffy, which is to say very!",
+      "cid": 13,
+      "catName": "Daisy",
+      "cataAge": "6 months",
+      "catBreed": "Tuxedo",
+      "catDescription": "Daisy is as sweet as she is fluffy, which is to say very!",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Tuxedo-10.jpg"
     },
     {
-      "id": 14,
-      "name": "Oscar",
-      "age": "7 years",
-      "breed": "American Shorthair",
-      "description": "Oscar is a seasoned snuggler and a friend to all he meets.",
+      "cid": 14,
+      "catName": "Oscar",
+      "cataAge": "7 years",
+      "catBreed": "American Shorthair",
+      "catDescription": "Oscar is a seasoned snuggler and a friend to all he meets.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Tuxedo-10.jpg"
     },
     {
-      "id": 15,
-      "name": "Zoe",
-      "age": "3 years",
-      "breed": "Tuxedo",
-      "description": "Zoe has a regal bearing and a soft, silky coat.",
+      "cid": 15,
+      "catName": "Zoe",
+      "cataAge": "3 years",
+      "catBreed": "Tuxedo",
+      "catDescription": "Zoe has a regal bearing and a soft, silky coat.",
       "adoptionStatus": "Available",
-      "imageUrl":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Tuxedo-10.jpg"
     }
   ]
   
