@@ -3,7 +3,7 @@ import { Navbar, Nav, FormControl, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart , faHeart } from '@fortawesome/free-solid-svg-icons';
 import  '../styles/home.css'
 
 
@@ -46,8 +46,15 @@ function NavBar(props) {
 
 
             <Nav  >
-                <Link>
-                    <Button  to="/cart" variant="dark" className="me-2">
+                
+                <Link to="/wishlist">
+                  <Button variant="dark" className="me-2">
+                    <FontAwesomeIcon icon={faHeart} />
+                  </Button>
+                </Link>
+
+                <Link to="/cart">
+                    <Button   variant="dark" className="me-2">
                         <FontAwesomeIcon icon={faShoppingCart} />
                     </Button>
                 </Link>

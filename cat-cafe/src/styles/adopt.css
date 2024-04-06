@@ -8,3 +8,10 @@
   .carousel-item img {
     opacity: 0.6;
   }
+
+.favorite-btn{
+  background-color: transparent;
+  border: none;
+  transition: opacity 0.3s ease ;
+  cursor: pointer;
+}

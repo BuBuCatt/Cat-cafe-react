@@ -1,6 +1,25 @@
-import React from 'react'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import  { useState } from 'react';
 
 export default function Cats({cats}) {
+
+    const [isFavorited, setIsFavorited] = useState(false);
+    const toggleFavorite = () => {
+        setIsFavorited(!isFavorited);
+        if (!isFavorited) {
+          // Add to favorites
+          localStorage.setItem(cats.id, JSON.stringify(cats));
+        } else {
+          // Remove from favorites
+          localStorage.removeItem(cats.id);
+        }
+      
+      };
+      
+
   return (
     <>
         <div className="container mt-5">
@@ -18,7 +37,10 @@ export default function Cats({cats}) {
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                     <span className={`badge ${cat.adoptionStatus === 'Available' ? 'bg-success' : 'bg-secondary'}`}>{cat.adoptionStatus}</span>
-                    <a href="#" className="btn btn-primary">Adopt</a>
+                    {/* <a href="#" className="btn btn-primary">Adopt</a> */}
+                    <button className="favorite-btn"  onClick={() => toggleFavorite(cat)}  aria-label="Toggle Favorite" disabled={cat.adoptionStatus === 'Adopted'}>
+                        <FontAwesomeIcon icon={isFavorited ? fasHeart : farHeart} color={isFavorited ? "red" : "grey"} />
+                    </button>
                     </div>
                 </div>
                 </div>
