@@ -14,9 +14,6 @@ Cat Café Locator: Find cat cafés near you where you can meet potential feline 
 
 Favorites: Save cats you’re interested into your favorites list for easy access later.
 
-Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 
 
