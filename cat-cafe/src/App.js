@@ -13,6 +13,7 @@ import Logout from './components/Logout';
 import FileService from "./services/FileService";
 import Cafe from './pages/Cafe';
 import Shop from './pages/Shop';
+import Wishlist from './pages/Wishlist';
 
 
 
@@ -108,6 +109,7 @@ const userLogout=()=>{
               <Route path="adopt" element={<Adopt cats={cats}/>} />
               <Route path="cafe" element={<Cafe menu={menu}/>} />
               <Route path="shop" element={<Shop />} />
+              <Route path="wishlist" element={<Wishlist/>} />
               <Route path="cart" element={<ShoppingCart />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />

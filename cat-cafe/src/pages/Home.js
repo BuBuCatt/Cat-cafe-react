@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import  '../styles/home.css'
+import Footer from "../components/Footer";
 
 
 
@@ -24,6 +25,8 @@ const Home = (props) => {
       )}
 
       <HeroSection/>
+
+      <Footer/>
      
      
       
