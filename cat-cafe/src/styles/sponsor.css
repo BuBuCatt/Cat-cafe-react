@@ -1,0 +1,34 @@
+.sponsor-cat-img{
+    border-radius: 25%;
+    width: 90%;
+}
+
+.sponsor-banner {
+    margin-top: 30px; 
+    margin-bottom: 30px;
+  }
+.sponsor-btn {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    border-radius:10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .sponsor-banner img {
+    height: 90%; 
+    object-fit: cover; 
+    width: 90%; 
+    border-radius: 10%;
+  }
+  .sponsor-btn:hover {
+    background-color: #6F4E37; /* Change the background color when the button is hovered */
+  }
+  
