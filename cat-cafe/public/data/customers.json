@@ -2,121 +2,121 @@
     {
       "id": 1,
       "username": "Bubu",
-      "password": "test12",
+      "pass": "test12",
       "email": "bubu@meowmatch.com"
     },
     {
       "id": 2,
       "username": "EspressoEnthusiast",
-      "password": "hashedpassword234",
+      "pass": "hashedpass234",
       "email": "enthusiast@meowmatch.com"
     },
     {
       "id": 3,
       "username": "LatteLover",
-      "password": "hashedpassword345",
+      "pass": "hashedpass345",
       "email": "lover@meowmatch.com"
     },
     {
       "id": 4,
       "username": "MacchiatoMogul",
-      "password": "hashedpassword456",
+      "pass": "hashedpass456",
       "email": "mogul@meowmatch.com"
     },
     {
       "id": 5,
       "username": "BlackCoffeeCat",
-      "password": "hashedpassword567",
+      "pass": "hashedpass567",
       "email": "blackcat@meowmatch.com"
     },
     {
       "id": 6,
       "username": "MochaMaestro",
-      "password": "hashedpassword678",
+      "pass": "hashedpass678",
       "email": "maestro@meowmatch.com"
     },
     {
       "id": 7,
       "username": "CappuccinoCommander",
-      "password": "hashedpassword789",
+      "pass": "hashedpass789",
       "email": "commander@meowmatch.com"
     },
     {
       "id": 8,
       "username": "AmericanoAdmirer",
-      "password": "hashedpassword890",
+      "pass": "hashedpass890",
       "email": "admirer@meowmatch.com"
     },
     {
       "id": 9,
       "username": "CortadoConnoisseur",
-      "password": "hashedpassword901",
+      "pass": "hashedpass901",
       "email": "connoisseur@meowmatch.com"
     },
     {
       "id": 10,
       "username": "FrappeFanatic",
-      "password": "hashedpassword012",
+      "pass": "hashedpass012",
       "email": "fanatic@meowmatch.com"
     },
     {
       "id": 11,
       "username": "AffogatoAficionado",
-      "password": "hashedpassword112",
+      "pass": "hashedpass112",
       "email": "aficionado@meowmatch.com"
     },
     {
       "id": 12,
       "username": "BreveBaron",
-      "password": "hashedpassword212",
+      "pass": "hashedpass212",
       "email": "baron@meowmatch.com"
     },
     {
       "id": 13,
       "username": "DoppioDuke",
-      "password": "hashedpassword312",
+      "pass": "hashedpass312",
       "email": "duke@meowmatch.com"
     },
     {
       "id": 14,
       "username": "RistrettoRuler",
-      "password": "hashedpassword412",
+      "pass": "hashedpass412",
       "email": "ruler@meowmatch.com"
     },
     {
       "id": 15,
       "username": "PurrOverPour",
-      "password": "hashedpassword512",
+      "pass": "hashedpass512",
       "email": "pour@meowmatch.com"
     },
     {
       "id": 16,
       "username": "SoyLatteSultan",
-      "password": "hashedpassword612",
+      "pass": "hashedpass612",
       "email": "sultan@meowmatch.com"
     },
     {
       "id": 17,
       "username": "ChaiCuddler",
-      "password": "hashedpassword712",
+      "pass": "hashedpass712",
       "email": "cuddler@meowmatch.com"
     },
     {
       "id": 18,
       "username": "PiccoloPatron",
-      "password": "hashedpassword812",
+      "pass": "hashedpass812",
       "email": "patron@meowmatch.com"
     },
     {
       "id": 19,
       "username": "FlatWhiteFiend",
-      "password": "hashedpassword912",
+      "pass": "hashedpass912",
       "email": "fiend@meowmatch.com"
     },
     {
       "id": 20,
       "username": "TeaTemptress",
-      "password": "hashedpassword102",
+      "pass": "hashedpass102",
       "email": "temptress@meowmatch.com"
     }
   ]

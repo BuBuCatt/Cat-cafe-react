@@ -29,7 +29,7 @@ function NavBar(props) {
         <Nav.Link as={Link}  to="/home">Home</Nav.Link>
         <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
         <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
-        <Nav.Link as={Link}  to="/shop">Shop</Nav.Link>
+        <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
       </Nav>
 
       <Form className="search-bar me-3 " >

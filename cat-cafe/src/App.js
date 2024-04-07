@@ -12,7 +12,7 @@ import LoginPage from './pages/LoginPage';
 import Logout from './components/Logout';
 import FileService from "./services/FileService";
 import Cafe from './pages/Cafe';
-import Shop from './pages/Shop';
+import Sponsor from "./pages/Sponsor";
 import Wishlist from './pages/Wishlist';
 
 
@@ -25,6 +25,9 @@ function App() {
   const [menu , setMenu]= useState(null); // cafe menu 
   // cats
   const [cats , setCats] = useState(null); // adopt cats
+
+  //cart
+  const [cart,setCart] = useState(null);
 
   // File error handling 
   const [error, setError] = useState(null); // file error handling
@@ -104,11 +107,11 @@ const userLogout=()=>{
 
         <Routes>
           <Route path="/" element={<Links loginUser={loginUser} />}>
-              <Route index element={<Home loginUser={loginUser} auth={Auth} />} />
-              <Route path="home" element={<Home  loginUser={loginUser} auth={Auth}/>} />
+              <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
+              <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats}/>} />
               <Route path="cafe" element={<Cafe menu={menu}/>} />
-              <Route path="shop" element={<Shop />} />
+              <Route path="sponsor" element={<Sponsor />} />
               <Route path="wishlist" element={<Wishlist/>} />
               <Route path="cart" element={<ShoppingCart />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
