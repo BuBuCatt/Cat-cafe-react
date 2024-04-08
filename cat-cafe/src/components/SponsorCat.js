@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import "../styles/sponsor.css";
 import { ProductObj } from '../classes/Cart';
+import { useNavigate } from 'react-router-dom';
 
 const SponsorCat = ({addProductObj}) => {
 
+  const navigate = useNavigate();
+
   console.log('Received addProductObj:', addProductObj);
+
 
  
 
   const [selectedAmount, setSelectedAmount] = useState(1);
   const [quantity, setQuantity] = useState(1);
+
+  const backToHome =()=>{
+
+    navigate('/');
+    
+  }
+
 
   const handleAddToCart = () => {
     console.log("Creating product with:", { mid: Date.now(), menuName: 'Sponsor Cat', menuPrice: 1, amount: 1 });
@@ -34,7 +45,7 @@ const SponsorCat = ({addProductObj}) => {
   return (
     <div className="container mt-5">
       <div className="row align-items-center">
-        <div className="col-md-6 mb-4">
+        <div className="col-md-6 mb-4 ">
           <img src="./data/img/Tabby-06.jpg" alt="Sponsor Cat" className="img-fluid sponsor-cat-img" />
         </div>
         <div className="col-md-6">
@@ -64,8 +75,13 @@ const SponsorCat = ({addProductObj}) => {
             </div>
           </div>
           <button className="btn btn-primary w-50 my-2 " onClick={handleAddToCart}>Add to cart</button>
+          
         </div>
       </div>
+      <div>
+      <button className="btn btn-cute btn-primary w-20 my-2 " onClick={backToHome}>Back To Home</button>
+      </div>
+      
     </div>
   );
 };

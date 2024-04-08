@@ -24,7 +24,7 @@ export default function CatList({cats}) {
             {cats ? firstThreeCats.map((cat) => (
               <div key={cat.cid} className="col-sm-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
                 <div className="card">
-                  <img src={cat.catImage} className="card-img-top" alt={cat.catName} style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />
+                  <img src={cat.catImage} className="card-img-top catImage " alt={cat.catName} style={{ aspectRatio: '1 / 1', objectFit: 'cover' }} />
                   <div className="card-body text-center">
                     <h5 className="card-title">{cat.catName}</h5>
                     <span className={`badge ${cat.adoptionStatus === 'Available' ? 'bg-success' : 'bg-secondary'}`}>{cat.adoptionStatus}</span>
