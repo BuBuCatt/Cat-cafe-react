@@ -168,7 +168,7 @@ const userLogout=()=>{
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
               <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
-              <Route path="sponsor" element={<Sponsor />} />
+              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart} />} />
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart} />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
