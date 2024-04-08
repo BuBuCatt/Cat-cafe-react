@@ -7,7 +7,7 @@ const Sponsor = (props) => {
     <>
 
         <div>
-            <h1>Sponsor Our Cats</h1>
+            {/* <h1>Sponsor Our Cats</h1> */}
             
             
           </div>
