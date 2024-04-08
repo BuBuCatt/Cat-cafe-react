@@ -29,6 +29,8 @@ console.log("carts.cart: ", carts?.cart);
         navigate("/"); // Navigate to the home page
     }
 
+    const totalCost = carts.cart.reduce((total, item) => total + (item.price * item.amount), 0);
+
 
     return(
         <>
@@ -83,7 +85,9 @@ console.log("carts.cart: ", carts?.cart);
                         )}
                     </tbody>
                 </table>
+                
                 <div className="d-grid gap-2 w-50">
+                        <p>Total: ${totalCost.toFixed(2)}</p>
                         <button className="btn btn-primary" type="button" onClick={resetCart}>Reset Cart</button>
                 </div>
             </div>
