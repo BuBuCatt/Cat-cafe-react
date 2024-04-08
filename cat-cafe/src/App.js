@@ -31,8 +31,13 @@ function App() {
   //cart
   const [cart,setCart] = useState(new CartObj(1));
 
+  //wishList
+
+  const [wishlist, setWishlist] = useState([]);
+
   // File error handling 
   const [error, setError] = useState(null); // file error handling
+
 
 
   useEffect(()=>{
@@ -128,6 +133,22 @@ const Auth = (userObj)=>{
   console.log("app" + userObj.pass)
 }
 
+
+// cat wishlist
+const addToWishlist = (cat) => {
+  console.log("Adding to wishlist:", cat);
+  setWishlist(currentWishlist => {
+    const updatedWishlist = [...currentWishlist, cat];
+    console.log("Updated wishlist:", updatedWishlist);
+    return updatedWishlist;
+  });
+};
+
+const removeFromWishlist = (catId) => {
+  setWishlist(currentWishlist => currentWishlist.filter(cat => cat.cid !== catId));
+};
+
+
 // logout
 const userLogout=()=>{
         
@@ -145,10 +166,10 @@ const userLogout=()=>{
           <Route path="/" element={<Links loginUser={loginUser} />}>
               <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
-              <Route path="adopt" element={<Adopt cats={cats}/>} />
+              <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
               <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
               <Route path="sponsor" element={<Sponsor />} />
-              <Route path="wishlist" element={<Wishlist/>} />
+              <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart} />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />

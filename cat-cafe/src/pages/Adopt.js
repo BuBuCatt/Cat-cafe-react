@@ -63,7 +63,7 @@ const Adopt = (props) => {
 
          
 
-          {props.cats ? <Cats cats={props.cats}/> : <p>Loading cats data...</p>}
+          {props.cats ? <Cats cats={props.cats} addToWishlist={props.addToWishlist} removeFromWishlist={props.removeFromWishlist}/>  : <p>Loading cats data...</p>}
 
          
     </>
