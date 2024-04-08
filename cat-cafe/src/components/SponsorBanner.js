@@ -12,7 +12,7 @@ const SponsorBanner = () => {
 
     <>
 
-    <h1 className="text-center mt-5">Sponsor Our Furry Friends </h1>  
+    <h1 className="text-center mt-5 banner-title">Sponsor Our Furry Friends </h1>  
     <div className="sponsor-banner" style={{ position: 'relative', textAlign: 'center', color: 'white' }}>
       <img src="./data/img/adopt/cat-banner.jpg" alt="Sponsor Our Cats" className="img-fluid" />
       <button onClick={goToSponsorPage} className="sponsor-btn">
