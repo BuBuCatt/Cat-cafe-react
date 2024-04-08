@@ -1,3 +1,7 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
 .btn-custom {
     background-color: #6F4E37; /* Coffee brown */
     color: white;
@@ -18,3 +22,45 @@
   .card-img-top:hover {
     opacity: 0.7;
   }
+
+  .hero-section {
+    position: relative;
+  }
+  
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1); 
+    animation: fadeIn 2s ease-in-out;
+    
+  }
+
+  .hero-section h1{
+    font-weight: 700;
+    color: #633819f4;
+  }
+  .hero-section p{
+    color: #332215;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .btn-custom:hover {
+    background-color: #8B5E3C; 
+    color: #fff; 
+    border: 2px solid ; 
+    transform: scale(1.05); 
+    transition: all 0.3s ease; 
+  } 
+
