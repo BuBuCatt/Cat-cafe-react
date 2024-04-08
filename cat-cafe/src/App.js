@@ -14,6 +14,8 @@ import FileService from "./services/FileService";
 import Cafe from './pages/Cafe';
 import Sponsor from "./pages/Sponsor";
 import Wishlist from './pages/Wishlist';
+import CartObj from './classes/Cart';
+import { ProductObj } from './classes/Cart';
 
 
 
@@ -27,7 +29,7 @@ function App() {
   const [cats , setCats] = useState(null); // adopt cats
 
   //cart
-  const [cart,setCart] = useState(null);
+  const [cart,setCart] = useState(new CartObj(1));
 
   // File error handling 
   const [error, setError] = useState(null); // file error handling
@@ -74,20 +76,54 @@ function App() {
     
 },[]);
 
+const addProductObj = (productObj)=>{
+  setCart((prevCart)=>{
+      prevCart.addProduct(productObj);
+      return prevCart;
+  });
+}
+
+const removeItem = (mid) => {
+  setCart(prevCart => {
+      const newCart = new CartObj(prevCart.uid);
+
+      prevCart.cart.forEach((product, key) => {
+        console.log("This is key" + key);
+          if (key != mid ) {
+              newCart.addProduct(new ProductObj(key, product.pname, product.price, product.amount));
+          }
+      });
+
+      return newCart;
+  });
+}
+
+const resetCart = () => {
+  setCart(prevCart => {
+      prevCart.removeProduct();
+      return new CartObj(prevCart.uid);
+  });
+}
+
 
 
 const Auth = (userObj)=>{
-
-  console.log("app" + userObj.email)
-   console.log("app" + userObj.pass)
-   console.log("users" +users)
   for (let user of users){
-    if(user.email == userObj.email && user.password == userObj.pass){
-      setLoginUser(user);
-    }
-      console.log(user.email);
-  }
+    console.log('user:', user);
+    console.log('userObj:', userObj);
+
+    
    
+
+    if(user.email == userObj.email && user.pass == userObj.pass){
+     
+      setLoginUser(user);
+      console.log('User logged in:', user);
+    }
+
+   
+  }
+
   console.log("app" + userObj.email)
   console.log("app" + userObj.pass)
 }
@@ -110,10 +146,10 @@ const userLogout=()=>{
               <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats}/>} />
-              <Route path="cafe" element={<Cafe menu={menu}/>} />
+              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
               <Route path="sponsor" element={<Sponsor />} />
               <Route path="wishlist" element={<Wishlist/>} />
-              <Route path="cart" element={<ShoppingCart />} />
+              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart} />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
@@ -127,3 +163,4 @@ const userLogout=()=>{
 }
 
 export default App;
+

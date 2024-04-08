@@ -3,29 +3,55 @@ export default class CartObj{
     #cart = new Map();
     constructor(uid){
         this.#uid = uid;
+       
     }
+
+
     addProduct(productObj){
-        let prObj = this.#findProduct(productObj.mid);
-        if(prObj==-1)
+        console.log("Adding product:", productObj);
+        let prObj = this.findProduct(productObj.mid);
+        console.log("Found product:", prObj);
+        
+        if(prObj==-1)//if not this product in cart set the product
             this.#cart.set(productObj.mid,productObj);
         else{
-            let newAmount = prObj.amount;
-            this.#cart.set(prObj.mid,this.modifyProduct(prObj,++newAmount));
+            let newAmount = prObj.amount +1  ;
+          
+            console.log("New amount before modify:",newAmount);
+            this.#cart.set(prObj.mid,this.modifyProduct(prObj,newAmount));
+            console.log("Product after modify:", this.#cart.get(productObj.mid));
         }
-    }
-    modifyProduct(productObj,newAmount){
+        console.log("Cart after adding:", Array.from(this.#cart.values()));
+     }
+
+
+     modifyProduct(productObj,newAmount){
         productObj.amount = newAmount;
         return productObj;
     }
-    #findProduct(mid){
+    findProduct(mid){
         if(this.#cart.has(mid))
             return this.#cart.get(mid);
         else
             return -1;
     }
     removeProduct(mid){
-        this.#cart.delete(mid);
+       
+            // this.#cart.delete(mid);
+            return this.#cart.has(mid) ? this.#cart.get(mid) : -1;
+        
     }
+
+    removeEachProduct(mid){
+
+        let prObj = this.findProduct(mid);
+        if (prObj !== -1) {
+            this.#cart.delete(mid);
+        }
+
+    }
+
+  
     get cart(){
         let output = [];
         for(let prObj of this.#cart.values()){
@@ -34,6 +60,8 @@ export default class CartObj{
         }
         return output;
     }
+
+    
     invoiceTotal(){
         let sum = 0;
         for(let prObj of this.#cart.values()){
@@ -48,6 +76,26 @@ export default class CartObj{
         }
         localStorage.setItem(this.#uid,JSON.stringify(output));
     }
+
+
+    increaseQuantity(mid) {
+        const product = this.#cart.get(mid);
+        if (product) {
+            product.amount += 1;
+            this.#cart.set(mid, this.modifyProduct(product, product.amount));
+        }
+    }
+    
+    decreaseQuantity(mid) {
+        const product = this.#cart.get(mid);
+        if (product && product.amount > 1) {
+            product.amount -= 1;
+            this.#cart.set(mid, this.modifyProduct(product, product.amount));
+        } else {
+            this.removeProduct(mid); // Optionally remove the item if its count goes to zero
+        }
+    }
+    
 }
 
 
@@ -71,13 +119,13 @@ export class ProductObj{
         if(newAmount==0) throw new Error("Amount can not be zero");
         this.#amount = newAmount;
     }
-    get pid(){
+    get mid(){
         return this.#mid;
     }
-    get pname(){
+    get menuName() {
         return this.#menuName;
     }
-    get price(){
+    get menuPrice() {
         return this.#menuPrice;
     }
     total(){

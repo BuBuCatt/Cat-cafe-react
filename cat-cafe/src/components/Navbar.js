@@ -11,7 +11,7 @@ function NavBar(props) {
   return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
          
-      <Navbar.Brand className="mr-auto" >
+      <Navbar.Brand className="mr-auto mr-lg-5" >
           <Link to="/home">
               <img 
               
@@ -23,8 +23,20 @@ function NavBar(props) {
               />
             </Link>
       </Navbar.Brand>
+
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
+
+      { props.loginUser ? (
+          <Navbar.Text className="me-2">
+            <strong>Welcome, {props.loginUser && props.loginUser.username}</strong>
+          </Navbar.Text>
+        ) : (
+          <Navbar.Text className="me-2">
+            <strong>Welcome, Guest!</strong>
+          </Navbar.Text>
+        )}
+
       <Nav className="mx-auto me-3">
         <Nav.Link as={Link}  to="/home">Home</Nav.Link>
         <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>

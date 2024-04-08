@@ -16,14 +16,7 @@ const Home = (props) => {
   return (
     <>
 
-      { props.loginUser ? (
-       
-        <span>Welcome,{props.loginUser && props.loginUser.username}</span>
 
-      ):(
-        <span>Welcome, Guest!</span>
-
-      )}
 
       <HeroSection/>
    
@@ -32,7 +25,7 @@ const Home = (props) => {
 
       <SponsorBanner/>
 
-      {/* <Footer/> */}
+      <Footer/>
      
      
       
