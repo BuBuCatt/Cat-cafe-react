@@ -2,23 +2,41 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
-import  { useState } from 'react';
+import  { useState,useEffect } from 'react';
 
-export default function Cats({cats}) {
+export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
-    const [isFavorited, setIsFavorited] = useState(false);
-    const toggleFavorite = () => {
-        setIsFavorited(!isFavorited);
-        if (!isFavorited) {
-          // Add to favorites
-          localStorage.setItem(cats.id, JSON.stringify(cats));
-        } else {
-          // Remove from favorites
-          localStorage.removeItem(cats.id);
+  
+
+      const [favoritedCats, setFavoritedCats] = useState(() => {
+        // Load favorited cats from localStorage
+        const saved = localStorage.getItem("favoritedCats");
+        console.log("Loaded from localStorage:", saved);
+        return saved ? JSON.parse(saved) : {};
+    });
+
+    useEffect(() => {
+      // Save to localStorage when favoritedCats changes
+      localStorage.setItem("favoritedCats", JSON.stringify(favoritedCats));
+  }, []);
+
+  const toggleFavorite = (cat) => {
+    const isCurrentlyFavorited = favoritedCats[cat.cid];
+    const updatedFavoritedCats = {
+        ...favoritedCats,
+        [cat.cid]: !isCurrentlyFavorited
+    };
+    setFavoritedCats(updatedFavoritedCats);
+    localStorage.setItem("favoritedCats", JSON.stringify(updatedFavoritedCats));
+
+        if (!isCurrentlyFavorited) {
+          addToWishlist(cat);
+          }else {
+            removeFromWishlist(cat.cid);
         }
-      
-      };
-      
+
+    };
+
 
   return (
     <>
@@ -37,10 +55,11 @@ export default function Cats({cats}) {
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                     <span className={`badge ${cat.adoptionStatus === 'Available' ? 'bg-success' : 'bg-secondary'}`}>{cat.adoptionStatus}</span>
-                    {/* <a href="#" className="btn btn-primary">Adopt</a> */}
-                    <button className="favorite-btn"  onClick={() => toggleFavorite(cat)}  aria-label="Toggle Favorite" disabled={cat.adoptionStatus === 'Adopted'}>
-                        <FontAwesomeIcon icon={isFavorited ? fasHeart : farHeart} color={isFavorited ? "red" : "grey"} />
-                    </button>
+                    {cat.adoptionStatus === 'Available' && (
+                        <button className="favorite-btn" onClick={() => toggleFavorite(cat)} aria-label="Toggle Favorite">
+                            <FontAwesomeIcon icon={favoritedCats[cat.cid] ? fasHeart : farHeart} color={favoritedCats[cat.cid] ? "red" : "black"} />
+                        </button>
+                    )}
                     </div>
                 </div>
                 </div>
