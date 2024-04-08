@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
-import  { useState } from 'react';
+
 import  '../styles/home.css'
 
 

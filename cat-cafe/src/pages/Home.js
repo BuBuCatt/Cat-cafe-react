@@ -11,8 +11,6 @@ import SponsorBanner from "../components/SponsorBanner";
 const Home = (props) => {
 
 
-  //console.log("here is home"+ props.loginUser)
-
   return (
     <>
 
