@@ -77,12 +77,12 @@
     transition: all 0.3s ease;
   }
   
-  .sponsor-cat-img:hover {
-    transform: rotate(360deg);
-  }
+
   
   h2 {
-    color: #332215;
+    font-weight: 900;
+    color: #633819f4;
+    font-size: 80px;
   }
   
   .text-secondary {
@@ -120,4 +120,11 @@
   .btn-outline-secondary:hover {
     background-color: #8B5E3C;
     color: #fff;
+  }
+
+  .spn-cat-container {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    height: 100vh; /* Make the container take up the full viewport height */
   }

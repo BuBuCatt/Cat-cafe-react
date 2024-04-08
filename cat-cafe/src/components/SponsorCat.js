@@ -44,7 +44,7 @@ const SponsorCat = ({addProductObj}) => {
 
   return (
     <div className="container mt-5">
-      <div className="row align-items-center">
+      <div className="row align-items-center spn-cat-container">
         <div className="col-md-6 mb-4 ">
           <img src="./data/img/Tabby-06.jpg" alt="Sponsor Cat" className="img-fluid sponsor-cat-img" />
         </div>
@@ -58,7 +58,7 @@ const SponsorCat = ({addProductObj}) => {
               {[1, 3, 5, 10, 20,30, 50, 60,80,90,100].map((amount) => (
                 <button 
                   key={amount} 
-                  className={`btn ${selectedAmount === amount ? 'btn-secondary' : 'btn-outline-secondary'} mx-1`} 
+                  className={`btn ${selectedAmount === amount ? 'btn-secondary' : 'btn-outline-secondary'} mx-1 `} 
                   onClick={() => handleAmountSelect(amount)}
                 >
                   ${amount}
