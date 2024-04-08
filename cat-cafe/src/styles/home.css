@@ -18,6 +18,7 @@
   .card-img-top {
     transition: opacity 0.5s ease-in-out;
     cursor: pointer;
+    border-radius: 50%;
   }
   .card-img-top:hover {
     opacity: 0.7;
@@ -64,3 +65,16 @@
     transition: all 0.3s ease; 
   } 
 
+  .card {
+    border: none; /* Remove the border */
+  }
+
+  .catlist-title{
+    font-weight: 700;
+    color: #633819f4;
+  }
+
+  .card-img-top:hover {
+    transform: scale(1.1); /* Increase the size of the image when hovered */
+    transition: transform 0.3s ease; /* Add a transition effect */
+  }

@@ -18,7 +18,7 @@ export default function CatList({cats}) {
 
   return (
     <>
-    <h1 className="text-center mt-5">Adopt a Furry Friend Today</h1>      
+    <h1 className="text-center mt-5 catlist-title">Adopt a Furry Friend Today</h1>      
     <div className="container mt-5">
           <div className="row cat-list">
             {cats ? firstThreeCats.map((cat) => (
@@ -37,7 +37,7 @@ export default function CatList({cats}) {
           </div>
 
             <div className="text-center mt-1">
-              <Link to="/adopt" className="btn btn-custom">View All</Link> 
+              <Link to="/adopt" className="btn btn-custom">View More</Link> 
             </div>
         </div>
         
