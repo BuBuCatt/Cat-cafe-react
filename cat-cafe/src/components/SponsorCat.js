@@ -50,9 +50,9 @@ const SponsorCat = ({addProductObj}) => {
         </div>
         <div className="col-md-6">
           <h2>Sponsor Our Cats</h2>
-          <p className="text-secondary">{selectedAmount}.00 CAD</p>
+          <p className="text-secondary amount-text ">{selectedAmount}.00 CAD</p>
           <div>
-            <span>Amount</span>
+            <span className='amount-title'>Amount</span>
             <div className="my-2">
               {/* Amount Buttons */}
               {[1, 3, 5, 10, 20,30, 50,100].map((amount) => (
@@ -68,13 +68,13 @@ const SponsorCat = ({addProductObj}) => {
           </div>
           <div className="my-4">
             <span>Quantity</span>
-            <div className="input-group w-50">
+            <div className="input-group w-50 my-2">
               <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(false)}>-</button>
               <input type="text" className="form-control text-center " value={quantity} readOnly />
               <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(true)}>+</button>
             </div>
           </div>
-          <button className="btn btn-primary w-50 my-2 " onClick={handleAddToCart}>Add to cart</button>
+          <button className="btn btn-primary w-50 my-2  " onClick={handleAddToCart}>Add to cart</button>
           
         </div>
       </div>

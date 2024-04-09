@@ -68,7 +68,7 @@
   }
 
   .container {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   
   .sponsor-cat-img {
@@ -123,8 +123,19 @@
   }
 
   .spn-cat-container {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    height: 100vh; /* Make the container take up the full viewport height */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+  }
+
+
+  .amount-text {
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+
+  .amount-title{
+    font-size: 1.2rem;
+    color: #8B5E3C;
   }
