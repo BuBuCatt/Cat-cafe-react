@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import  { useState,useEffect } from 'react';
+import "../styles/cats.css";
 
 export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
@@ -45,13 +46,13 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
             {cats.map((cat) => (
             <div key={cat.cid} className="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div className="card h-100">
-                <img src={cat.catImage} className="card-img-top" alt={cat.catName} />
+                <img src={cat.catImage} className="card-img-top cat-img" alt={cat.catName} />
                 <div className="card-body">
-                    <h5 className="card-title">{cat.catName}</h5>
-                    <p className="card-text">
-                    <strong>Breed:</strong> {cat.catBreed}<br />
-                    <strong>Age:</strong> {cat.cataAge}<br />
-                    <strong>Description:</strong> {cat.catDescription}
+                    <h5 className="card-title cat-name ">{cat.catName}</h5>
+                    <p className="card-text cat-details">
+                        <strong className='cat-detail-title'>Breed:</strong> {cat.catBreed}<br />
+                        <strong className='cat-detail-title'>Age:</strong> {cat.cataAge}<br />
+                        <strong className='cat-detail-title'>Description:</strong> {cat.catDescription}
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                     <span className={`badge ${cat.adoptionStatus === 'Available' ? 'bg-success' : 'bg-secondary'}`}>{cat.adoptionStatus}</span>

@@ -101,7 +101,7 @@
       "catBreed": "Munchkin",
       "catDescription": "Simba may be small, but his heart is mighty.",
       "adoptionStatus": "Available",
-      "catImage":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Munchkin-11.png"
     },
     {
       "cid": 12,
@@ -110,7 +110,7 @@
       "catBreed": "American Shorthair",
       "catDescription": "Max is a playful explorer who's always on the hunt for fun.",
       "adoptionStatus": "Available",
-      "catImage":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Max-12.png"
     },
     {
       "cid": 13,
@@ -119,7 +119,7 @@
       "catBreed": "Tuxedo",
       "catDescription": "Daisy is as sweet as she is fluffy, which is to say very!",
       "adoptionStatus": "Available",
-      "catImage":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Daisy-13.png"
     },
     {
       "cid": 14,
@@ -128,7 +128,7 @@
       "catBreed": "American Shorthair",
       "catDescription": "Oscar is a seasoned snuggler and a friend to all he meets.",
       "adoptionStatus": "Available",
-      "catImage":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/oscar-14.png"
     },
     {
       "cid": 15,
@@ -137,7 +137,7 @@
       "catBreed": "Tuxedo",
       "catDescription": "Zoe has a regal bearing and a soft, silky coat.",
       "adoptionStatus": "Available",
-      "catImage":"./data/img/Tuxedo-10.jpg"
+      "catImage":"./data/img/Zoe-15.png"
     }
   ]
   
