@@ -55,7 +55,7 @@ const SponsorCat = ({addProductObj}) => {
             <span>Amount</span>
             <div className="my-2">
               {/* Amount Buttons */}
-              {[1, 3, 5, 10, 20,30, 50, 60,80,90,100].map((amount) => (
+              {[1, 3, 5, 10, 20,30, 50,100].map((amount) => (
                 <button 
                   key={amount} 
                   className={`btn ${selectedAmount === amount ? 'btn-secondary' : 'btn-outline-secondary'} mx-1 `} 
