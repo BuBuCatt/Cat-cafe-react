@@ -5,6 +5,8 @@ import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import  { useState,useEffect } from 'react';
 import "../styles/cats.css";
 import Footer from './Footer';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 
 export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
@@ -40,9 +42,7 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
     };
 
-    const handleFilterChange = (event) => {
-        setFilter(event.target.value);
-    };
+
 
     const filteredCats = cats.filter(cat => {
         return filter == 'All' || cat.catBreed == filter;
@@ -54,16 +54,22 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
         
         <div className="container mt-5">
 
-                <div className="filter-controls   ">
+                <div className="filter-controls mb-4  ">
                     <label className='breed-filter'>
                         Filter by Breed:
-                        <select value={filter} onChange={handleFilterChange} className="form-select cat-form-select">
-                            <option value="All">All</option>
-                            {Array.from(new Set(cats.map(cat => cat.catBreed))).map(breed => (
-                                <option key={breed} value={breed}>{breed}</option>
-                            ))}
-                        </select>
                     </label>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic" className="brown-bg">
+                        {filter}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => setFilter('All')}>All</Dropdown.Item>
+                        {Array.from(new Set(cats.map(cat => cat.catBreed))).map(breed => (
+                            <Dropdown.Item key={breed} onClick={() => setFilter(breed)}>{breed}</Dropdown.Item>
+                        ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
         
         <div className="row row-container">
