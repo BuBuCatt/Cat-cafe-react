@@ -1,6 +1,7 @@
 import React from 'react';
 import SponsorCat from '../components/SponsorCat';
 
+
 const Sponsor = (props) => {
   return (
 
@@ -13,6 +14,8 @@ const Sponsor = (props) => {
           </div>
 
           <SponsorCat addProductObj={props.addProObj}/>
+
+  
 
 
     

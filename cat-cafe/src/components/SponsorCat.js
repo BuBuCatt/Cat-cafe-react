@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../styles/sponsor.css";
 import { ProductObj } from '../classes/Cart';
 import { useNavigate } from 'react-router-dom';
+import Footer from "../components/Footer";
 
 const SponsorCat = ({addProductObj}) => {
 
@@ -67,20 +68,25 @@ const SponsorCat = ({addProductObj}) => {
             </div>
           </div>
           <div className="my-4">
-            <span>Quantity</span>
+            <span className='quantity-title'>Quantity</span>
             <div className="input-group w-50 my-2">
               <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(false)}>-</button>
               <input type="text" className="form-control text-center " value={quantity} readOnly />
               <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(true)}>+</button>
             </div>
           </div>
-          <button className="btn btn-primary w-50 my-2  " onClick={handleAddToCart}>Add to cart</button>
+          <button className="btn btn-primary w-50   my-2  add-to-cart-btn " onClick={handleAddToCart}>Add to cart</button>
           
         </div>
       </div>
       <div>
-      <button className="btn btn-cute btn-primary w-20 my-2 " onClick={backToHome}>Back To Home</button>
+      <div className="parent-container">
+        <button className="btn btn-cute btn-primary w-20 my-2 back-to-home-btn " onClick={backToHome}>Back To Home</button>
+        <Footer/>
       </div>
+      
+      </div>
+   
       
     </div>
   );
