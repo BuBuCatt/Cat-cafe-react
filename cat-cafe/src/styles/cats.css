@@ -20,11 +20,27 @@
   }
   
   .cat-details {
-    color: #6F4E37; /* A darker shade of brown */
-    line-height: 1.5; /* Increase the space between lines */
+    color: #6F4E37; 
+    line-height: 1.5; 
   }
   
   .cat-detail-title {
     font-weight: bold; 
    
+  }
+
+  .breed-filter{
+    color: #6F4E37;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-weight: bold; 
+  }
+
+  .cat-form-select{
+    color: #6F4E37;
+    margin-top: 10px;
+  }
+
+  .row-container{
+    margin-bottom: 50px;
   }

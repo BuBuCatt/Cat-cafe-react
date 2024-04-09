@@ -4,10 +4,12 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import  { useState,useEffect } from 'react';
 import "../styles/cats.css";
+import Footer from './Footer';
+
 
 export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
-  
+    const [filter, setFilter] = useState('All');
 
       const [favoritedCats, setFavoritedCats] = useState(() => {
         // Load favorited cats from localStorage
@@ -38,12 +40,34 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
     };
 
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value);
+    };
+
+    const filteredCats = cats.filter(cat => {
+        return filter == 'All' || cat.catBreed == filter;
+    });
+
 
   return (
     <>
+        
         <div className="container mt-5">
-        <div className="row">
-            {cats.map((cat) => (
+
+                <div className="filter-controls   ">
+                    <label className='breed-filter'>
+                        Filter by Breed:
+                        <select value={filter} onChange={handleFilterChange} className="form-select cat-form-select">
+                            <option value="All">All</option>
+                            {Array.from(new Set(cats.map(cat => cat.catBreed))).map(breed => (
+                                <option key={breed} value={breed}>{breed}</option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+        
+        <div className="row row-container">
+            {filteredCats.map((cat) => (
             <div key={cat.cid} className="col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div className="card h-100">
                 <img src={cat.catImage} className="card-img-top cat-img" alt={cat.catName} />
@@ -66,8 +90,14 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
                 </div>
             </div>
             ))}
+
         </div>
+
+
+  
         </div>
+       
+       
     </>
   )
 }
