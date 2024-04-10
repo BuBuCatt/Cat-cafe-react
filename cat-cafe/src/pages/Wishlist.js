@@ -30,6 +30,7 @@ export default function Wishlist(props) {
                 <div className="card-body">
                   <h5 className="card-title">{cat.catName}</h5>
                   <p className="card-text">{cat.catDescription}</p>
+                  <button onClick={() => props.removeFromWishlist(cat.cid)}>Delete</button>
                 </div>
               </div>
             </div>

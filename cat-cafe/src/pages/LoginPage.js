@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
-
+import "../styles/LoginPage.css";
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage(props){
@@ -36,7 +36,7 @@ export default function LoginPage(props){
 
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
+    <Container className="d-flex justify-content-center align-items-center login-container" style={{ height: '60vh' }}>
 
       <Form onSubmit={submitHandler } className="w-50">
 

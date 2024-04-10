@@ -35,6 +35,7 @@ function App() {
 
   const [wishlist, setWishlist] = useState([]);
 
+
   // File error handling 
   const [error, setError] = useState(null); // file error handling
 
@@ -160,7 +161,7 @@ const userLogout=()=>{
 
   return (
     <BrowserRouter>
-      <NavBar loginUser={loginUser} userLogout={userLogout} />
+      <NavBar loginUser={loginUser} userLogout={userLogout}    />
 
         <Routes>
           <Route path="/" element={<Links loginUser={loginUser} />}>

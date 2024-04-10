@@ -8,10 +8,7 @@ const ShoppingCart = (props) => {
 
     <>
 
-      <div>
-      <h1>Shopping Cart</h1>
- 
-    </div>
+   
 
     <Cartcompo  carts={props.shoppingCart} removeItem={props.removeItem} resetCart={props.resetCart} />
 

@@ -23,7 +23,13 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
     useEffect(() => {
       // Save to localStorage when favoritedCats changes
       localStorage.setItem("favoritedCats", JSON.stringify(favoritedCats));
-  }, []);
+        // Clear localStorage when the page is unloaded
+        const handleBeforeUnload = () => localStorage.removeItem("favoritedCats");
+        window.addEventListener("beforeunload", handleBeforeUnload);
+          // Clean up the event listener when the component is unmounted
+        return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+        
+  }, [favoritedCats]);
 
   const toggleFavorite = (cat) => {
     const isCurrentlyFavorited = favoritedCats[cat.cid];

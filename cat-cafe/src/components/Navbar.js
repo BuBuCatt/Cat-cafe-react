@@ -5,9 +5,40 @@ import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart , faHeart } from '@fortawesome/free-solid-svg-icons';
 import  '../styles/home.css'
+import { useState ,useEffect} from 'react';
 
 
 function NavBar(props) {
+
+
+  // const [filteredData, setFilteredData] = useState([]);
+
+  // useEffect(() => {
+  //   setFilteredData(props.menu);
+  // }, [props.menu]);
+
+  // const handleSearchChange = (event) => {
+
+  //   const value = event.target.value; // userinput data
+
+  //   props.setSearchTerm(value);
+  //   filterData(value);
+
+
+
+  // };
+
+  // const filterData = (value) => {
+  //   if (!value) {
+  //     setFilteredData(props.menu);
+  //   } else {
+  //     const filtered =props.menu.filter(item =>
+  //       item.menuName.toLowerCase().includes(value.toLowerCase())
+  //     );
+  //     setFilteredData(filtered);
+  //   }
+  // };
+
   return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
          
@@ -44,17 +75,21 @@ function NavBar(props) {
         <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
       </Nav>
 
+      {/* search bar */}
+{/* 
       <Form className="search-bar me-3 " >
       <FormControl
         type="text"
         placeholder="Searching"
         className="mr-sm-2 border-2 bg-light "
+      
+      
         
       />
-      {/* <Button variant="outline-danger">
+      <Button variant="outline-danger">
         <span role="img" aria-label="search">🔍</span>
-      </Button> */}
-    </Form>
+      </Button>
+    </Form> */}
 
 
             <Nav  >
