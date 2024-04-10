@@ -16,6 +16,13 @@ import Sponsor from "./pages/Sponsor";
 import Wishlist from './pages/Wishlist';
 import CartObj from './classes/Cart';
 import { ProductObj } from './classes/Cart';
+import AdminDashboard from './pages/AdminDashboard';
+import { Admin, User } from './classes/Users';
+
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 
 
@@ -34,6 +41,8 @@ function App() {
   //wishList
 
   const [wishlist, setWishlist] = useState([]);
+
+
 
 
   // File error handling 
@@ -114,25 +123,73 @@ const resetCart = () => {
 
 
 const Auth = (userObj)=>{
+
+
+
+  let getUser = null;
+
+
   for (let user of users){
+    
     console.log('user:', user);
     console.log('userObj:', userObj);
-
-    
-   
-
     if(user.email == userObj.email && user.pass == userObj.pass){
+      getUser=user;
      
-      setLoginUser(user);
       console.log('User logged in:', user);
+      break;
     }
 
-   
   }
 
   console.log("app" + userObj.email)
   console.log("app" + userObj.pass)
+
+  let tmpUser = null;
+
+  if(getUser){
+    if(getUser.type == 'admin'){
+      tmpUser = new Admin(getUser.id, getUser.username,getUser.email, getUser.type );
+      console.log("new admin tmpUser created"+tmpUser.username + " " + tmpUser.type);
+     
+    }else{
+
+      tmpUser = new User(getUser.id, getUser.username,getUser.email, getUser.type);
+      console.log("new customer tmpUser created"+tmpUser.username + " " + tmpUser.type);
+
+    }
+
+    if (tmpUser) {
+     
+      setLoginUser(tmpUser);
+      console.log("login success");
+
+
+    }
+    // if user is not found, alert user not found
+    else {
+      console.log("login failed");
+      alert("Login failed: User not found ");
+      setLoginUser(null);
+    }
+
+    
+  }
 }
+// check user type 
+const checkUserType = (user) => {
+  if (user) {
+    const userType = user.type;
+    console.log("userType -> " + userType);
+    return userType;
+  } else {
+    // Log or handle the case when user is null
+    console.log("No user object provided.");
+    return null;
+  }
+}
+
+
 
 
 // cat wishlist
@@ -161,7 +218,7 @@ const userLogout=()=>{
 
   return (
     <BrowserRouter>
-      <NavBar loginUser={loginUser} userLogout={userLogout}    />
+      <NavBar loginUser={loginUser} userLogout={userLogout} checkUserType={checkUserType}   />
 
         <Routes>
           <Route path="/" element={<Links loginUser={loginUser} />}>
@@ -173,6 +230,7 @@ const userLogout=()=>{
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart} />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           

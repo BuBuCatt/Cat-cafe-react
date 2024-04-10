@@ -17,16 +17,11 @@ export default function LoginPage(props){
 
 
     const submitHandler = (e)=>{
-        e.preventDefault();
+      e.preventDefault();
         props.auth(user);
-        
         console.log(" login success"+ user.email);
         navigate('/home');
-      
-           
-
-      
-        
+   
     }
     console.log("here is Login" + props.loginUser);
 

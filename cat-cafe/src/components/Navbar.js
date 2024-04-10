@@ -6,40 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart , faHeart } from '@fortawesome/free-solid-svg-icons';
 import  '../styles/home.css'
 import { useState ,useEffect} from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 function NavBar(props) {
+  const navigate = useNavigate();
+  const userType = props.checkUserType(props.loginUser);
 
-
-  // const [filteredData, setFilteredData] = useState([]);
-
-  // useEffect(() => {
-  //   setFilteredData(props.menu);
-  // }, [props.menu]);
-
-  // const handleSearchChange = (event) => {
-
-  //   const value = event.target.value; // userinput data
-
-  //   props.setSearchTerm(value);
-  //   filterData(value);
+  useEffect(() => {
+    if (userType == 'admin') {
+      navigate('/admin');
+    }
+  }, [userType, navigate]);
 
 
 
-  // };
 
-  // const filterData = (value) => {
-  //   if (!value) {
-  //     setFilteredData(props.menu);
-  //   } else {
-  //     const filtered =props.menu.filter(item =>
-  //       item.menuName.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //     setFilteredData(filtered);
-  //   }
-  // };
-
-  return (
+    return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
          
       <Navbar.Brand className="mr-auto mr-lg-5" >
@@ -68,11 +50,16 @@ function NavBar(props) {
           </Navbar.Text>
         )}
 
+
       <Nav className="mx-auto me-3">
+      {userType != "admin" &&(
+        <>
         <Nav.Link as={Link}  to="/home">Home</Nav.Link>
         <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
         <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
         <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
+        </>)
+          }
       </Nav>
 
       {/* search bar */}
@@ -129,6 +116,6 @@ function NavBar(props) {
         </Navbar.Collapse>
     </Navbar>
   );
-}
-
+                  
+                  }
 export default NavBar;
