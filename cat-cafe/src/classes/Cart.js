@@ -106,11 +106,14 @@ export class ProductObj{
     #menuName; // not equal to pname
     #menuPrice;
     #amount;
+
+    
     constructor(mid,menuName,menuPrice,amount=1){
         this.#mid = mid;
         this.#menuName = menuName;
         this.#menuPrice = Number(menuPrice);
         this.#amount = Number(amount);
+      
     }
     get amount(){
         return this.#amount;
@@ -128,6 +131,7 @@ export class ProductObj{
     get menuPrice() {
         return this.#menuPrice;
     }
+  
     total(){
         return Number((this.#menuPrice * this.#amount).toFixed(2));
     }
