@@ -12,11 +12,11 @@ function NavBar(props) {
   const navigate = useNavigate();
   const userType = props.checkUserType(props.loginUser);
 
-  // useEffect(() => {
-  //   if (userType == 'admin') {
-  //     navigate('/admin');
-  //   }
-  // }, [userType, navigate]);
+  useEffect(() => {
+    if (userType == 'admin') {
+      navigate('/admin');
+    }
+  }, [userType, navigate]);
 
 
 
