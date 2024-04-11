@@ -22,6 +22,20 @@ export default class CartObj{
             console.log("Product after modify:", this.#cart.get(productObj.mid));
         }
         console.log("Cart after adding:", Array.from(this.#cart.values()));
+        this.toSave();
+     }
+
+
+    addSponsorProduct(productObj){ // need a unique id 
+        console.log("Adding addSponsorProduct:", productObj);
+        let prObj = this.findProduct(productObj.sid);
+        console.log("Found product:", prObj);
+        
+        if(prObj==-1)//if not this product in cart set the product
+            this.#cart.set(productObj.sid,productObj);
+       
+        console.log("Cart after adding:", Array.from(this.#cart.values()));
+        this.toSaveSponsor();
      }
 
 
@@ -40,6 +54,9 @@ export default class CartObj{
             // this.#cart.delete(mid);
             return this.#cart.has(mid) ? this.#cart.get(mid) : -1;
         
+    }
+    cleanCart () {
+        return this.#cart.clear();
     }
 
     removeEachProduct(mid){
@@ -76,7 +93,14 @@ export default class CartObj{
         }
         localStorage.setItem(this.#uid,JSON.stringify(output));
     }
-
+    
+    toSaveSponsor(){ // for sponsor save method
+        let output = [];
+        for(let prObj of this.#cart.values()){
+            output.push({mid: prObj.sid, amount: prObj.selectedAmount});
+        }
+        localStorage.setItem(this.#uid,JSON.stringify(output));
+    }
 
     increaseQuantity(mid) {
         const product = this.#cart.get(mid);

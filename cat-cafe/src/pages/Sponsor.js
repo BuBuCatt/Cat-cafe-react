@@ -13,7 +13,7 @@ const Sponsor = (props) => {
             
           </div>
 
-          <SponsorCat addProductObj={props.addProObj}/>
+          <SponsorCat addProductObj={props.addProObj} addSponsorObj={props.addSponsor}/>
 
   
 

@@ -10,7 +10,7 @@ const ShoppingCart = (props) => {
 
    
 
-    <Cartcompo  carts={props.shoppingCart} removeItem={props.removeItem} resetCart={props.resetCart} />
+    <Cartcompo  carts={props.shoppingCart} removeItem={props.removeItem} resetCart={props.resetCart} updateQuantity={props.updateQuantity}/>
 
 
     </>

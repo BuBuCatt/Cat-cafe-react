@@ -18,6 +18,8 @@ import CartObj from './classes/Cart';
 import { ProductObj } from './classes/Cart';
 import AdminDashboard from './pages/AdminDashboard';
 import { Admin, User } from './classes/Users';
+import AES from 'crypto-js/aes'; // Import AES module for encryption
+import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
 
 
 
@@ -88,14 +90,42 @@ function App() {
           }
       )
 
+
+      if (sessionStorage.getItem("user") == null) {
+
+      } else {
+
+        let tmpUser = sessionStorage.getItem("user");
+        tmpUser = JSON.parse(AES.decrypt(tmpUser, 'webdev').toString(enc.Utf8));
+
+        console.log(tmpUser);
+
+        tmpUser = (tmpUser.type == null) ? new User(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type) :
+          new Admin(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type);
+
+        setLoginUser(tmpUser);
+      }
+
+      
     
 },[]);
 
 const addProductObj = (productObj)=>{
   setCart((prevCart)=>{
       prevCart.addProduct(productObj);
+     
       return prevCart;
   });
+ 
+}
+
+const addSponsor = (productObj)=>{
+  setCart((prevCart)=>{
+      prevCart.addSponsorProduct(productObj);
+     
+      return prevCart;
+  });
+ 
 }
 
 const removeItem = (mid) => {
@@ -112,6 +142,8 @@ const removeItem = (mid) => {
       return newCart;
   });
 }
+
+
 
 const resetCart = () => {
   setCart(prevCart => {
@@ -148,20 +180,28 @@ const Auth = (userObj)=>{
   let tmpUser = null;
 
   if(getUser){
-    if(getUser.type == 'admin'){
+    if(getUser.type == 'admin'){//admin
       tmpUser = new Admin(getUser.id, getUser.username,getUser.email, getUser.type );
       console.log("new admin tmpUser created"+tmpUser.username + " " + tmpUser.type);
+
+      localStorage.setItem('admin', JSON.stringify(tmpUser)); // store data in local storge after userlogin 
+      console.log("ADMIN logged in and stored in local storage:", tmpUser);
      
     }else{
-
+      // 
+      
       tmpUser = new User(getUser.id, getUser.username,getUser.email, getUser.type);
       console.log("new customer tmpUser created"+tmpUser.username + " " + tmpUser.type);
+
+      localStorage.setItem('user', JSON.stringify(tmpUser)); 
+      console.log("User logged in and stored in local storage:", tmpUser);
 
     }
 
     if (tmpUser) {
      
       setLoginUser(tmpUser);
+      
       console.log("login success");
 
 
@@ -173,9 +213,24 @@ const Auth = (userObj)=>{
       setLoginUser(null);
     }
 
+    storeUserSession(tmpUser);
+  
     
   }
+
+
 }
+
+
+
+function storeUserSession(user) {
+  const encryptedUser = AES.encrypt(JSON.stringify(user), 'webdev').toString();
+  sessionStorage.setItem("user", encryptedUser);
+}
+
+
+
+
 // check user type 
 const checkUserType = (user) => {
   if (user) {
@@ -209,10 +264,24 @@ const removeFromWishlist = (catId) => {
 
 // logout
 const userLogout=()=>{
-        
-  setLoginUser(null);
+  // let tmpCart = new CartObj(1);
 
+  // setCart(tmpCart);
+  setLoginUser(null);
+  
 }
+
+function updateQuantity(mid, change) {
+  setCart((prevCarts) => {
+      return {
+          ...prevCarts,
+          cart: prevCarts.cart.map(item => 
+              item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
+          )
+      };
+  });
+}
+
 
 
 
@@ -226,9 +295,9 @@ const userLogout=()=>{
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
               <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
-              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart} />} />
+              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor}/>} />
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
-              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart} />} />
+              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
