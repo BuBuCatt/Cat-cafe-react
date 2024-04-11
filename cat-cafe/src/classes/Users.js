@@ -1,8 +1,9 @@
-class User{
-    constructor(id,username,email){
+export  class User{
+    constructor(id,username,email,type){
         this.id = id;
         this.username = username;
         this.email = email;
+        this.type=type;
     }
     displayInfo(){
         return this;
@@ -19,9 +20,9 @@ export class Customer extends User{
     }
 }
 
-export class Staff extends User{
-    constructor(id,fname,lname,email,type){
-        super(id,fname,lname,email);
+export class Admin extends User{
+    constructor(id,username,email,type){
+        super(id,username,email);
         this.type = type;
     }
     displayInfo(){

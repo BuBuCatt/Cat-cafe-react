@@ -17,6 +17,8 @@ import Wishlist from "./pages/Wishlist";
 import CartObj from "./classes/Cart";
 import { ProductObj } from "./classes/Cart";
 import Admin from "./pages/Admin";
+import AES from 'crypto-js/aes'; // Import the 'AES' module from 'crypto-js'
+import { enc } from 'crypto-js'; // Import the 'enc' module from 'crypto-js'
 
 function App() {
   // customers
@@ -83,6 +85,22 @@ function App() {
         );
       }
     );
+
+
+    // if (sessionStorage.getItem("user") == null) {
+
+    // } else {
+
+    //   let tmpUser = sessionStorage.getItem("user");
+    //   tmpUser = JSON.parse(AES.decrypt(tmpUser, 'webdev').toString(enc.Utf8));
+
+    //   console.log(tmpUser);
+
+
+
+    //   setLoginUser(tmpUser);
+    // }
+
   }, []);
 
   const addProductObj = (productObj) => {

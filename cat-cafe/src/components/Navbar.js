@@ -101,30 +101,33 @@ const NavBar = (props) => {
           <Nav.Link as={Link} to="/sponsor">
             Sponsor
           </Nav.Link>
+
+          <div className="mainSearchDiv" style={{ position: 'relative', width: '200px' }}>
+              <div className="mainChildDiv">
+                <input
+                  className="search-bar-input"
+                  type="text"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  placeholder="Search menu..."
+                />
+                <MagnifyingGlass className="icon" size={18} />
+                {searchTerm &&
+                  filteredMenu.map((item) => (
+                    <ul key={item.mid} style={{ position: 'absolute', backgroundColor: 'white', listStyle: 'none', width: '100%' }}>
+                      <li>
+                        <Link to={`/item/${item.mid}`}>{item.menuName}</Link>
+                      </li>
+                    </ul>
+                  ))}
+              </div>
+            </div>
+     
         </Nav>
-        <div className="mainSearchDiv">
-          <div className="mainChildDiv">
-            <input
-              className="search-bar-input"
-              type="text"
-              value={searchTerm}
-              onChange={handleChange}
-              placeholder="Search menu..."
-            />
-            <MagnifyingGlass className="icon" size={18} />
-            {searchTerm &&
-              filteredMenu.map((item) => (
-                <ul key={item.mid}>
-                  <li>
-                    <Link to={`/item/${item.mid}`}>{item.menuName}</Link>
-                  </li>
-                </ul>
-              ))}
-          </div>
-        </div>
+
 
         {/* search bar */}
-        {/* 
+{/*         
       <Form className="search-bar me-3 " >
       <FormControl
         type="text"
@@ -151,6 +154,8 @@ const NavBar = (props) => {
               <FontAwesomeIcon icon={faShoppingCart} />
             </Button>
           </Link>
+
+             
 
           {/* login */}
           {props.loginUser ? ( // true

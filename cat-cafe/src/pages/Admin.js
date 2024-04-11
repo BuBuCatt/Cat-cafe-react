@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/admin.css";
 
-export default function Admin({ users, cart, modifyProduct, removeProduct }) {
+export default function AdminDash({ users, cart, modifyProduct, removeProduct }) {
   const [viewingCartUserId, setViewingCartUserId] = useState(null);
   const userCart =
     viewingCartUserId && cart && cart.get ? cart.get(viewingCartUserId) : null;

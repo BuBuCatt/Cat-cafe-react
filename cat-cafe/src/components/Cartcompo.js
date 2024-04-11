@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Table, Alert } from 'react-bootstrap';
 
-export default function Cartcompo({ carts,removeItem, resetCart }){
+export default function Cartcompo({ carts,removeItem, resetCart, updateQuantity }){
 
     console.log("Here is cart compo: " + carts);
     console.log("Here is cart compo: " + JSON.stringify(carts, null, 2));
@@ -16,6 +16,15 @@ console.log("carts.cart: ", carts?.cart);
     });
 
     const navigate = useNavigate();
+
+    const incrementQuantity = (mid) => {
+        updateQuantity(mid, 1); // Assuming updateQuantity handles increment by 1
+    };
+
+    const decrementQuantity = (mid) => {
+        updateQuantity(mid, -1); // Assuming updateQuantity handles decrement by 1
+    };
+
 
     const saveHandler = ()=>{
         carts.toSave();
@@ -62,7 +71,13 @@ console.log("carts.cart: ", carts?.cart);
                                    
                                     <td>{item.pname}</td>
                                     <td>${item.price.toFixed(2)}</td>
-                                    <td>{item.amount}</td>
+                                    <td>
+                                            <Button variant="outline-secondary" size="sm" onClick={() => decrementQuantity(item.mid)}>-</Button>
+                                            {' '}
+                                            {item.amount}
+                                            {' '}
+                                            <Button variant="outline-secondary" size="sm" onClick={() => incrementQuantity(item.mid)}>+</Button>
+                                        </td>
                                     <td>${(item.price * item.amount).toFixed(2)}</td>
                                     <td>
                                         <Button variant="danger" size="sm" onClick={() => removeItem(item.mid)}>
