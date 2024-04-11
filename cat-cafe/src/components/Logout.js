@@ -1,20 +1,20 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Logout = (props) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    // Clear user data from the state
+    props.userLogout(null);
+    console.log("Successful logout");
 
-    useEffect(() => {
-        // Clear user data from the state
-        props.userLogout(null);
-        console.log("Successful logout");
+    // Redirect to login page
+    navigate("/login");
+    localStorage.removeItem("user");
+  }, []);
 
-        // Redirect to login page
-        navigate('/login');
-    }, []);
-
-    return null;
+  return null;
 };
 
 export default Logout;
