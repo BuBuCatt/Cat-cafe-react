@@ -1,123 +1,143 @@
 [
-    {
-      "id": 1,
-      "username": "Bubu",
-      "pass": "test12",
-      "email": "bubu@meowmatch.com"
-    },
-    {
-      "id": 2,
-      "username": "EspressoEnthusiast",
-      "pass": "hashedpass234",
-      "email": "enthusiast@meowmatch.com"
-    },
+  {
+    "id": 1,
+    "username": "Bubu",
+    "pass": "test12",
+    "email": "test",
+    "isAdmin": true
+  },
+  {
+    "id": 2,
+    "username": "EspressoEnthusiast",
+    "pass": "test12",
+    "email": "test1",
+    "isAdmin": false
+  },
     {
       "id": 3,
       "username": "LatteLover",
       "pass": "hashedpass345",
-      "email": "lover@meowmatch.com"
+      "email": "lover@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 4,
       "username": "MacchiatoMogul",
       "pass": "hashedpass456",
-      "email": "mogul@meowmatch.com"
+      "email": "mogul@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 5,
       "username": "BlackCoffeeCat",
       "pass": "hashedpass567",
-      "email": "blackcat@meowmatch.com"
+      "email": "blackcat@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 6,
       "username": "MochaMaestro",
       "pass": "hashedpass678",
-      "email": "maestro@meowmatch.com"
+      "email": "maestro@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 7,
       "username": "CappuccinoCommander",
       "pass": "hashedpass789",
-      "email": "commander@meowmatch.com"
+      "email": "commander@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 8,
       "username": "AmericanoAdmirer",
       "pass": "hashedpass890",
-      "email": "admirer@meowmatch.com"
+      "email": "admirer@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 9,
       "username": "CortadoConnoisseur",
       "pass": "hashedpass901",
-      "email": "connoisseur@meowmatch.com"
+      "email": "connoisseur@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 10,
       "username": "FrappeFanatic",
       "pass": "hashedpass012",
-      "email": "fanatic@meowmatch.com"
+      "email": "fanatic@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 11,
       "username": "AffogatoAficionado",
       "pass": "hashedpass112",
-      "email": "aficionado@meowmatch.com"
+      "email": "aficionado@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 12,
       "username": "BreveBaron",
       "pass": "hashedpass212",
-      "email": "baron@meowmatch.com"
+      "email": "baron@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 13,
       "username": "DoppioDuke",
       "pass": "hashedpass312",
-      "email": "duke@meowmatch.com"
+      "email": "duke@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 14,
       "username": "RistrettoRuler",
       "pass": "hashedpass412",
-      "email": "ruler@meowmatch.com"
+      "email": "ruler@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 15,
       "username": "PurrOverPour",
       "pass": "hashedpass512",
-      "email": "pour@meowmatch.com"
+      "email": "pour@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 16,
       "username": "SoyLatteSultan",
       "pass": "hashedpass612",
-      "email": "sultan@meowmatch.com"
+      "email": "sultan@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 17,
       "username": "ChaiCuddler",
       "pass": "hashedpass712",
-      "email": "cuddler@meowmatch.com"
+      "email": "cuddler@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 18,
       "username": "PiccoloPatron",
       "pass": "hashedpass812",
-      "email": "patron@meowmatch.com"
+      "email": "patron@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 19,
       "username": "FlatWhiteFiend",
       "pass": "hashedpass912",
-      "email": "fiend@meowmatch.com"
+      "email": "fiend@meowmatch.com",
+      "isAdmin":false
     },
     {
       "id": 20,
       "username": "TeaTemptress",
       "pass": "hashedpass102",
-      "email": "temptress@meowmatch.com"
+      "email": "temptress@meowmatch.com",
+      "isAdmin":false
     }
   ]
   

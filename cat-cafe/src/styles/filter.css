@@ -1,0 +1,9 @@
+.selectFilter {
+  margin-top: 50px;
+  margin-left: 8%;
+  outline: none;
+}
+
+.selectFilter option:hover {
+  background-color: #947346;
+}

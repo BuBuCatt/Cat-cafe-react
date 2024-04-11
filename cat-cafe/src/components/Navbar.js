@@ -1,66 +1,82 @@
-import React from 'react';
-import { Navbar, Nav, FormControl, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Navbar, Nav, FormControl, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart , faHeart } from '@fortawesome/free-solid-svg-icons';
-import  '../styles/home.css'
-import { useState ,useEffect} from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faHeart } from "@fortawesome/free-solid-svg-icons";
+import "../styles/home.css";
+import { useState, useEffect } from "react";
+import "../styles/search.css";
+import { MagnifyingGlass } from "phosphor-react";
+import FileService from "../services/FileService";
 
+const NavBar = (props) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [menu, setMenu] = useState(null);
+  const [filteredMenu, setFilteredMenu] = useState([]);
 
-function NavBar(props) {
+  useEffect(() => {
+    let filtered = [];
+    if (menu) {
+      for (let i = 0; i < menu.length; i++) {
+        if (
+          menu[i].menuName &&
+          menu[i].menuName.toLowerCase().startsWith(searchTerm.toLowerCase())
+        ) {
+          filtered.push(menu[i]);
+        }
+      }
+    }
+    setFilteredMenu(filtered);
+  }, [menu, searchTerm]);
 
+  console.log("Filtered Menu: ", filteredMenu);
+  console.log(searchTerm);
 
-  // const [filteredData, setFilteredData] = useState([]);
+  // Função para atualizar o estado com o valor atual do input
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-  // useEffect(() => {
-  //   setFilteredData(props.menu);
-  // }, [props.menu]);
-
-  // const handleSearchChange = (event) => {
-
-  //   const value = event.target.value; // userinput data
-
-  //   props.setSearchTerm(value);
-  //   filterData(value);
-
-
-
-  // };
-
-  // const filterData = (value) => {
-  //   if (!value) {
-  //     setFilteredData(props.menu);
-  //   } else {
-  //     const filtered =props.menu.filter(item =>
-  //       item.menuName.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //     setFilteredData(filtered);
-  //   }
-  // };
+  useEffect(() => {
+    FileService.read("menu").then(
+      (response) => {
+        setMenu(response.data); // Set Menu state with loaded data  -> cafe menu
+        console.log("Json file Cafe Menu Obj : " + response.data);
+      },
+      (rej) => {
+        console.log(rej); // Log errors if file reading fails
+      }
+    );
+  }, []);
 
   return (
-    <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
-         
-      <Navbar.Brand className="mr-auto mr-lg-5" >
-          <Link to="/home">
-              <img 
-              
-                src={logo}
-                width="100"
-                height="auto"
-                className="d-inline-block align-top"
-                alt="Logo"
-              />
-            </Link>
+    <Navbar
+      bg="light"
+      variant="light"
+      expand="lg"
+      style={{ padding: "10px 50px" }}
+      className="navbar"
+    >
+      <Navbar.Brand className="mr-auto mr-lg-5">
+        <Link to="/home">
+          <img
+            src={logo}
+            width="100"
+            height="auto"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
+        </Link>
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-
-      { props.loginUser ? (
+        {props.loginUser ? (
           <Navbar.Text className="me-2">
-            <strong>Welcome, {props.loginUser && props.loginUser.username}</strong>
+            <strong>
+              Welcome, {props.loginUser && props.loginUser.username}
+            </strong>
           </Navbar.Text>
         ) : (
           <Navbar.Text className="me-2">
@@ -68,15 +84,48 @@ function NavBar(props) {
           </Navbar.Text>
         )}
 
-      <Nav className="mx-auto me-3">
-        <Nav.Link as={Link}  to="/home">Home</Nav.Link>
-        <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
-        <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
-        <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
-      </Nav>
+        <Nav className="mx-auto me-3">
+          <Nav.Link as={Link} to="/home">
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/adopt">
+            Adopt Cat
+          </Nav.Link>
+          <Nav.Link as={Link} to="/cafe">
+            Cafe
+          </Nav.Link>
+          {props.isAdmin ? (
+            <Nav.Link as={Link} to="/admin/:userId">
+              Admin
+            </Nav.Link>
+          ) : null}
+          <Nav.Link as={Link} to="/sponsor">
+            Sponsor
+          </Nav.Link>
+        </Nav>
+        <div className="mainSearchDiv">
+          <div className="mainChildDiv">
+            <input
+              className="search-bar-input"
+              type="text"
+              value={searchTerm}
+              onChange={handleChange}
+              placeholder="Search menu..."
+            />
+            <MagnifyingGlass className="icon" size={18} />
+            {searchTerm &&
+              filteredMenu.map((item) => (
+                <ul key={item.mid}>
+                  <li>
+                    <Link to={`/item/${item.mid}`}>{item.menuName}</Link>
+                  </li>
+                </ul>
+              ))}
+          </div>
+        </div>
 
-      {/* search bar */}
-{/* 
+        {/* search bar */}
+        {/* 
       <Form className="search-bar me-3 " >
       <FormControl
         type="text"
@@ -91,44 +140,35 @@ function NavBar(props) {
       </Button>
     </Form> */}
 
+        <Nav>
+          <Link to="/wishlist">
+            <Button variant="dark" className="me-2">
+              <FontAwesomeIcon icon={faHeart} />
+            </Button>
+          </Link>
 
-            <Nav  >
-                
-                <Link to="/wishlist">
-                  <Button variant="dark" className="me-2">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </Button>
-                </Link>
+          <Link to="/cart">
+            <Button variant="dark" className="me-2">
+              <FontAwesomeIcon icon={faShoppingCart} />
+            </Button>
+          </Link>
 
-                <Link to="/cart">
-                    <Button   variant="dark" className="me-2">
-                        <FontAwesomeIcon icon={faShoppingCart} />
-                    </Button>
-                </Link>
-
-                {/* login */}
-                    {props.loginUser? ( // true
-                       
-                      <Link to="/logout">
-                        <Button  variant="dark" onClick={() => props.userLogout(null)}>Logout</Button>
-                      </Link>
-                      
-                     
-
-                    ):(
-                    
-                        <Link to="/login" >
-                        <Button  variant="dark">Login</Button>
-                      </Link>
-
-                    )
-      
-                    }
-            
-            </Nav>
-        </Navbar.Collapse>
+          {/* login */}
+          {props.loginUser ? ( // true
+            <Link to="/logout">
+              <Button variant="dark" onClick={() => props.userLogout(null)}>
+                Logout
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <Button variant="dark">Login</Button>
+            </Link>
+          )}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
-}
+};
 
 export default NavBar;
