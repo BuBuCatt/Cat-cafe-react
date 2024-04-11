@@ -33,7 +33,6 @@ const NavBar = (props) => {
   console.log("Filtered Menu: ", filteredMenu);
   console.log(searchTerm);
 
-  // Função para atualizar o estado com o valor atual do input
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };

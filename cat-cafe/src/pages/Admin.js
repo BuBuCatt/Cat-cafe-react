@@ -19,8 +19,8 @@ export default function Admin({ users, cart, modifyProduct, removeProduct }) {
             <tr className="tr-thead">
               <th>ID</th>
               <th>Name</th>
-              <th>Email</th> {/* New column */}
-              <th>Role</th> {/* New column */}
+              <th>Email</th>
+              <th>Role</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -29,9 +29,8 @@ export default function Admin({ users, cart, modifyProduct, removeProduct }) {
               <tr className="tr-content" key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
-                <td>{user.email}</td> {/* New column */}
+                <td>{user.email}</td>
                 <td>{user.isAdmin ? "Admin" : "Customer"}</td>{" "}
-                {/* New column */}
                 <td>
                   <button
                     onClick={() => {
