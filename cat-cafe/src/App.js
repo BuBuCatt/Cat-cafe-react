@@ -11,6 +11,8 @@ import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import Logout from './components/Logout';
 import FileService from "./services/FileService";
+import DataService from "./services/DataService";
+import AuthService from "./services/AuthService";
 import Cafe from './pages/Cafe';
 import Sponsor from "./pages/Sponsor";
 import Wishlist from './pages/Wishlist';
@@ -21,19 +23,14 @@ import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
 
-
-
-
-
-
-
-
 function App() {
   // customers
-  const [users, setUsers]=useState(null);// json file user/ customers
+  // const [users, setUsers]=useState(null);// json file user/ customers
   const [loginUser,setLoginUser] = useState(null); // login user 
+ 
   // cafe Menu
   const [menu , setMenu]= useState(null); // cafe menu 
+ 
   // cats
   const [cats , setCats] = useState(null); // adopt cats
 
@@ -41,59 +38,39 @@ function App() {
   const [cart,setCart] = useState(new CartObj(1));
 
   //wishList
-
   const [wishlist, setWishlist] = useState([]);
-
-
-
 
   // File error handling 
   const [error, setError] = useState(null); // file error handling
 
-
-
   useEffect(()=>{
-// read the users file then get the data 
+  // sends request to backend to get data from database
 
-        // Read the customer json file
-        FileService.read("customers").then(
+        // Get Menu Data from backend
+        DataService.getData("getProducts").then(
             (response)=>{
-                setUsers(response.data);// Set users state with loaded data in users -> users
-                console.log("Json file customers Obj : " + response.data);
+              setMenu(response.data);// Set menu state with loaded data in menu -> menu
+                console.log("Products data from mysql : " + response.data);
             },
             (rej)=>{
                 console.log(rej);// Log errors if file reading fails
-                setError(rej.message || "An error occurred while reading the customers file.");
+                setError(rej.message || "An error occurred while getting the menu from data base.");
             }
         )
-         //read cafe menu json file
-        FileService.read("menu").then(
+
+      //Get Cats Data from backend
+        DataService.getData("getCats").then(
           (response)=>{
-            setMenu(response.data);// Set Menu state with loaded data  -> cafe menu
-              console.log("Json file Cafe Menu Obj : " + response.data);
+            setCats(response.data);// Set cats state with loaded data in cats -> cats
+            console.log("Cats data from mysql : " + response.data);
           },
           (rej)=>{
               console.log(rej);// Log errors if file reading fails
-              setError(rej.message || "An error occurred while reading the menu file.");
+              setError(rej.message || "An error occurred while getting the cats from database.");
           }
       )
 
-      //read cafe menu json file
-        FileService.read("cats").then(
-          (response)=>{
-            setCats(response.data);// Set Cats state with loaded data  -> Adopt Cats
-              console.log("Json file Adopt Cats Obj : " + response.data);
-          },
-          (rej)=>{
-              console.log(rej);// Log errors if file reading fails
-              setError(rej.message || "An error occurred while reading the cats file.");
-          }
-      )
-
-
-      if (sessionStorage.getItem("user") == null) {
-
-      } else {
+      if (sessionStorage.getItem("user") !== null) {
 
         let tmpUser = sessionStorage.getItem("user");
         tmpUser = JSON.parse(AES.decrypt(tmpUser, 'webdev').toString(enc.Utf8));
@@ -105,9 +82,6 @@ function App() {
 
         setLoginUser(tmpUser);
       }
-
-      
-    
 },[]);
 
 const addProductObj = (productObj)=>{
@@ -143,8 +117,6 @@ const removeItem = (mid) => {
   });
 }
 
-
-
 const resetCart = () => {
   setCart(prevCart => {
       prevCart.removeProduct();
@@ -152,36 +124,24 @@ const resetCart = () => {
   });
 }
 
-
-
-const Auth = (userObj)=>{
-
-
-
+const Auth = (userFormData)=>{
   let getUser = null;
-
-
-  for (let user of users){
-    
-    console.log('user:', user);
-    console.log('userObj:', userObj);
-    if(user.email == userObj.email && user.pass == userObj.pass){
-      getUser=user;
-     
-      console.log('User logged in:', user);
-      break;
-    }
-
-  }
-
-  console.log("app" + userObj.email)
-  console.log("app" + userObj.pass)
-
   let tmpUser = null;
 
+  AuthService.login(userFormData).then(
+    (response)=>{
+      getUser = response.data.username;
+      console.log("User login from mysql : " + response.data.username);
+    },
+    (rej)=>{
+        console.log(rej);// Log errors if login fails
+        setError(rej.message || "An error occurred trying to login");
+    }
+  )
+
   if(getUser){
-    if(getUser.type == 'admin'){//admin
-      tmpUser = new Admin(getUser.id, getUser.username,getUser.email, getUser.type );
+    if(getUser.type === 'admin'){//admin
+      tmpUser = new Admin(getUser.id, getUser.username,getUser.email, getUser.type, getUser.sid );
       console.log("new admin tmpUser created"+tmpUser.username + " " + tmpUser.type);
 
       localStorage.setItem('admin', JSON.stringify(tmpUser)); // store data in local storge after userlogin 
@@ -190,7 +150,7 @@ const Auth = (userObj)=>{
     }else{
       // 
       
-      tmpUser = new User(getUser.id, getUser.username,getUser.email, getUser.type);
+      tmpUser = new User(getUser.id, getUser.username,getUser.email, getUser.type, getUser.sid);
       console.log("new customer tmpUser created"+tmpUser.username + " " + tmpUser.type);
 
       localStorage.setItem('user', JSON.stringify(tmpUser)); 
@@ -204,7 +164,6 @@ const Auth = (userObj)=>{
       
       console.log("login success");
 
-
     }
     // if user is not found, alert user not found
     else {
@@ -215,21 +174,13 @@ const Auth = (userObj)=>{
 
     storeUserSession(tmpUser);
   
-    
   }
-
-
 }
-
-
 
 function storeUserSession(user) {
   const encryptedUser = AES.encrypt(JSON.stringify(user), 'webdev').toString();
   sessionStorage.setItem("user", encryptedUser);
 }
-
-
-
 
 // check user type 
 const checkUserType = (user) => {
@@ -243,9 +194,6 @@ const checkUserType = (user) => {
     return null;
   }
 }
-
-
-
 
 // cat wishlist
 const addToWishlist = (cat) => {
@@ -281,9 +229,6 @@ function updateQuantity(mid, change) {
       };
   });
 }
-
-
-
 
   return (
     <BrowserRouter>
