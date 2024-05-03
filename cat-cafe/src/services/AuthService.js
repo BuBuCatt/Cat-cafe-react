@@ -5,16 +5,7 @@ class AuthService{
         console.log("sending user data to register on backend");
         return http.post(
             `http://localhost/webdev5/PHP_project/paths.php/register`,
-            {
-                headers: {
-                    "Content-Type": 'application/json',
-                },
-                body: {
-                    email: user.email,
-                    pass: user.pass,
-                    username: user.username
-                }
-            }
+            user
         );
     }
 

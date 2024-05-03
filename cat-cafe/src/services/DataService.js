@@ -13,7 +13,15 @@ class DataService{
     }
 
     addData(dataPath, data){
-        console.log("reading "+dataPath+" from database");
+        console.log("posting new data on "+dataPath+" database");
+        return http.post(
+            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}`,
+            data
+        );
+    }
+
+    editData(dataPath, data){
+        console.log("editing "+dataPath+" from database");
         return http.post(
             `http://localhost/webdev5/PHP_project/paths.php/${dataPath}`,
             {

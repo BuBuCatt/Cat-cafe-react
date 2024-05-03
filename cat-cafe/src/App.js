@@ -7,6 +7,8 @@ import NavBar from './components/Navbar';
 import Home from './pages/Home';
 import Adopt from './pages/Adopt';
 import ShoppingCart from './pages/ShoppingCart';
+import CatsForm from './pages/CatsForm';
+import ProductForm from './pages/ProductForm';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import Logout from './components/Logout';
@@ -42,6 +44,9 @@ function App() {
 
   // File error handling 
   const [error, setError] = useState(null); // file error handling
+
+  // Form use type
+  const [useFlag, setUseFlag] = useState('add'); // file error handling
 
   useEffect(()=>{
   // sends request to backend to get data from database
@@ -245,6 +250,8 @@ function updateQuantity(mid, change) {
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="catsform" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
+              <Route path="productsform" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           
