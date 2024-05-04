@@ -14,20 +14,15 @@ export default function LoginPage(props){
         })
     }
 
-
-
     const submitHandler = (e)=>{
       e.preventDefault();
-        props.auth(user);
-        console.log(" login success"+ user.email);
-        navigate('/home');
+      const formData = new FormData(e.target);
+      props.auth(formData);
+      console.log(" login success"+ user.email);
+      navigate('/home');
    
     }
-    console.log("here is Login" + props.loginUser);
-
-
-
-
+    console.log("here is Login Session ID" + props.loginUser);
 
 
   return (
