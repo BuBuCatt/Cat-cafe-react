@@ -12,6 +12,7 @@ import ProductForm from './pages/ProductForm';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
 import Logout from './components/Logout';
+import Registration from './pages/Registration';
 import FileService from "./services/FileService";
 import DataService from "./services/DataService";
 import AuthService from "./services/AuthService";
@@ -249,6 +250,7 @@ function updateQuantity(mid, change) {
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="reg" element={<Registration  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
               <Route path="catsform" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
               <Route path="productsform" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />

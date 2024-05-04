@@ -104,9 +104,14 @@ function NavBar(props) {
 
                     ):(
                     
-                        <Link to="/login" >
-                        <Button  variant="dark">Login</Button>
+                      <>
+                      <Link to="/login">
+                          <Button variant="dark" className="me-2">Login</Button>
                       </Link>
+                      <Link to="/reg">
+                          <Button variant="dark">Register</Button>
+                      </Link>
+                  </>
 
                     )
       
