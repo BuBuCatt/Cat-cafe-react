@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button,Accordion } from 'react-bootstrap';
 
 import "../styles/wishlist.css";
+import Footer from '../components/Footer';
 
 export default function Wishlist(props) {
   console.log("Wishlist data in component:", props.wishlist); 
@@ -71,6 +72,7 @@ export default function Wishlist(props) {
        
    
         </Container>
+        <Footer/>
     </>
   )
 }

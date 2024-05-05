@@ -1,9 +1,37 @@
 // src/pages/Menu.js
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import Menu from '../components/Menu';
+import Footer from '../components/Footer';
+import DataService from '../services/DataService';
+import { Alert } from 'react-bootstrap';
+
 
 const Cafe = (props) => {
 
+  const [msg,setMsg] = useState(null);
+  const [data, setData] = useState(props.menu);
+  const [alertType,setAlertType] = useState("");
+
+  const reloadData = () => {
+    DataService.getData("getProducts").then(
+        (response)=>{
+          setData(response.data);
+        },
+        (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred while reloading the data.");
+            setAlertType('danger');
+        }
+    )
+  }
+
+  useEffect(()=>{
+    reloadData();
+
+    if(msg){
+      // setTimeout(()=> setMsg(null),5000)
+    }
+  },[msg])
 
   const Carousel = ()=>{
 
@@ -47,20 +75,28 @@ const Cafe = (props) => {
 
 
       <div className="container mt-5">
-              <div className="row">
-                <div className="col-12">
-                  <div className="hero-section">
+        <div className="row">
+          <div className="col-12">
+            <div className="hero-section">
 
-                    <Carousel/>
-              
+              <Carousel/>
+        
 
-                  </div>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </div>
+        {
+            msg ? (
+              <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+            ) : null
+        }
 
-        <Menu menu={props.menu} addProObj={props.addProObj} cart={props.shoppingCart} type='order'/>
-
+        { data ? 
+          <Menu menu={data} addProObj={props.addProObj} cart={props.shoppingCart} type='order'/>
+           : <p>Loading menu data....</p>
+        }
+        <Footer/>
  
     </>
    
