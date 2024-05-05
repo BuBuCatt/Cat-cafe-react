@@ -10,9 +10,9 @@ const AdminDashboard = (props) => {
 
     useEffect(()=>{
 
-      // if(props.loginUser == null || props.loginUser.type !== "admin"){
-      //   navigate("/");
-      // }
+      if(props.loginUser == null || props.loginUser.type !== "admin"){
+        navigate("/");
+      }
 
     },[]);
 

@@ -4,12 +4,13 @@ import  { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { Button, Container,Row, Col, Alert, Dropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PopupWindow from '../components/PopWindow';
 import Footer from '../components/Footer';
 
 
 const AdminCats = (props) => {
+    const navigate = useNavigate()
     const [filter, setFilter] = useState('All');
     const [msg,setMsg] = useState(null);
     const [data, setData] = useState(props.cats);
@@ -49,17 +50,14 @@ const AdminCats = (props) => {
       }
 
     useEffect(()=>{
-        // if(props.loginUser == null){
-        //   navigate("/");
-        // }
-        // if(props.loginUser && props.loginUser.type != "admin"){
-        //     navigate("/");
-        // }
+        if(props.loginUser == null || props.loginUser.type != "admin"){
+          navigate("/");
+        }
 
         reloadData();
 
       if(msg){
-          // setTimeout(()=> setMsg(null),5000)
+          setTimeout(()=> setMsg(null),5000)
         }
     },[msg,props.loginUser])
 

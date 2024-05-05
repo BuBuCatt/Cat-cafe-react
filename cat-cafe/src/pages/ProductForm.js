@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import "../styles/BasicForm.css";
+import "../styles/Alert.css"
 import { Link, useNavigate } from 'react-router-dom';
 import DataService from '../services/DataService';
 import Footer from '../components/Footer';
@@ -21,9 +22,9 @@ export default function ProductForm(props){
 
   
   useEffect(()=>{
-    // if(props.loginUser == null || props.loginUser.type != "admin"){
-    //   navigate("/");
-    // }
+    if(props.loginUser == null || props.loginUser.type != "admin"){
+      navigate("/");
+    }
 
     if(pageId){
       DataService.searchData('searchProduct', pageId).then(
@@ -35,7 +36,8 @@ export default function ProductForm(props){
         },
         (rej)=>{
           console.log(rej);
-          setMsg(rej.response.data||'Unable to retrieve product data. Try again later');
+          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+          setMsg(msg || 'Unable to retrieve product data. Try again later');
           setAlertType('danger');
           setTimeout(()=> navigate('/adminMenu'),4000)
         }
@@ -110,7 +112,7 @@ export default function ProductForm(props){
       }
       {
         msg ? (
-          <Alert variant={alertType}>{msg}</Alert>
+          <Alert className='alert-msg' variant={alertType}>{msg}</Alert>
         ) : null
       }
 

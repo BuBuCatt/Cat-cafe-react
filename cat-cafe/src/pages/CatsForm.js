@@ -22,9 +22,9 @@ export default function CatsForm(props){
     let pageId = pageURL.searchParams.get('id');
 
     useEffect(()=>{
-      // if(props.loginUser == null || props.loginUser && props.loginUser.type != "admin"){
-      //   navigate("/");
-      // }
+      if(props.loginUser == null || props.loginUser.type !== "admin"){
+        navigate("/");
+      }
 
       if(pageId){
         DataService.searchData('searchCat', pageId).then(
@@ -45,7 +45,7 @@ export default function CatsForm(props){
       }
 
       if(msg){
-          // setTimeout(()=> setMsg(null),5000)
+          setTimeout(()=> setMsg(null),5000)
         }
     },[msg,props.loginUser])
     const navigate = useNavigate(); 

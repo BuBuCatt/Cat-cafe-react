@@ -3,13 +3,14 @@ import DataService from '../services/DataService';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container,Row, Col, Alert, Dropdown } from 'react-bootstrap';
 import PopupWindow from '../components/PopWindow';
 import Footer from '../components/Footer';
 
 
 const AdminMenu = (props) => {
+    const navigate = useNavigate(); 
     const [msg,setMsg] = useState(null);
     const [data, setData] = useState(props.menu);
     const [alertType,setAlertType] = useState("");
@@ -18,19 +19,15 @@ const AdminMenu = (props) => {
     const filteredProducts = data ? data.filter(menu => {
         return filter === 'All' || menu.menuCategory === filter;
     }) : [];
-
     useEffect(()=>{
-        // if(props.loginUser == null){
-        //   navigate("/");
-        // }
-        // if(props.loginUser && props.loginUser.type != "admin"){
-        //     navigate("/");
-        // }
+        if(props.loginUser == null || props.loginUser.type != "admin"){
+          navigate("/");
+        }
 
         reloadData();
 
       if(msg){
-          // setTimeout(()=> setMsg(null),5000)
+          setTimeout(()=> setMsg(null),5000)
         }
     },[msg,props.loginUser])
 

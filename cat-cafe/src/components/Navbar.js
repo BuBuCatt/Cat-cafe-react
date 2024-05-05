@@ -12,15 +12,6 @@ function NavBar(props) {
   const navigate = useNavigate();
   const userType = props.checkUserType(props.loginUser);
 
-  useEffect(() => {
-    if (userType == 'admin') {
-      navigate('/admin');
-    }
-  }, [userType, navigate]);
-
-
-
-
     return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
          

@@ -129,37 +129,30 @@ const resetCart = () => {
   });
 }
 
-const Auth = (userFormData)=>{
-  let getUser = null;
+const Auth = (user)=>{
+  // let getUser = null;
   let tmpUser = null;
 
-  AuthService.login(userFormData).then(
-    (response)=>{
-      console.log("Type of response.data:", typeof response.data);
-      console.log("Complete response object:", response);
-      console.log("Data received:", response.data);
-      // const username = response.data.username;
-      // const email = response.data.email;
-      
+  // AuthService.login(userFormData).then(
+  //   (response)=>{
+  //     console.log("Type of response.data:", typeof response.data);
+  //     console.log("Complete response object:", response);
 
+  //     getUser = response.data;
+  //     setLoginUser(getUser);
+  //     console.log("User login from MySQL: " + getUser);
+  //   },
+  //   (rej)=>{
+  //       console.log(rej);// Log errors if login fails
+  //       // setError(rej.message || "An error occurred trying to login");
+  //       return {message: rej.message, type: 'danger'}
+  //   }
+  // )
 
-
-      // console.log("Username:", username);
-      // console.log("Email:", email);
-
-      getUser = response.data;
-      setLoginUser(getUser);
-      console.log("User login from MySQL: " + getUser);
-    },
-    (rej)=>{
-        console.log(rej);// Log errors if login fails
-        setError(rej.message || "An error occurred trying to login");
-    }
-  )
-
-  if(getUser){
-    if(getUser.type === 'admin'){//admin
-      tmpUser = new Admin(getUser.id, getUser.username,getUser.email, getUser.type, getUser.sid );
+  if(user){
+    setLoginUser(user);
+    if(user.type === 'admin'){//admin
+      tmpUser = new Admin(user.id, user.username,user.email, user.type, user.sid );
       console.log("new admin tmpUser created"+tmpUser.username + " " + tmpUser.type);
 
       localStorage.setItem('admin', JSON.stringify(tmpUser)); // store data in local storge after userlogin 
@@ -168,7 +161,7 @@ const Auth = (userFormData)=>{
     }else{
       // 
       
-      tmpUser = new User(getUser.id, getUser.username,getUser.email, getUser.type, getUser.sid);
+      tmpUser = new User(user.id, user.username,user.email, user.type, user.sid);
       console.log("new customer tmpUser created"+tmpUser.username + " " + tmpUser.type);
 
       localStorage.setItem('user', JSON.stringify(tmpUser)); 
@@ -186,12 +179,10 @@ const Auth = (userFormData)=>{
     // if user is not found, alert user not found
     else {
       console.log("login failed");
-      alert("Login failed: User not found ");
       setLoginUser(null);
     }
 
     storeUserSession(tmpUser);
-  
   }
 }
 
