@@ -20,6 +20,10 @@
     padding: 0.8rem;
 }
 
+.regForm{
+    margin-top: 20%;;
+}
+
 @media (max-width: 576px) {
     .login-form {
         padding: 1rem;

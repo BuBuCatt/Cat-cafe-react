@@ -6,7 +6,21 @@ import { useNavigate } from 'react-router-dom';
 export default function LoginPage(props){
 
     const [user,setUser] = useState({email:"",pass:""});
+    const [msg,setMsg] = useState(null);
     const navigate = useNavigate(); 
+
+    useEffect(()=>{
+      // if(props.loginUser == null){
+      //   navigate("/");
+      // }
+      // if(props.loginUser && props.loginUser.type != "admin"){
+      //     navigate("/");
+      // }
+
+      if(msg){
+          setTimeout(()=> setMsg(null),5000)
+        }
+    },[msg,props.loginUser])
 
     const changeHandler = (e)=>{
         setUser(prev=>{
