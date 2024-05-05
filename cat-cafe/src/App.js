@@ -47,9 +47,6 @@ function App() {
   // File error handling 
   const [error, setError] = useState(null); // file error handling
 
-  // Form use type
-  const [useFlag, setUseFlag] = useState('add'); // file error handling
-
   useEffect(()=>{
   // sends request to backend to get data from database
 
@@ -252,11 +249,11 @@ function updateQuantity(mid, change) {
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="admin-menu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="admin-cats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="cat-form" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
-              <Route path="product-form" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />
-              <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+              <Route path="adminMenu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="adminCats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="admin/form/cat" element={<CatsForm loginUser={loginUser} cats={cats}/>}  />
+              <Route path="admin/form/product" element={<ProductForm loginUser={loginUser} menu={menu} />}  />
+              <Route path="logout" element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           
         </Routes>
