@@ -34,7 +34,7 @@ const AdminCats = (props) => {
     }
 
     const removeItem = (item) => {
-        DataService.removeData("removeCat",item.cid).then(
+        DataService.removeData("removeCat",item.cid, props.loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
               setAlertType('primary');

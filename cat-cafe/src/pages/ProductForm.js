@@ -67,7 +67,8 @@ export default function ProductForm(props){
   const submitHandler = (e)=>{
     e.preventDefault();
     let formData = new FormData(e.target);
-
+    formData.append("sid", props.loginUser.sessionID);
+    
     if(!pageId){
       DataService.addData('addProduct',formData).then(
         (response)=>{

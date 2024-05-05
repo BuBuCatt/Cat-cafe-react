@@ -66,6 +66,8 @@ export default function CatsForm(props){
     const submitHandler = (e)=>{
       e.preventDefault();
       const formData = new FormData(e.target);
+      formData.append("sid", props.loginUser.sessionID);
+      
       if(!pageId){
         DataService.addData('addCat',formData).then(
           (response)=>{

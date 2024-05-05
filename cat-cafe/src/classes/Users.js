@@ -4,7 +4,7 @@ export  class User{
         this.username = username;
         this.email = email;
         this.type = type;
-        this.sessionID = sessionID
+        this.sessionID = sessionID;
     }
     displayInfo(){
         return this;
@@ -22,9 +22,10 @@ export class Customer extends User{
 }
 
 export class Admin extends User{
-    constructor(id,username,email,type){
+    constructor(id,username,email,type,sessionID){
         super(id,username,email);
         this.type = type;
+        this.sessionID = sessionID;
     }
     displayInfo(){
         return this;

@@ -32,7 +32,7 @@ const AdminMenu = (props) => {
     },[msg,props.loginUser])
 
     const removeItem = (item) => {
-        DataService.removeData("removeProduct",item.mid).then(
+        DataService.removeData("removeProduct",item.mid,props.loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
               setAlertType('primary');

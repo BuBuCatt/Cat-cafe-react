@@ -148,7 +148,7 @@ const Auth = (user)=>{
   //       return {message: rej.message, type: 'danger'}
   //   }
   // )
-
+  console.log(user)
   if(user){
     setLoginUser(user);
     if(user.type === 'admin'){//admin

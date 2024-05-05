@@ -40,10 +40,10 @@ class DataService{
         );
     }
 
-    removeData(dataPath, id){
+    removeData(dataPath, id, sid){
         console.log("deleting "+dataPath+" from database");
         return http.delete(
-            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}?id=${id}`
+            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}?id=${id}&sid=${sid}`
         );
     }
 
