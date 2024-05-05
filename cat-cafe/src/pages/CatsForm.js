@@ -1,8 +1,10 @@
+import "../styles/BasicForm.css";
+import "../styles/Alert.css"
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
-import "../styles/BasicForm.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DataService from '../services/DataService';
+import Footer from "../components/Footer";
 
 export default function CatsForm(props){
 
@@ -12,19 +14,38 @@ export default function CatsForm(props){
     const [catDescription,setCatDescription] = useState("");
     const [adoptionStatus,setAdoptionStatus] = useState("Available");
     const [catImage,setCatImage] = useState("");
+
     const [msg,setMsg] = useState(null);
     const [alertType,setAlertType] = useState("");
 
+    let pageURL = new URL(window.location);
+    let pageId = pageURL.searchParams.get('id');
+
     useEffect(()=>{
-      // if(props.loginUser == null){
+      // if(props.loginUser == null || props.loginUser && props.loginUser.type != "admin"){
       //   navigate("/");
       // }
-      // if(props.loginUser && props.loginUser.type != "admin"){
-      //     navigate("/");
-      // }
+
+      if(pageId){
+        DataService.searchData('searchCat', pageId).then(
+          (response)=>{
+            setCatName(response.data.catName);
+            setCataAge(response.data.cataAge);
+            setCatBreed(response.data.catBreed);
+            setCatDescription(response.data.catDescription);
+            setAdoptionStatus(response.data.setAdoptionStatus);
+          },
+          (rej)=>{
+            console.log(rej);
+            setMsg(rej.response.data||'Unable to retrieve cat data. Try again later');
+            setAlertType('danger');
+            setTimeout(()=> navigate('/adminCats'),4000)
+          }
+        )
+      }
 
       if(msg){
-          setTimeout(()=> setMsg(null),5000)
+          // setTimeout(()=> setMsg(null),5000)
         }
     },[msg,props.loginUser])
     const navigate = useNavigate(); 
@@ -45,7 +66,7 @@ export default function CatsForm(props){
     const submitHandler = (e)=>{
       e.preventDefault();
       const formData = new FormData(e.target);
-      if(props.useFlag === 'add'){
+      if(!pageId){
         DataService.addData('addCat',formData).then(
           (response)=>{
             setMsg(response.data);// Set cats state with loaded data in cats -> cats
@@ -60,7 +81,18 @@ export default function CatsForm(props){
         )
       }
       else {
-        DataService.editData('editCat',formData)
+        formData.append("cid", pageId);
+        DataService.editData('editCat',formData).then(
+          (response)=>{
+            setMsg(response.data);
+            setAlertType('primary');
+          },
+          (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred.");
+            setAlertType('danger');
+          }
+        )
         // console.log(" cat with id:"+e.target.id+" edit successfully");
         // navigate('/home');
       }
@@ -69,10 +101,14 @@ export default function CatsForm(props){
 
   return (
     <Container className="d-flex justify-content-center align-items-center main-container" >
-      
+      {
+        pageId ? (
+          <Link to='/adminCats'>Go back</Link>
+        ) : null
+      }
       {
         msg ? (
-          <Alert variant={alertType}>{msg}</Alert>
+          <Alert className='alert-msg' variant={alertType}>{msg}</Alert>
         ) : null
       }
 
@@ -80,7 +116,7 @@ export default function CatsForm(props){
 
         <Row className="mb-4">
           <Col className="d-flex justify-content-center">
-            <Image src="../data/img/meow-match-caf-favicon-black.png" alt="Meow Match Café Logo" roundedCircle />
+            <Image src="../../data/img/meow-match-caf-favicon-black.png" alt="Meow Match Café Logo" roundedCircle />
           </Col>
         </Row>
 
@@ -154,17 +190,18 @@ export default function CatsForm(props){
             value={catImage}
             onChange={e => changeHandler(e,setCatImage)}
             placeholder="Cat Image"
-            required
+            required={pageId ? false : true}
           />
         </Form.Group>
     
         <div  className="d-flex justify-content-center">
           <Button variant="dark" type="submit" className="w-50">
-            { props.useFlag && props.useFlag === 'edit' ?  'Edit Cat': 'Add New Cat'}     
+            { pageId ?  'Edit Cat': 'Add New Cat'}     
           </Button>
         </div>
  
       </Form>
+      <Footer/>
     </Container>
   );
 

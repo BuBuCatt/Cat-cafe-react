@@ -52,14 +52,21 @@ function NavBar(props) {
 
 
       <Nav className="mx-auto me-3">
-      {userType != "admin" &&(
-        <>
-        <Nav.Link as={Link}  to="/home">Home</Nav.Link>
-        <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
-        <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
-        <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
-        </>)
-          }
+        {userType === "admin" ? (
+          <>
+          <Nav.Link as={Link}  to="/admin">Dashboard</Nav.Link>
+          <Nav.Link as={Link}  to="/adminMenu">Menu</Nav.Link>
+          <Nav.Link as={Link}  to="/adminCats">Cats</Nav.Link>
+        </>
+          ) : (
+          <>
+            <Nav.Link as={Link}  to="/home">Home</Nav.Link>
+            <Nav.Link as={Link}  to="/adopt">Adopt Cat</Nav.Link>
+            <Nav.Link as={Link}  to="/cafe">Cafe</Nav.Link>
+            <Nav.Link as={Link}  to="/sponsor">Sponsor</Nav.Link>
+          </>
+          )
+        }
       </Nav>
 
       {/* search bar */}
@@ -79,19 +86,24 @@ function NavBar(props) {
     </Form> */}
 
 
-            <Nav  >
-                
-                <Link to="/wishlist">
-                  <Button variant="dark" className="me-2">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </Button>
-                </Link>
+            <Nav className='gap-1' >
+                {
+                  userType === "admin" ? null : (
+                    <>
+                    <Link to="/wishlist">
+                      <Button variant="dark" className="me-2">
+                        <FontAwesomeIcon icon={faHeart} />
+                      </Button>
+                    </Link>
 
-                <Link to="/cart">
-                    <Button   variant="dark" className="me-2">
-                        <FontAwesomeIcon icon={faShoppingCart} />
-                    </Button>
-                </Link>
+                    <Link to="/cart">
+                        <Button   variant="dark" className="me-2">
+                            <FontAwesomeIcon icon={faShoppingCart} />
+                        </Button>
+                    </Link>
+                    </>
+                  )
+                }
 
                 {/* login */}
                     {props.loginUser? ( // true

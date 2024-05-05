@@ -22,6 +22,8 @@ import Wishlist from './pages/Wishlist';
 import CartObj from './classes/Cart';
 import { ProductObj } from './classes/Cart';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminMenu from './pages/AdminMenu'
+import AdminCats from './pages/AdminCats'
 import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
@@ -45,9 +47,6 @@ function App() {
 
   // File error handling 
   const [error, setError] = useState(null); // file error handling
-
-  // Form use type
-  const [useFlag, setUseFlag] = useState('add'); // file error handling
 
   useEffect(()=>{
   // sends request to backend to get data from database
@@ -266,9 +265,11 @@ function updateQuantity(mid, change) {
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="reg" element={<Registration  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="catsform" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
-              <Route path="productsform" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />
-              <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+              <Route path="adminMenu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="adminCats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="admin/form/cat" element={<CatsForm loginUser={loginUser} cats={cats}/>}  />
+              <Route path="admin/form/product" element={<ProductForm loginUser={loginUser} menu={menu} />}  />
+              <Route path="logout" element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           
         </Routes>

@@ -79,15 +79,6 @@ const SponsorCat = ({addProductObj}) => {
           
         </div>
       </div>
-      <div>
-      <div className="parent-container">
-        {/* <button className="btn btn-cute btn-primary w-20 my-2 back-to-home-btn " onClick={backToHome}>Back To Home</button> */}
-        <Footer/>
-      </div>
-      
-      </div>
-   
-      
     </div>
   );
 };

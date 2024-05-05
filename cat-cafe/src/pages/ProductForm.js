@@ -1,77 +1,113 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import "../styles/BasicForm.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DataService from '../services/DataService';
+import Footer from '../components/Footer';
 
 export default function ProductForm(props){
+  
+  const [menuName,setMenuName] = useState("");
+  const [menuDescription,setMenuDescription] = useState("");
+  const [menuPrice,setMenuPrice] = useState("");
+  const [menuCategory,setMenuCategory] = useState("");
+  const [menuImage,setMenuImage] = useState("");
 
-    const [menuName,setMenuName] = useState("");
-    const [menuDescription,setMenuDescription] = useState("");
-    const [menuPrice,setMenuPrice] = useState("");
-    const [menuCategory,setMenuCategory] = useState("");
-    const [menuImage,setMenuImage] = useState("");
-    const [msg,setMsg] = useState(null);
-    const [alertType,setAlertType] = useState("");
+  const [msg,setMsg] = useState(null);
+  const [alertType,setAlertType] = useState("");
 
-    useEffect(()=>{
-      // if(props.loginUser == null){
-      //   navigate("/");
-      // }
-      // if(props.loginUser && props.loginUser.type != "admin"){
-      //     navigate("/");
-      // }
+  let pageURL = new URL(window.location);
+  let pageId = pageURL.searchParams.get('id');
 
-      if(msg){
-          setTimeout(()=> setMsg(null),5000)
+  
+  useEffect(()=>{
+    // if(props.loginUser == null || props.loginUser.type != "admin"){
+    //   navigate("/");
+    // }
+
+    if(pageId){
+      DataService.searchData('searchProduct', pageId).then(
+        (response)=>{
+          setMenuName(response.data.menuName);
+          setMenuDescription(response.data.menuDescription);
+          setMenuPrice(response.data.menuPrice);
+          setMenuCategory(response.data.menuCategory);
+        },
+        (rej)=>{
+          console.log(rej);
+          setMsg(rej.response.data||'Unable to retrieve product data. Try again later');
+          setAlertType('danger');
+          setTimeout(()=> navigate('/adminMenu'),4000)
         }
-    },[msg,props.loginUser])
-
-    const navigate = useNavigate(); 
-
-    const changeHandler = (e,setFunction)=>{
-      setFunction(e.target.value)
+      )
     }
 
-    const emptyForm = ()=>{
-      setMenuName('');
-      setMenuDescription('');
-      setMenuPrice('');
-      setMenuCategory('');
-      setMenuImage('');
+    if(msg){
+      setTimeout(()=> setMsg(null),5000)
+    }
+    
+  },[msg,props.loginUser])
+
+  const navigate = useNavigate(); 
+
+  const changeHandler = (e,setFunction)=>{
+    setFunction(e.target.value)
+  }
+
+  const emptyForm = ()=>{
+    setMenuName('');
+    setMenuDescription('');
+    setMenuPrice('');
+    setMenuCategory('');
+    setMenuImage('');
+  }
+
+  const submitHandler = (e)=>{
+    e.preventDefault();
+    let formData = new FormData(e.target);
+
+    if(!pageId){
+      DataService.addData('addProduct',formData).then(
+        (response)=>{
+          setMsg(response.data);
+          setAlertType('primary');
+          emptyForm();
+        },
+        (rej)=>{
+          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+          setMsg(msg || "An error occurred.");
+          setAlertType('danger');
+        }
+      )
+    }
+    else {
+      formData.append("mid", pageId);
+      DataService.editData('editProduct',formData).then(
+        (response)=>{
+          setMsg(response.data);
+          setAlertType('primary');
+        },
+        (rej)=>{
+          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+          setMsg(msg || "An error occurred.");
+          setAlertType('danger');
+        }
+      )
+      // console.log("product with id:"+e.target.id+" edit successfully");
+      // navigate('/home');
     }
 
-    const submitHandler = (e)=>{
-      e.preventDefault();
-      const formData = new FormData(e.target);
 
-      if(props.useFlag === 'add'){
-        DataService.addData('addProduct',formData).then(
-          (response)=>{
-            setMsg(response.data);
-            setAlertType('primary');
-            // emptyForm();
-          },
-          (rej)=>{
-            console.log(rej);
-            setMsg(rej.response.data || "An error occurred.");
-            setAlertType('danger');
-          }
-        )
-      }
-      else {
-        DataService.editData('editProduct',formData)
-        // console.log("product with id:"+e.target.id+" edit successfully");
-        // navigate('/home');
-      }
-
-
-    }
+  }
 
 
   return (
     <Container className="d-flex justify-content-center align-items-center main-container" >
-      
+      {
+        pageId ? (
+          <Link to='/adminMenu'>Go back</Link>
+        ) : null
+      }
       {
         msg ? (
           <Alert variant={alertType}>{msg}</Alert>
@@ -82,7 +118,7 @@ export default function ProductForm(props){
 
         <Row className="mb-4">
           <Col className="d-flex justify-content-center">
-            <Image src="../data/img/meow-match-caf-favicon-black.png" alt="Meow Match Café Logo" roundedCircle />
+            <Image src="../../data/img/meow-match-caf-favicon-black.png" alt="Meow Match Café Logo" roundedCircle />
           </Col>
         </Row>
 
@@ -151,17 +187,19 @@ export default function ProductForm(props){
             value={menuImage}
             onChange={e => changeHandler(e,setMenuImage)}
             placeholder="Product Image"
-            required
+            required={pageId ? false : true}
           />
         </Form.Group>
     
         <div  className="d-flex justify-content-center">
           <Button variant="dark" type="submit" className="w-50">
-            { props.useFlag && props.useFlag === 'edit' ?  'Edit Product': 'Add New Product'}     
+            { pageId ?  'Edit Product' : 'Add New Product'}     
           </Button>
         </div>    
  
       </Form>
+
+      <Footer/>
     </Container>
   );
 

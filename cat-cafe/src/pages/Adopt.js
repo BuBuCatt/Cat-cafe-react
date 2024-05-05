@@ -1,7 +1,10 @@
 // src/pages/Adopt.js
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import Cats from '../components/Cats';
 import "../styles/adopt.css";
+import Footer from '../components/Footer';
+import DataService from '../services/DataService';
+import { Alert } from 'react-bootstrap';
 
 
 
@@ -45,6 +48,30 @@ const Carousel = ()=>{
 
 
 const Adopt = (props) => {
+  const [msg,setMsg] = useState(null);
+  const [data, setData] = useState(props.cats);
+  const [alertType,setAlertType] = useState("");
+
+  const reloadData = () => {
+    DataService.getData("getCats").then(
+        (response)=>{
+          setData(response.data);
+        },
+        (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred while reloading the data.");
+            setAlertType('danger');
+        }
+    )
+  }
+
+  useEffect(()=>{
+    reloadData();
+    
+    if(msg){
+      // setTimeout(()=> setMsg(null),5000)
+    }
+  },[msg])
   return (
 
     <>
@@ -62,10 +89,14 @@ const Adopt = (props) => {
       </div>
 
          
+        {
+            msg ? (
+              <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+            ) : null
+        }
+          {data ? <Cats cats={data} addToWishlist={props.addToWishlist} removeFromWishlist={props.removeFromWishlist}/>  : <p>Loading cats data...</p>}
 
-          {props.cats ? <Cats cats={props.cats} addToWishlist={props.addToWishlist} removeFromWishlist={props.removeFromWishlist}/>  : <p>Loading cats data...</p>}
-
-         
+         <Footer/>
     </>
    
   );

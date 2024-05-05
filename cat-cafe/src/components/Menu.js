@@ -1,32 +1,29 @@
 import React from 'react'
 import { ProductObj } from '../classes/Cart'
-import { useState } from 'react';
+import '../styles/Alert.css'
 
 export default function Menu(props) {
 
- 
+    const addHandler = (item) => {
 
 
-const addHandler = (item) => {
+      console.log("Product details : " + item.mid, item.menuName, item.menuPrice);
+      console.log("item obj" + item);
+      const productObj = new ProductObj(item.mid, item.menuName, item.menuPrice); // Create a new product object
+      props.addProObj(productObj); // Call the function passed via props
 
+      console.log("added coffee name ." +item.menuName);
+      console.log("added coffee obj name"+productObj.pname)
 
-  console.log("Product details : " + item.mid, item.menuName, item.menuPrice);
-  console.log("item obj" + item);
-  const productObj = new ProductObj(item.mid, item.menuName, item.menuPrice); // Create a new product object
-  props.addProObj(productObj); // Call the function passed via props
+      console.log("cart item " + props.cart.cart);
 
-  console.log("added coffee name ." +item.menuName);
-  console.log("added coffee obj name"+productObj.pname)
-
-  console.log("cart item " + props.cart.cart);
-
-    // If props.cart and props.cart.cart exist, log them
-    if (props.cart && props.cart.cart) {
-      console.log("Cart items:", props.cart.cart);
-    } else {
-      console.log("Cart or cart items are undefined");
-    }
- };
+        // If props.cart and props.cart.cart exist, log them
+        if (props.cart && props.cart.cart) {
+          console.log("Cart items:", props.cart.cart);
+        } else {
+          console.log("Cart or cart items are undefined");
+        }
+    };
 
   return (
     <>
@@ -39,9 +36,9 @@ const addHandler = (item) => {
               <div className="card-body">
                 <h5 className="card-title">{item.menuName}</h5>
                 <p className="card-text">{item.menuDescription}</p>
-                <div className="d-flex justify-content-between align-items-center">
+                <span className="text-muted">${item.menuPrice}</span>
+                <div className="d-flex flex-column justify-content-between align-items-center mt-2">
                   <button className="btn btn-primary" onClick={()=>{addHandler( item)}}>Order Now</button>
-                  <span className="text-muted">${item.menuPrice}</span>
                 </div>
               </div>
             </div>
@@ -49,9 +46,6 @@ const addHandler = (item) => {
         ))}
       </div>
     </div>
-
-
-
 
     </>
   )

@@ -12,6 +12,18 @@ class DataService{
         );
     }
 
+    searchData(dataPath, id){
+        console.log("reading "+dataPath+" from database");
+        return http.get(
+            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}?id=${id}`,
+            {
+                headers: {
+                    "Content-Type": 'application/json',
+                }
+            }
+        );
+    }
+
     addData(dataPath, data){
         console.log("posting new data on "+dataPath+" database");
         return http.post(
@@ -24,16 +36,17 @@ class DataService{
         console.log("editing "+dataPath+" from database");
         return http.post(
             `http://localhost/webdev5/PHP_project/paths.php/${dataPath}`,
-            {
-                headers: {
-                    "Content-Type": 'application/json',
-                },
-                body: {
-                    data: data
-                }
-            }
+            data
         );
     }
+
+    removeData(dataPath, id){
+        console.log("deleting "+dataPath+" from database");
+        return http.delete(
+            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}?id=${id}`
+        );
+    }
+
 }
 
 export default new DataService();
