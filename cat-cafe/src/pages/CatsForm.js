@@ -16,12 +16,12 @@ export default function CatsForm(props){
     const [alertType,setAlertType] = useState("");
 
     useEffect(()=>{
-      if(props.loginUser == null){
-        navigate("/");
-      }
-      if(props.loginUser && props.loginUser.type != "admin"){
-          navigate("/");
-      }
+      // if(props.loginUser == null){
+      //   navigate("/");
+      // }
+      // if(props.loginUser && props.loginUser.type != "admin"){
+      //     navigate("/");
+      // }
 
       if(msg){
           setTimeout(()=> setMsg(null),5000)

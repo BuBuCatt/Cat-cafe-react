@@ -136,8 +136,21 @@ const Auth = (userFormData)=>{
 
   AuthService.login(userFormData).then(
     (response)=>{
-      getUser = response.data.username;
-      console.log("User login from mysql : " + response.data.username);
+      console.log("Type of response.data:", typeof response.data);
+      console.log("Complete response object:", response);
+      console.log("Data received:", response.data);
+      // const username = response.data.username;
+      // const email = response.data.email;
+      
+
+
+
+      // console.log("Username:", username);
+      // console.log("Email:", email);
+
+      getUser = response.data;
+      setLoginUser(getUser);
+      console.log("User login from MySQL: " + getUser);
     },
     (rej)=>{
         console.log(rej);// Log errors if login fails
@@ -182,6 +195,7 @@ const Auth = (userFormData)=>{
   
   }
 }
+
 
 function storeUserSession(user) {
   const encryptedUser = AES.encrypt(JSON.stringify(user), 'webdev').toString();
