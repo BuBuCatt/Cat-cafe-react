@@ -59,7 +59,7 @@ const Cafe = (props) => {
               </div>
             </div>
 
-        <Menu menu={props.menu} addProObj={props.addProObj} cart={props.shoppingCart}/>
+        <Menu menu={props.menu} addProObj={props.addProObj} cart={props.shoppingCart} type='order'/>
 
  
     </>

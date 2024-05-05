@@ -31,15 +31,27 @@ const AdminDashboard = (props) => {
           <Container fluid className="pt-4">
             <h1>Welcome to Admin Dashboard</h1>
             <Container fluid>
-              <Row>
+              <Row className='mb-3'>
                 <Col>
-                <Link to="/catsForm">
+                <Link to="/cat-Form">
                   <Button  variant="success">Add new cats</Button>
                 </Link>
                 </Col>
                 <Col>
-                <Link to="/catsForm">
+                <Link to="/product-form">
                   <Button  variant="success">Add new products</Button>
+                </Link>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                <Link to="/admin-cats">
+                  <Button  variant="secondary">Edit/remove cats</Button>
+                </Link>
+                </Col>
+                <Col>
+                <Link to="/admin-menu">
+                  <Button  variant="secondary">Edit/remove products</Button>
                 </Link>
                 </Col>
               </Row>
