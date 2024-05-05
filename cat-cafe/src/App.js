@@ -21,6 +21,8 @@ import Wishlist from './pages/Wishlist';
 import CartObj from './classes/Cart';
 import { ProductObj } from './classes/Cart';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminMenu from './pages/AdminMenu'
+import AdminCats from './pages/AdminCats'
 import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
@@ -250,8 +252,10 @@ function updateQuantity(mid, change) {
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="catsform" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
-              <Route path="productsform" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />
+              <Route path="admin-menu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="admin-cats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
+              <Route path="cat-form" element={<CatsForm loginUser={loginUser} useFlag={useFlag}/>}  />
+              <Route path="product-form" element={<ProductForm loginUser={loginUser} useFlag={useFlag}/>}  />
               <Route path="logout"  element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
             </Route>
           
