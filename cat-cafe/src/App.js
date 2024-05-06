@@ -254,7 +254,7 @@ function updateQuantity(mid, change) {
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
               <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="reg" element={<Registration  />}  />
+              <Route path="reg" element={<Registration  loginUser={loginUser}/>}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
               <Route path="adminMenu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
               <Route path="adminCats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
