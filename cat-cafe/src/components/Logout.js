@@ -8,6 +8,7 @@ const Logout = (props) => {
     useEffect(() => {
         // Clear user data from the state
         props.userLogout(null);
+        localStorage.removeItem("user");
         console.log("Successful logout");
 
         // Redirect to login page

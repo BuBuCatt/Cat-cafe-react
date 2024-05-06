@@ -27,6 +27,7 @@ import AdminCats from './pages/AdminCats'
 import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
+import CartService from './services/CartService';
 
 function App() {
   // customers
@@ -40,7 +41,7 @@ function App() {
   const [cats , setCats] = useState(null); // adopt cats
 
   //cart
-  const [cart,setCart] = useState(new CartObj(1));
+  const [cart,setCart] = useState(null);
 
   //wishList
   const [wishlist, setWishlist] = useState([]);
@@ -80,12 +81,31 @@ function App() {
         let tmpUser = sessionStorage.getItem("user");
         tmpUser = JSON.parse(AES.decrypt(tmpUser, 'webdev').toString(enc.Utf8));
 
-        console.log(tmpUser);
+        console.log('Stored user: '+tmpUser);
 
-        tmpUser = (tmpUser.type == null) ? new User(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type) :
-          new Admin(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type);
+        tmpUser = (tmpUser.type == null) ? new User(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type, tmpUser.sessionID) :
+          new Admin(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type, tmpUser.sessionID);
 
         setLoginUser(tmpUser);
+        CartService.getCart(tmpUser.id, tmpUser.sessionID).then(
+          (response)=>{
+            setCart( new CartObj(tmpUser.id) )
+            console.log('Cart form database: '+response.data)
+            console.log('Cart '+cart)
+            response.data.forEach(prod => {
+              if(prod.mid){
+                let productObj = new ProductObj(prod.id, prod.mid, null, prod.pname, prod.price, prod.amount); // Create a new product object
+                addProductObj(productObj);
+              } else {
+                let productObj = new ProductObj(prod.id, null, prod.sid, prod.pname, prod.price, prod.amount); // Create a new product object
+                addSponsor(productObj);
+              }
+            })
+          },
+          (rej)=>{
+            console.log(rej)
+          }
+        )
       }
 },[]);
 
@@ -107,47 +127,10 @@ const addSponsor = (productObj)=>{
  
 }
 
-const removeItem = (mid) => {
-  setCart(prevCart => {
-      const newCart = new CartObj(prevCart.uid);
-
-      prevCart.cart.forEach((product, key) => {
-        console.log("This is key" + key);
-          if (key != mid ) {
-              newCart.addProduct(new ProductObj(key, product.pname, product.price, product.amount));
-          }
-      });
-
-      return newCart;
-  });
-}
-
-const resetCart = () => {
-  setCart(prevCart => {
-      prevCart.removeProduct();
-      return new CartObj(prevCart.uid);
-  });
-}
-
 const Auth = (user)=>{
   // let getUser = null;
   let tmpUser = null;
 
-  // AuthService.login(userFormData).then(
-  //   (response)=>{
-  //     console.log("Type of response.data:", typeof response.data);
-  //     console.log("Complete response object:", response);
-
-  //     getUser = response.data;
-  //     setLoginUser(getUser);
-  //     console.log("User login from MySQL: " + getUser);
-  //   },
-  //   (rej)=>{
-  //       console.log(rej);// Log errors if login fails
-  //       // setError(rej.message || "An error occurred trying to login");
-  //       return {message: rej.message, type: 'danger'}
-  //   }
-  // )
   console.log(user)
   if(user){
     setLoginUser(user);
@@ -172,6 +155,25 @@ const Auth = (user)=>{
     if (tmpUser) {
      
       setLoginUser(tmpUser);
+      CartService.getCart(tmpUser.id, tmpUser.sessionId).then(
+        (response)=>{
+          setCart( new CartObj(tmpUser.id) )
+          console.log('Cart form database: '+response.data)
+          console.log('Cart '+cart)
+          response.data.forEach(prod => {
+            if(prod.mid){
+              let productObj = new ProductObj(prod.id, prod.mid, null, prod.pname, prod.price, prod.amount); // Create a new product object
+              addProductObj(productObj);
+            } else {
+              let productObj = new ProductObj(prod.id, null, prod.sid, prod.pname, prod.price, prod.amount); // Create a new product object
+              addSponsor(productObj);
+            }
+          })
+        },
+        (rej)=>{
+          console.log(rej)
+        }
+      )
       
       console.log("login success");
 
@@ -229,17 +231,6 @@ const userLogout=()=>{
   
 }
 
-function updateQuantity(mid, change) {
-  setCart((prevCarts) => {
-      return {
-          ...prevCarts,
-          cart: prevCarts.cart.map(item => 
-              item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
-          )
-      };
-  });
-}
-
   return (
     <BrowserRouter>
       <NavBar loginUser={loginUser} userLogout={userLogout} checkUserType={checkUserType}   />
@@ -249,10 +240,10 @@ function updateQuantity(mid, change) {
               <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
-              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
-              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor}/>} />
+              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  loginUser={loginUser} />} />
+              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor} loginUser={loginUser}/>} />
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
-              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
+              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} loginUser={loginUser} />} />
               <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
               <Route path="reg" element={<Registration  />}  />
               <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />

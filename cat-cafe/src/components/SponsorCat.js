@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/sponsor.css";
 import { ProductObj } from '../classes/Cart';
 import { useNavigate } from 'react-router-dom';
-import Footer from "../components/Footer";
+import {Alert} from 'react-bootstrap';
+import "../styles/Alert.css"
+import CartService from '../services/CartService';
 
-const SponsorCat = ({addProductObj}) => {
+const SponsorCat = ({addProductObj, loginUser}) => {
+  const [msg,setMsg] = useState(null);
+  const [alertType,setAlertType] = useState("");
 
   const navigate = useNavigate();
 
   console.log('Received addProductObj:', addProductObj);
 
-
+  useEffect(()=>{
+      if(msg){
+          // setTimeout(()=> setMsg(null),5000)
+      }
+  },[msg])
  
 
   const [selectedAmount, setSelectedAmount] = useState(1);
@@ -24,13 +32,38 @@ const SponsorCat = ({addProductObj}) => {
 
 
   const handleAddToCart = () => {
-    console.log("Creating product with:", { mid: Date.now(), menuName: 'Sponsor Cat', menuPrice: 1, amount: 1 });
-    const product = new ProductObj(Date.now(), 'Sponsor Cat', selectedAmount, quantity);
-
-    console.log("Created product object:", product);
-    
-    addProductObj(product);
-    console.log('Product added to cart:', product);
+    if(!loginUser && !localStorage.getItem('user')){
+      setMsg('You need to login to add to your cart');
+      setAlertType('warning');
+    } else {
+      let user = JSON.parse(localStorage.getItem('user'));
+      let sponsorObj = new FormData();
+      sponsorObj.append("uid",user.id)
+      sponsorObj.append("sid",user.sessionID)
+      sponsorObj.append("value",selectedAmount)
+      sponsorObj.append("amount",quantity)
+      sponsorObj.append("type", 'overwrite')
+  
+      CartService.addItem(sponsorObj).then(
+        (response)=>{
+          setMsg(response.data);
+          setAlertType('primary');
+          // console.log("Creating product with:", { mid: Date.now(), menuName: 'Sponsor Cat', menuPrice: 1, amount: 1 });
+          // const product = new ProductObj(Date.now(), 'Sponsor Cat', selectedAmount, quantity);
+      
+          // console.log("Created product object:", product);
+          
+          // addProductObj(product);
+          // console.log('Product added to cart:', product);
+  
+        },
+        (rej)=>{
+          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+          setMsg(msg || "An error occurred while trying to add item to user cart.");
+          setAlertType('danger');
+        }
+      )
+    }
   };
 
   const handleAmountSelect = (amount) => {
@@ -45,6 +78,11 @@ const SponsorCat = ({addProductObj}) => {
 
   return (
     <div className="container mt-5">
+      {
+        msg ? (
+          <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
+        ) : null
+    }
       <div className="row align-items-center spn-cat-container">
         <div className="col-md-6 mb-4 ">
           <img src="./data/img/Tabby-06.jpg" alt="Sponsor Cat" className="img-fluid sponsor-cat-img" />

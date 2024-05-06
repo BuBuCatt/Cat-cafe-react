@@ -39,7 +39,7 @@ const AdminCats = (props) => {
               setMsg(response.data);
               setAlertType('primary');
 
-              reloadData()
+              reloadData();
           },
           (rej)=>{
             let msg = rej.response && rej.response.data ? rej.response.data : rej.response;

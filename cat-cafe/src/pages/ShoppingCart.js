@@ -8,10 +8,11 @@ const ShoppingCart = (props) => {
   return (
 
     <>
-
-   
-
-    <Cartcompo  carts={props.shoppingCart} removeItem={props.removeItem} resetCart={props.resetCart} updateQuantity={props.updateQuantity}/>
+    {
+      props.loginUser ? 
+      <Cartcompo  carts={props.shoppingCart} loginUser={props.loginUser}/>
+      : <p className='text-center my-2 mx-auto'>Please login to access your cart</p>
+    }
     <Footer/>
 
     </>
