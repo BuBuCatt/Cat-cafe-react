@@ -1,10 +1,11 @@
 import "../styles/BasicForm.css";
 import "../styles/Alert.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import DataService from '../services/DataService';
 import Footer from "../components/Footer";
+import { AuthContext } from "../context/AuthContext";
 
 export default function CatsForm(props){
 
@@ -14,6 +15,7 @@ export default function CatsForm(props){
     const [catDescription,setCatDescription] = useState("");
     const [adoptionStatus,setAdoptionStatus] = useState("Available");
     const [catImage,setCatImage] = useState("");
+    const { loginUser, checkUserType } = useContext(AuthContext);
 
     const [msg,setMsg] = useState(null);
     const [alertType,setAlertType] = useState("");
@@ -22,7 +24,7 @@ export default function CatsForm(props){
     let pageId = pageURL.searchParams.get('id');
 
     useEffect(()=>{
-      if(props.loginUser == null || props.loginUser.type !== "admin"){
+      if(loginUser == null || checkUserType(loginUser) !== "admin"){
         navigate("/");
       }
 
@@ -47,7 +49,7 @@ export default function CatsForm(props){
       if(msg){
           setTimeout(()=> setMsg(null),5000)
         }
-    },[msg,props.loginUser])
+    },[msg,loginUser])
     const navigate = useNavigate(); 
 
     const changeHandler = (e,setFunction)=>{
@@ -66,7 +68,7 @@ export default function CatsForm(props){
     const submitHandler = (e)=>{
       e.preventDefault();
       const formData = new FormData(e.target);
-      formData.append("sid", props.loginUser.sessionID);
+      formData.append("sid", loginUser.sessionID);
       
       if(!pageId){
         DataService.addData('addCat',formData).then(

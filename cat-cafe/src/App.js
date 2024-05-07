@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
 import Links from './components/Links';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import NavBar from './components/Navbar';
 import Home from './pages/Home';
 import Adopt from './pages/Adopt';
@@ -27,12 +27,14 @@ import AdminCats from './pages/AdminCats'
 import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
+import CartService from './services/CartService';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
   // customers
   // const [users, setUsers]=useState(null);// json file user/ customers
-  const [loginUser,setLoginUser] = useState(null); // login user 
- 
+  // const [loginUser,setLoginUser] = useState(null); // login user 
+  const { loginUser, setLoginUser } = useContext(AuthContext);
   // cafe Menu
   const [menu , setMenu]= useState(null); // cafe menu 
  
@@ -40,7 +42,7 @@ function App() {
   const [cats , setCats] = useState(null); // adopt cats
 
   //cart
-  const [cart,setCart] = useState(new CartObj(1));
+  const [cart,setCart] = useState(null);
 
   //wishList
   const [wishlist, setWishlist] = useState([]);
@@ -80,12 +82,31 @@ function App() {
         let tmpUser = sessionStorage.getItem("user");
         tmpUser = JSON.parse(AES.decrypt(tmpUser, 'webdev').toString(enc.Utf8));
 
-        console.log(tmpUser);
+        console.log('Stored user: '+tmpUser);
 
-        tmpUser = (tmpUser.type == null) ? new User(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type) :
-          new Admin(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type);
+        tmpUser = (tmpUser.type == null) ? new User(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type, tmpUser.sessionID) :
+          new Admin(tmpUser.id, tmpUser.username, tmpUser.email, tmpUser.type, tmpUser.sessionID);
 
         setLoginUser(tmpUser);
+        CartService.getCart(tmpUser.id, tmpUser.sessionID).then(
+          (response)=>{
+            setCart( new CartObj(tmpUser.id) )
+            console.log('Cart form database: '+response.data)
+            console.log('Cart '+cart)
+            response.data.forEach(prod => {
+              if(prod.mid){
+                let productObj = new ProductObj(prod.id, prod.mid, null, prod.pname, prod.price, prod.amount); // Create a new product object
+                addProductObj(productObj);
+              } else {
+                let productObj = new ProductObj(prod.id, null, prod.sid, prod.pname, prod.price, prod.amount); // Create a new product object
+                addSponsor(productObj);
+              }
+            })
+          },
+          (rej)=>{
+            console.log(rej)
+          }
+        )
       }
 },[]);
 
@@ -107,48 +128,9 @@ const addSponsor = (productObj)=>{
  
 }
 
-const removeItem = (mid) => {
-  setCart(prevCart => {
-      const newCart = new CartObj(prevCart.uid);
-
-      prevCart.cart.forEach((product, key) => {
-        console.log("This is key" + key);
-          if (key != mid ) {
-              newCart.addProduct(new ProductObj(key, product.pname, product.price, product.amount));
-          }
-      });
-
-      return newCart;
-  });
-}
-
-const resetCart = () => {
-  setCart(prevCart => {
-      prevCart.removeProduct();
-      return new CartObj(prevCart.uid);
-  });
-}
-
 const Auth = (user)=>{
-  // let getUser = null;
   let tmpUser = null;
 
-  // AuthService.login(userFormData).then(
-  //   (response)=>{
-  //     console.log("Type of response.data:", typeof response.data);
-  //     console.log("Complete response object:", response);
-
-  //     getUser = response.data;
-  //     setLoginUser(getUser);
-  //     console.log("User login from MySQL: " + getUser);
-  //   },
-  //   (rej)=>{
-  //       console.log(rej);// Log errors if login fails
-  //       // setError(rej.message || "An error occurred trying to login");
-  //       return {message: rej.message, type: 'danger'}
-  //   }
-  // )
-  console.log(user)
   if(user){
     setLoginUser(user);
     if(user.type === 'admin'){//admin
@@ -172,6 +154,25 @@ const Auth = (user)=>{
     if (tmpUser) {
      
       setLoginUser(tmpUser);
+      CartService.getCart(tmpUser.id, tmpUser.sessionID).then(
+        (response)=>{
+          setCart( new CartObj(tmpUser.id) )
+          console.log('Cart form database: '+response.data)
+          console.log('Cart '+cart)
+          response.data.forEach(prod => {
+            if(prod.mid){
+              let productObj = new ProductObj(prod.id, prod.mid, null, prod.pname, prod.price, prod.amount); // Create a new product object
+              addProductObj(productObj);
+            } else {
+              let productObj = new ProductObj(prod.id, null, prod.sid, prod.pname, prod.price, prod.amount); // Create a new product object
+              addSponsor(productObj);
+            }
+          })
+        },
+        (rej)=>{
+          console.log(rej)
+        }
+      )
       
       console.log("login success");
 
@@ -192,19 +193,6 @@ function storeUserSession(user) {
   sessionStorage.setItem("user", encryptedUser);
 }
 
-// check user type 
-const checkUserType = (user) => {
-  if (user) {
-    const userType = user.type;
-    console.log("userType -> " + userType);
-    return userType;
-  } else {
-    // Log or handle the case when user is null
-    console.log("No user object provided.");
-    return null;
-  }
-}
-
 // cat wishlist
 const addToWishlist = (cat) => {
   console.log("Adding to wishlist:", cat);
@@ -220,47 +208,29 @@ const removeFromWishlist = (catId) => {
 };
 
 
-// logout
-const userLogout=()=>{
-  // let tmpCart = new CartObj(1);
-
-  // setCart(tmpCart);
-  setLoginUser(null);
-  
-}
-
-function updateQuantity(mid, change) {
-  setCart((prevCarts) => {
-      return {
-          ...prevCarts,
-          cart: prevCarts.cart.map(item => 
-              item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
-          )
-      };
-  });
-}
 
   return (
     <BrowserRouter>
-      <NavBar loginUser={loginUser} userLogout={userLogout} checkUserType={checkUserType}   />
+      <NavBar />
 
         <Routes>
-          <Route path="/" element={<Links loginUser={loginUser} />}>
-              <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
-              <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
+          <Route path="/" element={<Links />}>
+              <Route index element={<Home auth={Auth} cats={cats}/>} />
+              <Route path="home" element={<Home auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
-              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  />} />
+              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart} />} />
               <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor}/>} />
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
-              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} removeItem={removeItem} resetCart={resetCart}  updateQuantity={updateQuantity}/>} />
-              <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="reg" element={<Registration  loginUser={loginUser}/>}  />
-              <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="adminMenu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="adminCats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="admin/form/cat" element={<CatsForm loginUser={loginUser} cats={cats}/>}  />
-              <Route path="admin/form/product" element={<ProductForm loginUser={loginUser} menu={menu} />}  />
-              <Route path="logout" element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+              <Route path="cart" element={<ShoppingCart  shoppingCart={cart}/>} />
+              <Route path="login" element={<LoginPage auth={Auth}  />}  />
+              <Route path="reg" element={<Registration />}  />
+              <Route path="admin" element={<AdminDashboard/>}  />
+              <Route path="adminMenu" element={<AdminMenu menu={menu}/>}  />
+              <Route path="adminCats" element={<AdminCats cats={cats}/>}  />
+              <Route path="admin/form/cat" element={<CatsForm cats={cats}/>}  />
+              <Route path="admin/form/product" element={<ProductForm menu={menu} />}  />
+              <Route path="logout" element={<Logout element={<LoginPage auth={Auth} />}  />} />
+
             </Route>
           
         </Routes>

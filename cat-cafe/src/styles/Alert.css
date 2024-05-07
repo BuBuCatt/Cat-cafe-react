@@ -1,21 +1,20 @@
 .alert-msg {
     position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    margin-bottom: 2rem;
     z-index: 999;
     width: 80%;
 }
 
-.top-alert {
-    position: fixed;
+.bottom {
+    margin-bottom: 2rem;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.top {
+    margin-top: 2rem;
     top: 0;
     left: 50%;
-    right: 0;
-    z-index: 9999; 
     transform: translate(-50%);
-    margin-top: 8%;
+}
 
-
-  }

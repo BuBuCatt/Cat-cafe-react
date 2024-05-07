@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button,Accordion } from 'react-bootstrap';
 
 import "../styles/wishlist.css";
 import Footer from '../components/Footer';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Wishlist(props) {
   console.log("Wishlist data in component:", props.wishlist); 
 
   const navigate = useNavigate();
+  const { loginUser } = useContext(AuthContext);
+
   const goHomeHandler = () => {
     navigate('/');
   }

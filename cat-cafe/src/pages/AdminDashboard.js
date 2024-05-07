@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
 import {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
-const AdminDashboard = (props) => {
+const AdminDashboard = () => {
 
     const navigate = useNavigate();
+    const { loginUser, setLoginUser, checkUserType } = useContext(AuthContext);
 
     useEffect(()=>{
 
-      if(props.loginUser == null || props.loginUser.type !== "admin"){
+      if(loginUser == null || checkUserType(loginUser) !== "admin"){
         navigate("/");
       }
 

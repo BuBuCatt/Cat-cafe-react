@@ -8,7 +8,7 @@ export default class CartObj{
 
 
     addProduct(productObj){
-        console.log("Adding product:", productObj);
+        console.log("Adding product mid:", productObj.mid);
         let prObj = this.findProduct(productObj.mid);
         console.log("Found product:", prObj);
         
@@ -18,7 +18,7 @@ export default class CartObj{
             let newAmount = prObj.amount +1  ;
           
             console.log("New amount before modify:",newAmount);
-            this.#cart.set(prObj.mid,this.modifyProduct(prObj,newAmount));
+            this.#cart.set('Mid'+prObj.mid,this.modifyProduct(prObj,newAmount));
             console.log("Product after modify:", this.#cart.get(productObj.mid));
         }
         console.log("Cart after adding:", Array.from(this.#cart.values()));
@@ -27,44 +27,54 @@ export default class CartObj{
 
 
     addSponsorProduct(productObj){ // need a unique id 
-        console.log("Adding addSponsorProduct:", productObj);
-        let prObj = this.findProduct(productObj.sid);
+        console.log("Adding addSponsorProduct sid:", productObj.sid);
+        let prObj = this.findSponsor(productObj.sid);
         console.log("Found product:", prObj);
         
         if(prObj==-1)//if not this product in cart set the product
-            this.#cart.set(productObj.sid,productObj);
-       
+            this.#cart.set('Sid'+productObj.sid,productObj);
+        
         console.log("Cart after adding:", Array.from(this.#cart.values()));
         this.toSaveSponsor();
      }
+     
 
 
      modifyProduct(productObj,newAmount){
-        productObj.amount = newAmount;
-        return productObj;
+    //     productObj.amount = newAmount;
+    //     return productObj;
     }
+
     findProduct(mid){
-        if(this.#cart.has(mid))
-            return this.#cart.get(mid);
+        if(this.#cart.has('Mid'+mid))
+            return this.#cart.get('Mid'+mid);
         else
             return -1;
     }
-    removeProduct(mid){
-       
-            // this.#cart.delete(mid);
-            return this.#cart.has(mid) ? this.#cart.get(mid) : -1;
-        
+
+    findSponsor(sid){
+        if(this.#cart.has('Sid'+sid))
+            return this.#cart.get('Sid'+sid);
+        else
+            return -1;
     }
+
+    removeProduct(){
+        this.#cart.forEach(item=>
+            this.#cart.delete(item.id)
+        )
+    }
+
     cleanCart () {
-        return this.#cart.clear();
+        // return this.#cart.clear();
     }
 
-    removeEachProduct(mid){
+    removeEachProduct(id){
 
-        let prObj = this.findProduct(mid);
-        if (prObj !== -1) {
-            this.#cart.delete(mid);
-        }
+        // let prObj = this.findProduct(id);
+        // if (prObj !== -1) {
+        //     this.#cart.delete(id);
+        // }
 
     }
 
@@ -80,18 +90,18 @@ export default class CartObj{
 
     
     invoiceTotal(){
-        let sum = 0;
-        for(let prObj of this.#cart.values()){
-            sum += prObj.total();
-        }
-        return Number(sum.toFixed(2));
+        // let sum = 0;
+        // for(let prObj of this.#cart.values()){
+        //     sum += prObj.total();
+        // }
+        // return Number(sum.toFixed(2));
     }
     toSave(){
-        let output = [];
-        for(let prObj of this.#cart.values()){
-            output.push({mid:prObj.mid,amount:prObj.amount});
-        }
-        localStorage.setItem(this.#uid,JSON.stringify(output));
+        // let output = [];
+        // for(let prObj of this.#cart.values()){
+        //     output.push({mid:prObj.mid,amount:prObj.amount});
+        // }
+        // localStorage.setItem(this.#uid,JSON.stringify(output));
     }
     
     toSaveSponsor(){ // for sponsor save method
@@ -103,21 +113,21 @@ export default class CartObj{
     }
 
     increaseQuantity(mid) {
-        const product = this.#cart.get(mid);
-        if (product) {
-            product.amount += 1;
-            this.#cart.set(mid, this.modifyProduct(product, product.amount));
-        }
+        // const product = this.#cart.get(mid);
+        // if (product) {
+        //     product.amount += 1;
+        //     this.#cart.set(mid, this.modifyProduct(product, product.amount));
+        // }
     }
     
     decreaseQuantity(mid) {
-        const product = this.#cart.get(mid);
-        if (product && product.amount > 1) {
-            product.amount -= 1;
-            this.#cart.set(mid, this.modifyProduct(product, product.amount));
-        } else {
-            this.removeProduct(mid); // Optionally remove the item if its count goes to zero
-        }
+        // const product = this.#cart.get(mid);
+        // if (product && product.amount > 1) {
+        //     product.amount -= 1;
+        //     this.#cart.set(mid, this.modifyProduct(product, product.amount));
+        // } else {
+        //     this.removeProduct(mid); // Optionally remove the item if its count goes to zero
+        // }
     }
     
 }
@@ -126,14 +136,18 @@ export default class CartObj{
 // Cafe products class
 
 export class ProductObj{
+    #id;
     #mid;
+    #sid;
     #menuName; // not equal to pname
     #menuPrice;
     #amount;
 
     
-    constructor(mid,menuName,menuPrice,amount=1){
+    constructor(id,mid,sid,menuName,menuPrice,amount=1){
+        this.#id = id;
         this.#mid = mid;
+        this.#sid = sid;
         this.#menuName = menuName;
         this.#menuPrice = Number(menuPrice);
         this.#amount = Number(amount);
@@ -148,6 +162,12 @@ export class ProductObj{
     }
     get mid(){
         return this.#mid;
+    }
+    get sid(){
+        return this.#sid;
+    }
+    get id(){
+        return this.#id;
     }
     get menuName() {
         return this.#menuName;

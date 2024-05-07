@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import DataService from '../services/DataService';
 import  { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { Button, Container,Row, Col, Alert, Dropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import PopupWindow from '../components/PopWindow';
 import Footer from '../components/Footer';
+import { AuthContext } from '../context/AuthContext';
 
 
 const AdminCats = (props) => {
@@ -15,6 +16,7 @@ const AdminCats = (props) => {
     const [msg,setMsg] = useState(null);
     const [data, setData] = useState(props.cats);
     const [alertType,setAlertType] = useState("");
+    const { loginUser, checkUserType } = useContext(AuthContext);
 
     const filteredCats = data ? data.filter(cat => {
         return filter === 'All' || cat.catBreed === filter;
@@ -34,12 +36,12 @@ const AdminCats = (props) => {
     }
 
     const removeItem = (item) => {
-        DataService.removeData("removeCat",item.cid, props.loginUser.sessionID).then(
+        DataService.removeData("removeCat",item.cid, loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
               setAlertType('primary');
 
-              reloadData()
+              reloadData();
           },
           (rej)=>{
             let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
@@ -50,7 +52,7 @@ const AdminCats = (props) => {
       }
 
     useEffect(()=>{
-        if(props.loginUser == null || props.loginUser.type != "admin"){
+        if(loginUser == null || checkUserType(loginUser) !== "admin"){
           navigate("/");
         }
 
@@ -59,7 +61,7 @@ const AdminCats = (props) => {
       if(msg){
           setTimeout(()=> setMsg(null),5000)
         }
-    },[msg,props.loginUser])
+    },[msg,loginUser])
 
   return (
     <>

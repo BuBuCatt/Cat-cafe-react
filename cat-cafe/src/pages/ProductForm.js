@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import "../styles/BasicForm.css";
 import "../styles/Alert.css"
 import { Link, useNavigate } from 'react-router-dom';
 import DataService from '../services/DataService';
 import Footer from '../components/Footer';
+import { AuthContext } from '../context/AuthContext';
 
 export default function ProductForm(props){
   
@@ -13,6 +14,7 @@ export default function ProductForm(props){
   const [menuPrice,setMenuPrice] = useState("");
   const [menuCategory,setMenuCategory] = useState("");
   const [menuImage,setMenuImage] = useState("");
+  const { loginUser, checkUserType } = useContext(AuthContext);
 
   const [msg,setMsg] = useState(null);
   const [alertType,setAlertType] = useState("");
@@ -22,7 +24,7 @@ export default function ProductForm(props){
 
   
   useEffect(()=>{
-    if(props.loginUser == null || props.loginUser.type != "admin"){
+    if(loginUser == null || checkUserType(loginUser) !== "admin"){
       navigate("/");
     }
 
@@ -48,7 +50,7 @@ export default function ProductForm(props){
       setTimeout(()=> setMsg(null),5000)
     }
     
-  },[msg,props.loginUser])
+  },[msg,loginUser])
 
   const navigate = useNavigate(); 
 
@@ -67,7 +69,7 @@ export default function ProductForm(props){
   const submitHandler = (e)=>{
     e.preventDefault();
     let formData = new FormData(e.target);
-    formData.append("sid", props.loginUser.sessionID);
+    formData.append("sid", loginUser.sessionID);
     
     if(!pageId){
       DataService.addData('addProduct',formData).then(

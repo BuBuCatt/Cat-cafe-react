@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Nav, FormControl, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from "../assets/logo.png";
@@ -7,10 +7,12 @@ import { faShoppingCart , faHeart } from '@fortawesome/free-solid-svg-icons';
 import  '../styles/home.css'
 import { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 function NavBar(props) {
   const navigate = useNavigate();
-  const userType = props.checkUserType(props.loginUser);
+  const { loginUser, logout, checkUserType } = useContext(AuthContext);
+  const userType = checkUserType(loginUser);
 
     return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
@@ -31,9 +33,9 @@ function NavBar(props) {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
 
-      { props.loginUser ? (
+      { loginUser ? (
           <Navbar.Text className="me-2">
-            <strong>Welcome, {props.loginUser && props.loginUser.username}</strong>
+            <strong>Welcome, {loginUser && loginUser.username}</strong>
           </Navbar.Text>
         ) : (
           <Navbar.Text className="me-2">
@@ -97,10 +99,10 @@ function NavBar(props) {
                 }
 
                 {/* login */}
-                    {props.loginUser? ( // true
+                    {loginUser? ( // true
                        
                       <Link to="/logout">
-                        <Button  variant="dark" onClick={() => props.userLogout(null)}>Logout</Button>
+                        <Button  variant="dark" onClick={() => logout()}>Logout</Button>
                       </Link>
                       
                      
