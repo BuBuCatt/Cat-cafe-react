@@ -1,56 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Alert ,Image,Container,Row,Col} from 'react-bootstrap';
+import { Form, Button, Alert ,Image,Container,Row,Col,InputGroup} from 'react-bootstrap';
 import "../styles/LoginPage.css";
+import AuthService from '../services/AuthService';
+import "../styles/Alert.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Registration = (props) => {
-    const [userDetails, setUserDetails] = useState({ username: '', password: '', email: '' });
-    const [error, setError] = useState('');
+    const [userDetails, setUserDetails] = useState({ username: '', email: '', pass: '' });
     const navigate = useNavigate();
+    const [msg,setMsg] = useState(null);
+    const [alertType,setAlertType] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+ 
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
+
+    useEffect(()=>{
+        
+        if(msg){
+            setTimeout(()=> setMsg(null),5000)
+          }
+      },[msg,props.loginUser]);
+
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
         setUserDetails(prevDetails => ({
             ...prevDetails,
-            [name]: value
+            [name]: value  // Updates the value in state, ensuring it's controlled
         }));
     };
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     setError('');
 
-    //     // Here you would normally handle the registration request to your backend
-    //     try {
-    //         const response = await fetch('/api/register', {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify(userDetails)
-    //         });
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             props.loginUser(data); // login the user with the received details
-    //             navigate('/'); // navigate to home or dashboard on successful registration
-    //         } else {
-    //             throw new Error('Failed to register. Please try again!');
-    //         }
-    //     } catch (error) {
-    //         setError(error.message);
-    //     }
-    // };
+    
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+
+
+
+        const formData = new FormData(e.target);
+        formData.append('username', userDetails.username);
+        formData.append('email', userDetails.email);
+        formData.append('password', userDetails.pass);
+
+
+        AuthService.register(formData).then(
+            (response)=>{
+              console.log("Type of response.data:", typeof response.data);
+              console.log("Register DATA: " + response.data);
+
+              navigate('/')
+            },
+            (rej)=>{
+              console.log(rej);// Log errors if login fails
+              let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+                setMsg(msg || 'Unable to retrieve product data. Try again later');
+                setAlertType('danger');
+            }
+          )
+
+        
+    };
 
     return (
         <Container className="d-flex justify-content-center align-items-center login-container" style={{ height: '60vh' }}>
-            {/* onSubmit={handleSubmit}      */}
-        <Form  className='regForm'> 
+    
+        <Form  onSubmit={submitHandler}   className='regForm'> 
 
-            <Row className="mb-4">
+            <Row  className="mb-4">
+    
                 <Col className="d-flex justify-content-center">
                     <Image src="../data/img/meow-match-caf-favicon-black.png" alt="Meow Match Café Logo" roundedCircle />
                 </Col>
             </Row>
- 
-            {error && <Alert variant="danger">{error}</Alert>}
+            {msg?(
+                <Alert className='top-alert' variant={alertType}>{msg}</Alert>
+            ) :null
+            }
+    
+
+            <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={userDetails.username}
+                    onChange={handleInputChange}
+                    
+                    required
+                />
+  
+            </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
@@ -62,27 +112,24 @@ const Registration = (props) => {
                     required
                 />
             </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Username"
-                    name="username"
-                    value={userDetails.username}
-                    onChange={handleInputChange}
-                    required
-                />
-            </Form.Group>
+
             <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={userDetails.password}
-                    onChange={handleInputChange}
-                    required
-                />
+                <InputGroup>
+                    <Form.Control
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Password"
+                        name="pass"
+                        value={userDetails.pass}
+                        onChange={handleInputChange}
+                        required
+                    />
+        
+                    <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }} aria-label="Toggle password visibility">
+                        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                    </InputGroup.Text>
+
+                </InputGroup>
             </Form.Group>
             <Button variant="primary" type="submit">Register</Button>
         </Form>

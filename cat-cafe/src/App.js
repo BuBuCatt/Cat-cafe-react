@@ -230,6 +230,7 @@ const removeFromWishlist = (catId) => {
               <Route path="admin/form/cat" element={<CatsForm cats={cats}/>}  />
               <Route path="admin/form/product" element={<ProductForm menu={menu} />}  />
               <Route path="logout" element={<Logout element={<LoginPage auth={Auth} />}  />} />
+
             </Route>
           
         </Routes>
