@@ -21,7 +21,7 @@ const Registration = (props) => {
         if(msg){
             setTimeout(()=> setMsg(null),5000)
           }
-      },[msg,props.loginUser]);
+      },[msg]);
 
 
     const handleInputChange = (e) => {
@@ -83,7 +83,7 @@ const Registration = (props) => {
                 </Col>
             </Row>
             {msg?(
-                <Alert className='top-alert' variant={alertType}>{msg}</Alert>
+                <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
             ) :null
             }
     

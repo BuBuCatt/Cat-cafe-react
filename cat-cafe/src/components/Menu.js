@@ -1,5 +1,4 @@
 import React, {useState,useEffect, useContext} from 'react'
-import { ProductObj } from '../classes/Cart'
 import '../styles/Alert.css'
 import {Alert} from 'react-bootstrap';
 import CartService from '../services/CartService';

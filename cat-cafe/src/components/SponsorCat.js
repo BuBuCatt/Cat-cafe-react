@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "../styles/sponsor.css";
-import { ProductObj } from '../classes/Cart';
-import { useNavigate } from 'react-router-dom';
 import {Alert} from 'react-bootstrap';
 import "../styles/Alert.css"
 import CartService from '../services/CartService';
@@ -11,8 +9,6 @@ const SponsorCat = ({addProductObj}) => {
   const [msg,setMsg] = useState(null);
   const [alertType,setAlertType] = useState("");
   const { loginUser } = useContext(AuthContext);
-
-  const navigate = useNavigate();
 
   console.log('Received addProductObj:', addProductObj);
 
@@ -25,13 +21,6 @@ const SponsorCat = ({addProductObj}) => {
 
   const [selectedAmount, setSelectedAmount] = useState(1);
   const [quantity, setQuantity] = useState(1);
-
-  const backToHome =()=>{
-
-    navigate('/');
-    
-  }
-
 
   const handleAddToCart = () => {
     if(!loginUser && !localStorage.getItem('user')){

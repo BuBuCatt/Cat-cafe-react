@@ -33,14 +33,15 @@ export default function Cartcompo({ carts }){
     },[msg])
 
     const reloadData = () => {
+        let user = loginUser;
         if(!loginUser){
-            loginUser = JSON.parse(localStorage.getItem('user'));
+            user = JSON.parse(localStorage.getItem('user'));
         } 
         
-        if(loginUser) {
-            CartService.getCart(loginUser.id, loginUser.sessionID).then(
+        if(user) {
+            CartService.getCart(user.id, user.sessionID).then(
                 (response)=>{
-                  setCart(new CartObj(loginUser.id));
+                  setCart(new CartObj(user.id));
                   console.log('Cart from sql: '+response.data)
                   response.data.forEach(prod => {
                     if(prod.mid){
