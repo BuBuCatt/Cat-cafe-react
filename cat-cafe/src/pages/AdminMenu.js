@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import DataService from '../services/DataService';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container,Row, Col, Alert, Dropdown } from 'react-bootstrap';
 import PopupWindow from '../components/PopWindow';
 import Footer from '../components/Footer';
+import { AuthContext } from '../context/AuthContext';
 
 
 const AdminMenu = (props) => {
@@ -15,12 +16,13 @@ const AdminMenu = (props) => {
     const [data, setData] = useState(props.menu);
     const [alertType,setAlertType] = useState("");
     const [filter, setFilter] = useState('All');
+    const { loginUser, checkUserType } = useContext(AuthContext);
 
     const filteredProducts = data ? data.filter(menu => {
         return filter === 'All' || menu.menuCategory === filter;
     }) : [];
     useEffect(()=>{
-        if(props.loginUser == null || props.loginUser.type != "admin"){
+        if(loginUser == null || checkUserType(loginUser) !== "admin"){
           navigate("/");
         }
 
@@ -29,10 +31,10 @@ const AdminMenu = (props) => {
       if(msg){
           setTimeout(()=> setMsg(null),5000)
         }
-    },[msg,props.loginUser])
+    },[msg,loginUser])
 
     const removeItem = (item) => {
-        DataService.removeData("removeProduct",item.mid,props.loginUser.sessionID).then(
+        DataService.removeData("removeProduct",item.mid,loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
               setAlertType('primary');

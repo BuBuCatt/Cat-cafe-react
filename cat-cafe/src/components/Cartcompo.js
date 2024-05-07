@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Table, Alert } from 'react-bootstrap';
 import CartService from "../services/CartService";
 import '../styles/Alert.css';
 import CartObj, { ProductObj } from "../classes/Cart";
+import { AuthContext } from "../context/AuthContext";
 
-export default function Cartcompo({ carts, loginUser }){
+export default function Cartcompo({ carts }){
 
+    const { loginUser } = useContext(AuthContext);
     const [cart, setCart] = useState(carts);
     const [msg,setMsg] = useState(null);
     const [alertType,setAlertType] = useState("");

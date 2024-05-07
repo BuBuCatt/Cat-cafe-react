@@ -1,13 +1,15 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useContext} from 'react'
 import { ProductObj } from '../classes/Cart'
 import '../styles/Alert.css'
 import {Alert} from 'react-bootstrap';
 import CartService from '../services/CartService';
+import { AuthContext } from '../context/AuthContext';
 
 
 export default function Menu(props) {
     const [msg,setMsg] = useState(null);
     const [alertType,setAlertType] = useState("");
+    const { loginUser } = useContext(AuthContext);
 
     useEffect(()=>{
 
@@ -17,11 +19,11 @@ export default function Menu(props) {
   },[msg])
 
     const addHandler = (item) => {              
-      if(!props.loginUser && !localStorage.getItem('user')){
+      if(!loginUser && !localStorage.getItem('user')){
         setMsg('You need to login to add to your cart');
         setAlertType('warning');
       } else {
-        let user = JSON.parse(localStorage.getItem('user'));
+        let user = loginUser? loginUser : JSON.parse(localStorage.getItem('user'));
 
         let itemData = new FormData();
         itemData.append("uid",user.id)

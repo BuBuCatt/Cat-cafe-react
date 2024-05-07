@@ -17,7 +17,7 @@ export default function LoginPage(props){
       if(msg){
           setTimeout(()=> setMsg(null),5000)
         }
-    },[msg,props.loginUser])
+    },[msg])
 
     const changeHandler = (e)=>{
         setUser(prev=>{

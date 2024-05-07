@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import "../styles/sponsor.css";
 import { ProductObj } from '../classes/Cart';
 import { useNavigate } from 'react-router-dom';
 import {Alert} from 'react-bootstrap';
 import "../styles/Alert.css"
 import CartService from '../services/CartService';
+import { AuthContext } from '../context/AuthContext';
 
-const SponsorCat = ({addProductObj, loginUser}) => {
+const SponsorCat = ({addProductObj}) => {
   const [msg,setMsg] = useState(null);
   const [alertType,setAlertType] = useState("");
+  const { loginUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -36,7 +38,7 @@ const SponsorCat = ({addProductObj, loginUser}) => {
       setMsg('You need to login to add to your cart');
       setAlertType('warning');
     } else {
-      let user = JSON.parse(localStorage.getItem('user'));
+      let user = loginUser? loginUser : JSON.parse(localStorage.getItem('user'));
       let sponsorObj = new FormData();
       sponsorObj.append("uid",user.id)
       sponsorObj.append("sid",user.sessionID)

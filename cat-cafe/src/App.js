@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { BrowserRouter,  Routes, Route } from 'react-router-dom';
 import Links from './components/Links';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import NavBar from './components/Navbar';
 import Home from './pages/Home';
 import Adopt from './pages/Adopt';
@@ -28,12 +28,13 @@ import { Admin, User } from './classes/Users';
 import AES from 'crypto-js/aes'; // Import AES module for encryption
 import { enc } from 'crypto-js'; // Import the 'enc' module from the 'crypto-js' library
 import CartService from './services/CartService';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
   // customers
   // const [users, setUsers]=useState(null);// json file user/ customers
-  const [loginUser,setLoginUser] = useState(null); // login user 
- 
+  // const [loginUser,setLoginUser] = useState(null); // login user 
+  const { loginUser, setLoginUser } = useContext(AuthContext);
   // cafe Menu
   const [menu , setMenu]= useState(null); // cafe menu 
  
@@ -128,10 +129,8 @@ const addSponsor = (productObj)=>{
 }
 
 const Auth = (user)=>{
-  // let getUser = null;
   let tmpUser = null;
 
-  console.log(user)
   if(user){
     setLoginUser(user);
     if(user.type === 'admin'){//admin
@@ -155,7 +154,7 @@ const Auth = (user)=>{
     if (tmpUser) {
      
       setLoginUser(tmpUser);
-      CartService.getCart(tmpUser.id, tmpUser.sessionId).then(
+      CartService.getCart(tmpUser.id, tmpUser.sessionID).then(
         (response)=>{
           setCart( new CartObj(tmpUser.id) )
           console.log('Cart form database: '+response.data)
@@ -194,19 +193,6 @@ function storeUserSession(user) {
   sessionStorage.setItem("user", encryptedUser);
 }
 
-// check user type 
-const checkUserType = (user) => {
-  if (user) {
-    const userType = user.type;
-    console.log("userType -> " + userType);
-    return userType;
-  } else {
-    // Log or handle the case when user is null
-    console.log("No user object provided.");
-    return null;
-  }
-}
-
 // cat wishlist
 const addToWishlist = (cat) => {
   console.log("Adding to wishlist:", cat);
@@ -222,36 +208,28 @@ const removeFromWishlist = (catId) => {
 };
 
 
-// logout
-const userLogout=()=>{
-  // let tmpCart = new CartObj(1);
-
-  // setCart(tmpCart);
-  setLoginUser(null);
-  
-}
 
   return (
     <BrowserRouter>
-      <NavBar loginUser={loginUser} userLogout={userLogout} checkUserType={checkUserType}   />
+      <NavBar />
 
         <Routes>
-          <Route path="/" element={<Links loginUser={loginUser} />}>
-              <Route index element={<Home loginUser={loginUser} auth={Auth} cats={cats}/>} />
-              <Route path="home" element={<Home  loginUser={loginUser} auth={Auth} cats={cats}/>} />
+          <Route path="/" element={<Links />}>
+              <Route index element={<Home auth={Auth} cats={cats}/>} />
+              <Route path="home" element={<Home auth={Auth} cats={cats}/>} />
               <Route path="adopt" element={<Adopt cats={cats} addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>} />
-              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart}  loginUser={loginUser} />} />
-              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor} loginUser={loginUser}/>} />
+              <Route path="cafe" element={<Cafe menu={menu} addProObj={addProductObj} shoppingCart={cart} />} />
+              <Route path="sponsor" element={<Sponsor addProObj={addProductObj} shoppingCart={cart}  addSponsor={addSponsor}/>} />
               <Route path="wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} />} />
-              <Route path="cart" element={<ShoppingCart  shoppingCart={cart} loginUser={loginUser} />} />
-              <Route path="login" element={<LoginPage auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="reg" element={<Registration  />}  />
-              <Route path="admin" element={<AdminDashboard auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="adminMenu" element={<AdminMenu menu={menu} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="adminCats" element={<AdminCats cats={cats} auth={Auth} loginUser={loginUser}  />}  />
-              <Route path="admin/form/cat" element={<CatsForm loginUser={loginUser} cats={cats}/>}  />
-              <Route path="admin/form/product" element={<ProductForm loginUser={loginUser} menu={menu} />}  />
-              <Route path="logout" element={<Logout userLogout= {userLogout} element={<LoginPage auth={Auth} loginUser={loginUser} />}  />} />
+              <Route path="cart" element={<ShoppingCart  shoppingCart={cart}/>} />
+              <Route path="login" element={<LoginPage auth={Auth}  />}  />
+              <Route path="reg" element={<Registration />}  />
+              <Route path="admin" element={<AdminDashboard/>}  />
+              <Route path="adminMenu" element={<AdminMenu menu={menu}/>}  />
+              <Route path="adminCats" element={<AdminCats cats={cats}/>}  />
+              <Route path="admin/form/cat" element={<CatsForm cats={cats}/>}  />
+              <Route path="admin/form/product" element={<ProductForm menu={menu} />}  />
+              <Route path="logout" element={<Logout element={<LoginPage auth={Auth} />}  />} />
             </Route>
           
         </Routes>

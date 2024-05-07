@@ -6,7 +6,7 @@ const Sponsor = (props) => {
   return (
 
     <>
-      <SponsorCat addProductObj={props.addProObj} addSponsorObj={props.addSponsor} loginUser={props.loginUser}/>
+      <SponsorCat addProductObj={props.addProObj} addSponsorObj={props.addSponsor}/>
       <Footer/>
     </>
   
