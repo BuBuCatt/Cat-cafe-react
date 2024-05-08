@@ -17,11 +17,11 @@ class AuthService{
         );
     }
 
-    logout(sessionId){
+    logout(data){
         console.log("sending user sessionId to logout on backend");
         return http.post(
             `http://localhost/webdev5/PHP_project/paths.php/logout`,
-            sessionId
+            data
         );
     }
 }

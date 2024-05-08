@@ -4,14 +4,14 @@ import { AuthContext } from '../context/AuthContext';
 
 const Logout = (props) => {
     const navigate = useNavigate();
-    const { logout } = useContext(AuthContext);
+    const { loginUser, logout } = useContext(AuthContext);
 
     useEffect(() => {
         // Clear user data from the state
-        logout();
+        // logout(loginUser);
 
         // Redirect to login page
-        navigate('/login');
+        // navigate('/login');
     }, []);
 
     return null;

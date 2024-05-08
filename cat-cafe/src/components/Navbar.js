@@ -8,11 +8,32 @@ import  '../styles/home.css'
 import { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import AuthService from '../services/AuthService';
 
 function NavBar(props) {
   const navigate = useNavigate();
-  const { loginUser, logout, checkUserType } = useContext(AuthContext);
+  const { loginUser, checkUserType, setLoginUser } = useContext(AuthContext);
   const userType = checkUserType(loginUser);
+
+  function logout(){
+    let request = new FormData();
+    request.append("sid",loginUser.sessionID);
+    request.append('email',loginUser.email);
+
+    AuthService.logout(request).then(
+      (response)=>{
+        console.log(response.data);
+      },
+      (rej)=>{
+        console.log(rej && rej.message?rej.message:'Unable to terminate session. Logout just from client-side');
+      }
+    )
+    
+    setLoginUser(null);
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+    navigate('/login')
+  }
 
     return (
     <Navbar bg="light" variant="light" expand="lg" style={{ padding: '10px 50px' }}>
@@ -101,9 +122,9 @@ function NavBar(props) {
                 {/* login */}
                     {loginUser? ( // true
                        
-                      <Link to="/logout">
-                        <Button  variant="dark" onClick={() => logout()}>Logout</Button>
-                      </Link>
+                      // <Link to="/logout">
+                      // </Link>
+                        <Button  variant="dark" onClick={() => logout(loginUser)}>Logout</Button>
                       
                      
 
