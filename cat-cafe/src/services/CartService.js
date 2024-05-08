@@ -13,13 +13,6 @@ class CartService{
         );
     }
 
-    resetCart(uid,sid){
-        console.log("deleting all cart items from user "+uid);
-        return http.delete(
-            `http://localhost/webdev5/PHP_project/paths.php/resetCart?uid=${uid}&sid=${sid}`
-        );
-    }
-
     addItem(data){
         console.log("adding new item to user cart");
         return http.post(
@@ -27,14 +20,28 @@ class CartService{
             data
         );
     }
+    
+    changeQuantity(data){
+        console.log("update item quantity");
+        return http.post(
+            `http://localhost/webdev5/PHP_project/paths.php/changeCartItemQuantity`,
+            data
+        );
+    }
 
-    removeCartItem(cid, uid, sid){
-        console.log("removing item amount from cart database");
+    resetCart(uid,sid){
+        console.log("deleting all cart items from user "+uid);
+        return http.delete(
+            `http://localhost/webdev5/PHP_project/paths.php/resetCart?uid=${uid}&sid=${sid}`
+        );
+    }
+
+    removeCartItem(uid, sid, cid){
+        console.log("removing item from cart database");
         return http.delete(
             `http://localhost/webdev5/PHP_project/paths.php/removeCartItem?cid=${cid}&uid=${uid}&sid=${sid}`
         );
-    }
-    
+    }   
 }
 
 export default new CartService();

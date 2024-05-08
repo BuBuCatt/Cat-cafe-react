@@ -83,7 +83,7 @@ export default class CartObj{
         let output = [];
         for(let prObj of this.#cart.values()){
 
-            output.push({mid:prObj.mid,pname:prObj.menuName,price:prObj.menuPrice,amount:prObj.amount,total:prObj.total()});
+            output.push({id:prObj.id,sid:prObj.sid,mid:prObj.mid,pname:prObj.menuName,price:prObj.menuPrice,amount:prObj.amount,total:prObj.total()});
         }
         return output;
     }

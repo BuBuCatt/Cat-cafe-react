@@ -32,14 +32,21 @@ export default function LoginPage(props){
       AuthService.login(formData).then(
         (response)=>{
           console.log("Type of response.data:", typeof response.data);
-          props.auth(response.data)
-          console.log("User login from MySQL: " + response.data);
-          navigate('/home')
+          console.log("Type of response.data:", response.data);
+          if(typeof response.data !== 'string'){
+            props.auth(response.data)
+            console.log("User login from MySQL: " + response.data);
+            navigate('/home')
+            
+          } else {
+            setMsg('An error occurred while trying to login');
+            setAlertType('danger')
+          }
         },
         (rej)=>{
           console.log(rej);// Log errors if login fails
           let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-          setMsg(msg || 'An error occurred trying to login');
+          setMsg(msg || 'An error occurred while trying to login');
           setAlertType('danger')
         }
       )
@@ -49,7 +56,7 @@ export default function LoginPage(props){
     <Container className="d-flex justify-content-center align-items-center login-container" style={{ height: '60vh' }}>
       {
         msg ? (
-          <Alert className='alert-msg' variant={alertType}>{msg}</Alert>
+          <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
         ) : null
       }
       <Form onSubmit={submitHandler } className="w-50">

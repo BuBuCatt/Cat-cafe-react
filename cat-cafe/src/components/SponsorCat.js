@@ -10,7 +10,7 @@ const SponsorCat = ({addProductObj}) => {
   const [alertType,setAlertType] = useState("");
   const { loginUser } = useContext(AuthContext);
 
-  console.log('Received addProductObj:', addProductObj);
+  // console.log('Received addProductObj:', addProductObj);
 
   useEffect(()=>{
       if(msg){
@@ -49,6 +49,8 @@ const SponsorCat = ({addProductObj}) => {
   
         },
         (rej)=>{
+          console.log('Rej code: '+rej.response.status)
+          console.log('Msg: '+rej.response.data)
           let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
           setMsg(msg || "An error occurred while trying to add item to user cart.");
           setAlertType('danger');

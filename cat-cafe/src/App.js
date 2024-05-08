@@ -60,7 +60,7 @@ function App() {
                 console.log("Products data from mysql : " + response.data);
             },
             (rej)=>{
-                console.log(rej);// Log errors if file reading fails
+                console.log('Code: '+rej.response.status);// Log errors if file reading fails
                 setError(rej.message || "An error occurred while getting the menu from data base.");
             }
         )
@@ -136,21 +136,21 @@ const Auth = (user)=>{
     if(user.type === 'admin'){//admin
       tmpUser = new Admin(user.id, user.username,user.email, user.type, user.sid );
       console.log("new admin tmpUser created"+tmpUser.username + " " + tmpUser.type);
-
+      
       localStorage.setItem('admin', JSON.stringify(tmpUser)); // store data in local storge after userlogin 
       console.log("ADMIN logged in and stored in local storage:", tmpUser);
-     
+      
     }else{
       // 
       
       tmpUser = new User(user.id, user.username,user.email, user.type, user.sid);
       console.log("new customer tmpUser created"+tmpUser.username + " " + tmpUser.type);
-
+      
       localStorage.setItem('user', JSON.stringify(tmpUser)); 
       console.log("User logged in and stored in local storage:", tmpUser);
-
+      
     }
-
+    
     if (tmpUser) {
      
       setLoginUser(tmpUser);
