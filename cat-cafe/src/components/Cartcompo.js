@@ -43,16 +43,16 @@ export default function Cartcompo({ carts }){
         });
     }
 
-    function updateQuantity(mid, change) {
-        setCart((prevCarts) => {
-            return {
-                ...prevCarts,
-                cart: prevCarts.cart.map(item => 
-                    item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
-                )
-            };
-        });
-    }
+    // function updateQuantity(mid, change) {
+    //     setCart((prevCarts) => {
+    //         return {
+    //             ...prevCarts,
+    //             cart: prevCarts.cart.map(item => 
+    //                 item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
+    //             )
+    //         };
+    //     });
+    // }
 
     // const incrementQuantity = (mid) => {
     //     // updateQuantity(mid, 1); // Assuming updateQuantity handles increment by 1
@@ -98,7 +98,7 @@ export default function Cartcompo({ carts }){
         reloadData();
 
         if(msg){
-            // setTimeout(()=> setMsg(null),5000)
+            setTimeout(()=> setMsg(null),5000)
         }
     },[msg])
 

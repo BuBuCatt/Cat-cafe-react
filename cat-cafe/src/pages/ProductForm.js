@@ -111,12 +111,12 @@ export default function ProductForm(props){
     <Container className="d-flex justify-content-center align-items-center main-container" >
       {
         pageId ? (
-          <Link to='/adminMenu'>Go back</Link>
+          <Button variant="secondary" className="brown-btn w-25 mx-auto mb-3" onClick={() => navigate('/adminMenu')}>Go back</Button>
         ) : null
       }
       {
         msg ? (
-          <Alert className='alert-msg' variant={alertType}>{msg}</Alert>
+          <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
         ) : null
       }
 

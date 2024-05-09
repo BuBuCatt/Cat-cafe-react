@@ -109,7 +109,7 @@ export default function CatsForm(props){
     <Container className="d-flex justify-content-center align-items-center main-container" >
       {
         pageId ? (
-          <Link to='/adminCats'>Go back</Link>
+          <Button variant="secondary" className="brown-btn w-25 mx-auto mb-3" onClick={() => navigate('/adminCats')}>Go back</Button>
         ) : null
       }
       {
