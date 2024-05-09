@@ -18,6 +18,7 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
     const { loginUser } = useContext(AuthContext);
     const [msg,setMsg] = useState(null);
     const [alertType,setAlertType] = useState("");
+    
 
       const [favoritedCats, setFavoritedCats] = useState(() => {
         // Load favorited cats from localStorage

@@ -58,6 +58,7 @@ const Adopt = (props) => {
     // get cats data from database
     DataService.getData("getCats").then(
         (response)=>{
+          console.log("Adopt page data: ", response.data);
           setData(response.data);
         },
         (rej)=>{
