@@ -29,6 +29,7 @@ export default function ProductForm(props){
     }
 
     if(pageId){
+      // gets product data base on their id
       DataService.searchData('searchProduct', pageId).then(
         (response)=>{
           setMenuName(response.data.menuName);
@@ -80,7 +81,7 @@ export default function ProductForm(props){
         },
         (rej)=>{
           let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-          setMsg(msg || "An error occurred.");
+          setMsg(msg || "An error occurred while trying to add new product on database");
           setAlertType('danger');
         }
       )
@@ -94,7 +95,7 @@ export default function ProductForm(props){
         },
         (rej)=>{
           let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-          setMsg(msg || "An error occurred.");
+          setMsg(msg || "An error occurred while trying to edit product on database.");
           setAlertType('danger');
         }
       )

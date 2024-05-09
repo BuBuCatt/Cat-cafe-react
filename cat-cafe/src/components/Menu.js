@@ -13,17 +13,19 @@ export default function Menu(props) {
     useEffect(()=>{
 
       if(msg){
-          // setTimeout(()=> setMsg(null),5000)
+        setTimeout(()=> setMsg(null),5000)
       }
   },[msg])
 
     const addHandler = (item) => {              
+      //check if user is login to perform action
       if(!loginUser && !localStorage.getItem('user')){
         setMsg('You need to login to add to your cart');
         setAlertType('warning');
       } else {
         let user = loginUser? loginUser : JSON.parse(localStorage.getItem('user'));
 
+        //create request to send data to backend
         let itemData = new FormData();
         itemData.append("uid",user.id)
         itemData.append("sid",user.sessionID)

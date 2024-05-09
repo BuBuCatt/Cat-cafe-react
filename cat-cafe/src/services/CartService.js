@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class CartService{
     getCart(uid, sid){
-        console.log("getting user cart items");
+        console.log("getting user " +uid+" cart items");
         return http.get(
             `http://localhost/webdev5/PHP_project/paths.php/cart?uid=${uid}&sid=${sid}`,
             {

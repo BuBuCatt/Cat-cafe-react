@@ -34,6 +34,7 @@ const AdminMenu = (props) => {
     },[msg,loginUser])
 
     const removeItem = (item) => {
+        // send request to remove menu product from database
         DataService.removeData("removeProduct",item.mid,loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
@@ -50,13 +51,14 @@ const AdminMenu = (props) => {
     }
 
       const reloadData = () => {
+        // send request to receive all menu products on the  database
         DataService.getData("getProducts").then(
             (response)=>{
               setData(response.data);
             },
             (rej)=>{
                 let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                setMsg(msg || "An error occurred while reloading the data.");
+                setMsg(msg || "An error occurred while loading the menu data.");
                 setAlertType('danger');
             }
         )
@@ -66,7 +68,7 @@ const AdminMenu = (props) => {
        <>
         {
             msg ? (
-            <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+            <Alert variant={alertType} className='alert-msg bottom'>{msg}</Alert>
             ) : null
         }
         <div className="filter-controls mb-4 p-3">

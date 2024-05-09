@@ -53,13 +53,14 @@ const Adopt = (props) => {
   const [alertType,setAlertType] = useState("");
 
   const reloadData = () => {
+    // get cats data from database
     DataService.getData("getCats").then(
         (response)=>{
           setData(response.data);
         },
         (rej)=>{
             let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-            setMsg(msg || "An error occurred while reloading the data.");
+            setMsg(msg || "An error occurred while loading cats data.");
             setAlertType('danger');
         }
     )
@@ -69,7 +70,7 @@ const Adopt = (props) => {
     reloadData();
     
     if(msg){
-      // setTimeout(()=> setMsg(null),5000)
+      setTimeout(()=> setMsg(null),5000)
     }
   },[msg])
   return (
@@ -91,7 +92,7 @@ const Adopt = (props) => {
          
         {
             msg ? (
-              <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+              <Alert variant={alertType} className='alert-msg bottom'>{msg}</Alert>
             ) : null
         }
           {data ? <Cats cats={data} addToWishlist={props.addToWishlist} removeFromWishlist={props.removeFromWishlist}/>  : <p>Loading cats data...</p>}

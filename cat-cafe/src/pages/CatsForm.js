@@ -29,6 +29,7 @@ export default function CatsForm(props){
       }
 
       if(pageId){
+        // gets cat data base on their id
         DataService.searchData('searchCat', pageId).then(
           (response)=>{
             setCatName(response.data.catName);
@@ -67,10 +68,12 @@ export default function CatsForm(props){
 
     const submitHandler = (e)=>{
       e.preventDefault();
+      //create request body 
       const formData = new FormData(e.target);
       formData.append("sid", loginUser.sessionID);
       
       if(!pageId){
+        // send request to add new cat to database
         DataService.addData('addCat',formData).then(
           (response)=>{
             setMsg(response.data);// Set cats state with loaded data in cats -> cats
@@ -79,13 +82,14 @@ export default function CatsForm(props){
           },
           (rej)=>{
             console.log(rej);// Log errors if file reading fails
-            setMsg(rej.response.data || "An error occurred while getting the cats from database.");
+            setMsg(rej.response.data || "An error occurred while trying to add new cat on database.");
             setAlertType('danger');
           }
         )
       }
       else {
         formData.append("cid", pageId);
+        // send request to edit cat on the database
         DataService.editData('editCat',formData).then(
           (response)=>{
             setMsg(response.data);
@@ -93,12 +97,10 @@ export default function CatsForm(props){
           },
           (rej)=>{
             let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-            setMsg(msg || "An error occurred.");
+            setMsg(msg || "An error occurred while trying to edit cat on database.");
             setAlertType('danger');
           }
         )
-        // console.log(" cat with id:"+e.target.id+" edit successfully");
-        // navigate('/home');
       }
     }
 
@@ -112,7 +114,7 @@ export default function CatsForm(props){
       }
       {
         msg ? (
-          <Alert className='alert-msg' variant={alertType}>{msg}</Alert>
+          <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
         ) : null
       }
 

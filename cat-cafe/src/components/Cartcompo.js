@@ -125,7 +125,7 @@ export default function Cartcompo({ carts }){
                 },
                 (rej)=>{
                     let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                    console.log(msg || "An error occurred while getting the data.");
+                    console.log(msg || "An error occurred while getting cart data.");
                 }
             )
         }
@@ -133,8 +133,6 @@ export default function Cartcompo({ carts }){
 
     const removeItem = (id) => {
         if(loginUser){
-            alert(loginUser.id)
-            alert(loginUser.sessionID)
             CartService.removeCartItem(loginUser.id, loginUser.sessionID, id).then(
                 (response)=>{
                     setMsg(response.data);
@@ -191,7 +189,7 @@ export default function Cartcompo({ carts }){
                     },
                     (rej)=>{
                         let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                        setMsg(msg || "An error occurred while removing the item.");
+                        setMsg(msg || "An error occurred while updating item quantity.");
                         setAlertType('danger');
                     }
                 )

@@ -18,7 +18,7 @@ class AuthService{
     }
 
     logout(data){
-        console.log("sending user sessionId to logout on backend");
+        console.log("sending user sessionId to end session on backend");
         return http.post(
             `http://localhost/webdev5/PHP_project/paths.php/logout`,
             data

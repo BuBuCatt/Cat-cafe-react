@@ -16,6 +16,7 @@ function NavBar(props) {
   const userType = checkUserType(loginUser);
 
   function logout(){
+    //create request body to send data to backend
     let request = new FormData();
     request.append("sid",loginUser.sessionID);
     request.append('email',loginUser.email);

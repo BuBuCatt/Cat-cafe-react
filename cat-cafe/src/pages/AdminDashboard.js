@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
-import {useState,useEffect} from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthContext';
 const AdminDashboard = () => {
 
     const navigate = useNavigate();
-    const { loginUser, setLoginUser, checkUserType } = useContext(AuthContext);
+    const { loginUser, checkUserType } = useContext(AuthContext);
 
     useEffect(()=>{
 
@@ -16,7 +16,7 @@ const AdminDashboard = () => {
         navigate("/");
       }
 
-    },[]);
+    });
 
   return (
     <Container fluid>
