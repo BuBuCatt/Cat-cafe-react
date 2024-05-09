@@ -23,11 +23,13 @@ const SponsorCat = ({addProductObj}) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
+    //check if user is login to perform action
     if(!loginUser && !localStorage.getItem('user')){
       setMsg('You need to login to add to your cart');
       setAlertType('warning');
     } else {
       let user = loginUser? loginUser : JSON.parse(localStorage.getItem('user'));
+      //create request to send data to backend
       let sponsorObj = new FormData();
       sponsorObj.append("uid",user.id)
       sponsorObj.append("sid",user.sessionID)
@@ -49,8 +51,6 @@ const SponsorCat = ({addProductObj}) => {
   
         },
         (rej)=>{
-          console.log('Rej code: '+rej.response.status)
-          console.log('Msg: '+rej.response.data)
           let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
           setMsg(msg || "An error occurred while trying to add item to user cart.");
           setAlertType('danger');

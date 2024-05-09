@@ -13,13 +13,14 @@ const Cafe = (props) => {
   const [alertType,setAlertType] = useState("");
 
   const reloadData = () => {
+    // get menu products from database
     DataService.getData("getProducts").then(
         (response)=>{
           setData(response.data);
         },
         (rej)=>{
             let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-            setMsg(msg || "An error occurred while reloading the data.");
+            setMsg(msg || "An error occurred while loading menu.");
             setAlertType('danger');
         }
     )
@@ -29,7 +30,7 @@ const Cafe = (props) => {
     reloadData();
 
     if(msg){
-      // setTimeout(()=> setMsg(null),5000)
+      setTimeout(()=> setMsg(null),5000)
     }
   },[msg])
 
@@ -88,7 +89,7 @@ const Cafe = (props) => {
       </div>
         {
             msg ? (
-              <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+              <Alert variant={alertType} className='alert-msg bottom'>{msg}</Alert>
             ) : null
         }
 

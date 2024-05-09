@@ -43,16 +43,16 @@ export default function Cartcompo({ carts }){
         });
     }
 
-    function updateQuantity(mid, change) {
-        setCart((prevCarts) => {
-            return {
-                ...prevCarts,
-                cart: prevCarts.cart.map(item => 
-                    item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
-                )
-            };
-        });
-    }
+    // function updateQuantity(mid, change) {
+    //     setCart((prevCarts) => {
+    //         return {
+    //             ...prevCarts,
+    //             cart: prevCarts.cart.map(item => 
+    //                 item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
+    //             )
+    //         };
+    //     });
+    // }
 
     // const incrementQuantity = (mid) => {
     //     // updateQuantity(mid, 1); // Assuming updateQuantity handles increment by 1
@@ -98,7 +98,7 @@ export default function Cartcompo({ carts }){
         reloadData();
 
         if(msg){
-            // setTimeout(()=> setMsg(null),5000)
+            setTimeout(()=> setMsg(null),5000)
         }
     },[msg])
 
@@ -125,7 +125,7 @@ export default function Cartcompo({ carts }){
                 },
                 (rej)=>{
                     let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                    console.log(msg || "An error occurred while getting the data.");
+                    console.log(msg || "An error occurred while getting cart data.");
                 }
             )
         }
@@ -133,8 +133,6 @@ export default function Cartcompo({ carts }){
 
     const removeItem = (id) => {
         if(loginUser){
-            alert(loginUser.id)
-            alert(loginUser.sessionID)
             CartService.removeCartItem(loginUser.id, loginUser.sessionID, id).then(
                 (response)=>{
                     setMsg(response.data);
@@ -191,7 +189,7 @@ export default function Cartcompo({ carts }){
                     },
                     (rej)=>{
                         let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                        setMsg(msg || "An error occurred while removing the item.");
+                        setMsg(msg || "An error occurred while updating item quantity.");
                         setAlertType('danger');
                     }
                 )

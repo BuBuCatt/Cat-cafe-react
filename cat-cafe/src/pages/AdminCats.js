@@ -23,19 +23,21 @@ const AdminCats = (props) => {
     }) : [];
 
     const reloadData = () => {
+        // get cats data from database
         DataService.getData("getCats").then(
             (response)=>{
-              setData(response.data);
+                setData(response.data);
             },
             (rej)=>{
                 let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                setMsg(msg || "An error occurred while reloading the data.");
+                setMsg(msg || "An error occurred while loading cats data.");
                 setAlertType('danger');
             }
         )
     }
-
+    
     const removeItem = (item) => {
+        // send request to remove cat from database 
         DataService.removeData("removeCat",item.cid, loginUser.sessionID).then(
           (response)=>{
               setMsg(response.data);
@@ -67,7 +69,7 @@ const AdminCats = (props) => {
     <>
         {
             msg ? (
-            <Alert variant={alertType} className='alert-msg'>{msg}</Alert>
+            <Alert variant={alertType} className='alert-msg bottom'>{msg}</Alert>
             ) : null
         }
         <div className="container mt-5">
