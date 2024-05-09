@@ -32,13 +32,15 @@
       "id": 5,
       "username": "BlackCoffeeCat",
       "pass": "hashedpass567",
-      "email": "blackcat@meowmatch.com"
+      "email": "blackcat@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 6,
       "username": "MochaMaestro",
       "pass": "hashedpass678",
-      "email": "maestro@meowmatch.com"
+      "email": "maestro@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 7,

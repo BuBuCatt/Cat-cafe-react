@@ -31,7 +31,7 @@ export default function LoginPage(props){
       
       AuthService.login(formData).then(
         (response)=>{
-          console.log("Type of response.data:", typeof response.data);
+          //console.log("Type of response.data:", typeof response.data);
           console.log("Type of response.data:", response.data);
           if(typeof response.data !== 'string'){
             props.auth(response.data)
@@ -59,7 +59,7 @@ export default function LoginPage(props){
           <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
         ) : null
       }
-      <Form onSubmit={submitHandler } className="w-50">
+      <Form onSubmit={submitHandler} className="w-50">
 
         <Row className="mb-4">
           <Col className="d-flex justify-content-center">

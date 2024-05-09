@@ -8,6 +8,7 @@ import { Alert } from 'react-bootstrap';
 
 
 
+
 // cat carousal
 
 const Carousel = ()=>{
@@ -51,6 +52,7 @@ const Adopt = (props) => {
   const [msg,setMsg] = useState(null);
   const [data, setData] = useState(props.cats);
   const [alertType,setAlertType] = useState("");
+  const [wishlist, setWishlist] = useState([]);
 
   const reloadData = () => {
     DataService.getData("getCats").then(
@@ -65,13 +67,30 @@ const Adopt = (props) => {
     )
   }
 
+
   useEffect(()=>{
+    setWishlist(props.wishlist);
     reloadData();
+  
+
+    
     
     if(msg){
       // setTimeout(()=> setMsg(null),5000)
     }
-  },[msg])
+  },[msg,  props.wishlist]);
+
+
+
+
+
+
+
+
+
+
+
+
   return (
 
     <>

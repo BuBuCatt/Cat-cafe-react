@@ -25,6 +25,10 @@ export default function Menu(props) {
         let user = loginUser? loginUser : JSON.parse(localStorage.getItem('user'));
 
         let itemData = new FormData();
+        alert(loginUser.id);
+        alert(item.mid);
+
+       
         itemData.append("uid",user.id)
         itemData.append("sid",user.sessionID)
         itemData.append("mid",item.mid)

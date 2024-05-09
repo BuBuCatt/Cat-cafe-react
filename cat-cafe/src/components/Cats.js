@@ -2,16 +2,22 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
-import  { useState,useEffect } from 'react';
+import  { useState,useEffect,useContext } from 'react';
 import "../styles/cats.css";
 import Footer from './Footer';
-import Dropdown from 'react-bootstrap/Dropdown';
+import {Dropdown,Alert} from 'react-bootstrap';
+import DataService from '../services/DataService';
+import { AuthContext } from '../context/AuthContext';
 
 
 
 export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
     const [filter, setFilter] = useState('All');
+    const [wishlist, setWishlist] = useState([]);
+    const { loginUser } = useContext(AuthContext);
+    const [msg,setMsg] = useState(null);
+    const [alertType,setAlertType] = useState("");
 
       const [favoritedCats, setFavoritedCats] = useState(() => {
         // Load favorited cats from localStorage
@@ -21,6 +27,7 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
     });
 
     useEffect(() => {
+        reloadData();
       // Save to localStorage when favoritedCats changes
       localStorage.setItem("favoritedCats", JSON.stringify(favoritedCats));
         // Clear localStorage when the page is unloaded
@@ -31,20 +38,88 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
         
   }, [favoritedCats]);
 
-  const toggleFavorite = (cat) => {
-    const isCurrentlyFavorited = favoritedCats[cat.cid];
-    const updatedFavoritedCats = {
-        ...favoritedCats,
-        [cat.cid]: !isCurrentlyFavorited
-    };
-    setFavoritedCats(updatedFavoritedCats);
-    localStorage.setItem("favoritedCats", JSON.stringify(updatedFavoritedCats));
 
-        if (!isCurrentlyFavorited) {
-          addToWishlist(cat);
-          }else {
-            removeFromWishlist(cat.cid);
+  const reloadData = () => {
+    DataService.searchData("whishlist",loginUser.id).then(
+        (response)=>{
+          setWishlist(response.data);
+        },
+        (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred while reloading the data.");
+            setAlertType('danger');
         }
+    )
+  }
+
+
+  /*
+  
+    addData(dataPath, data){
+        console.log("posting new data on "+dataPath+" database");
+        return http.post(
+            `http://localhost/webdev5/PHP_project/paths.php/${dataPath}`,
+            data
+        );
+    }
+
+  
+  
+  
+  */
+
+  const toggleFavorite = (cid) => {
+    if(!loginUser ){
+        setMsg('You need to login to add to your cart');
+        setAlertType('warning');
+      }else{
+
+
+        let formData = new FormData();
+        formData.append("uid",loginUser.id);
+        formData.append("sid",loginUser.sessionID);
+        formData.append("cid",cid);
+      
+
+        if(favoritedCats[cid]){ 
+                formData.append("wid",favoritedCats['wid']);
+        }
+        
+                console.log(loginUser.sessionID);
+                console.log(loginUser);
+        
+                DataService.addData("addWishListItem",formData).then(
+                    (response)=>{
+                        console.log(response.data);
+                    },
+                    (rej)=>{
+                        console.log(rej);
+                    }
+                
+                );
+        
+
+        }
+    
+    // const isCurrentlyFavorited = favoritedCats[wishlist.cid];
+    // const updatedFavoritedCats = {
+    //     ...favoritedCats,
+    //     [wishlist.cid]: !isCurrentlyFavorited
+    // };
+    // setFavoritedCats(updatedFavoritedCats);
+    // localStorage.setItem("favoritedCats", JSON.stringify(updatedFavoritedCats));
+
+    //     if (!isCurrentlyFavorited) {
+    //       addToWishlist(wishlist);
+    //       }else {
+    //         removeFromWishlist(wishlist.cid);
+    //     }
+    
+
+ 
+      
+
+
 
     };
 
@@ -57,6 +132,11 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
   return (
     <>
+        {
+        msg ? (
+          <Alert className='alert-msg bottom' variant={alertType}>{msg}</Alert>
+        ) : null
+    }
         
         <div className="container mt-5">
 
@@ -93,7 +173,7 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
                     <div className="d-flex justify-content-between align-items-center">
                     <span className={`badge ${cat.adoptionStatus === 'Available' ? 'bg-success' : 'bg-secondary'}`}>{cat.adoptionStatus}</span>
                     {cat.adoptionStatus === 'Available' && (
-                        <button className="favorite-btn" onClick={() => toggleFavorite(cat)} aria-label="Toggle Favorite">
+                        <button className="favorite-btn" onClick={() => toggleFavorite(cat.cid)} aria-label="Toggle Favorite">
                             <FontAwesomeIcon icon={favoritedCats[cat.cid] ? fasHeart : farHeart} color={favoritedCats[cat.cid] ? "red" : "black"} />
                         </button>
                     )}

@@ -1,16 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button,Accordion } from 'react-bootstrap';
 
 import "../styles/wishlist.css";
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
-
+import DataService from '../services/DataService';
 export default function Wishlist(props) {
+  const [wishlist, setWishlist] = useState([]);
   console.log("Wishlist data in component:", props.wishlist); 
+  const [msg,setMsg] = useState(null);
+  const [alertType,setAlertType] = useState("");
 
   const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
+  
+    useEffect(() => {
+      reloadData();
+      //setWishlist(props.wishlist);
+    }, []);
 
   const goHomeHandler = () => {
     navigate('/');
@@ -19,6 +27,61 @@ export default function Wishlist(props) {
   const goAdoptHandler = () => {
     navigate('/adopt');
   }
+
+  const reloadData = () => {
+    console.log("RELOAD " + loginUser);
+    let user = loginUser;
+    if(!loginUser){
+        user = JSON.parse(localStorage.getItem('user'));
+    } 
+    
+   
+    if(user){
+      console.log("RELOAD ID " + user.id);
+    DataService.searchData("whishlist",user.id).then(
+        (response)=>{
+          console.log("Wishlist data in component:", response);
+          setWishlist(response.data);
+        },
+        (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred while reloading the data.");
+            setAlertType('danger');
+        }
+    )
+      }
+  }
+
+
+  const removeItem = (id) => {
+    if(loginUser){
+        alert(loginUser.id)
+        alert(loginUser.sessionID)
+        DataService.removeData(loginUser.id, loginUser.sessionID, id).then(
+            (response)=>{
+                setMsg(response.data);
+                setAlertType('primary');
+                reloadData();
+                // removeItemFunction(id);
+            },
+            (rej)=>{
+                console.log(rej);// Log errors if file reading fails
+                let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+                setMsg(msg || "An error occurred while removing the item.");
+                setAlertType('danger');
+            }
+        )
+    }
+}
+
+
+
+  useEffect(() => {
+    reloadData();
+}, []);
+
+
+
 
 
 
@@ -39,7 +102,7 @@ export default function Wishlist(props) {
                             <Card.Body>
                                 <Card.Title className="brown-theme">{cat.catName}</Card.Title>
                                 <Card.Text className="brown-theme">{cat.catDescription}</Card.Text>
-                                <Button variant="danger" className="brown-btn" onClick={() => props.removeFromWishlist(cat.cid)}>
+                                <Button variant="danger" className="brown-btn" onClick={() => removeItem(cat.cid)}>
                                     Delete
                                 </Button>
                             </Card.Body>
