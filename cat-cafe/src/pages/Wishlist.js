@@ -11,7 +11,7 @@ export default function Wishlist(props) {
   //console.log("Wishlist data in component:", props.wishlist); 
   const [msg,setMsg] = useState(null);
   const [alertType,setAlertType] = useState("");
-  const [adoptData, setadoptData] = useState(props.cats); // get the whole data from the props cats
+  const [adoptData, setadoptData] = useState([]); // get the whole data from the props cats
 
   const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
@@ -30,41 +30,41 @@ export default function Wishlist(props) {
   }
 
   const reloadData = () => {
-
-    DataService.getData("getCats").then(
-      (response)=>{
-        console.log("WishList PAGE data: ", response.data);
-        setadoptData(response.data);
-      },
-      (rej)=>{
-          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-          setMsg(msg || "An error occurred while loading cats data.");
-          setAlertType('danger');
-      }
-    )
-    console.log("RELOAD " + loginUser);
     let user = loginUser;
     if(!loginUser){
         user = JSON.parse(localStorage.getItem('user'));
     } 
-
-   
+    // console.log("RELOAD " + loginUser);
+    
+    
+    
     if(user){
+      DataService.searchData("getCatsWishlist",user.id).then(
+        (response)=>{
+          console.log("WishList PAGE data: ", response.data);
+          setadoptData(response.data);
+        },
+        (rej)=>{
+            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+            setMsg(msg || "An error occurred while loading cats data.");
+            setAlertType('danger');
+        }
+      )
       console.log("RELOAD ID " + user.id);
-        DataService.searchData("whishlist",user.id).then(
-            (response)=>{
-              console.log("Wishlist data in component:", response);//get the response data
-            setWishlist(response.data);
+        // DataService.searchData("whishlist",user.id).then(
+        //     (response)=>{
+        //       console.log("Wishlist data in component:", response);//get the response data
+        //     setWishlist(response.data);
            
     
 
-            },
-            (rej)=>{
-                let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-                setMsg(msg || "An error occurred while reloading the data.");
-                setAlertType('danger');
-            }
-        )
+        //     },
+        //     (rej)=>{
+        //         let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+        //         setMsg(msg || "An error occurred while reloading the data.");
+        //         setAlertType('danger');
+        //     }
+        // )
       }
 
  
@@ -75,11 +75,15 @@ export default function Wishlist(props) {
   }
 
 //wrong function
-  const removeItem = (id) => {
+  const removeItem = (cat) => {
     if(loginUser){
-        alert(loginUser.id)
-        alert(loginUser.sessionID)
-        DataService.removeData(loginUser.id, loginUser.sessionID, id).then(
+      let formData = new FormData();
+      formData.append("uid",loginUser.id);
+      formData.append("sid",loginUser.sessionID);
+      formData.append("cid",cat.cid);
+      formData.append("wid",cat.wid);
+    
+        DataService.addData("addWishListItem",formData).then(
             (response)=>{
                 setMsg(response.data);
                 setAlertType('primary');
@@ -117,14 +121,14 @@ export default function Wishlist(props) {
                 <Button variant="info" className="brown-btn" onClick={goAdoptHandler}>Go to Cats Page</Button>
             </div>
             <Row className="centered-row">
-                {wishlist.map(cat => (
+                {adoptData.map(cat => (
                     <Col sm={6} md={4} lg={3} key={cat.cid}>
                         <Card className="mb-4 card-custom">
                             <Card.Img variant="top" src={cat.catImage} alt={cat.catName} />
                             <Card.Body>
                                 <Card.Title className="brown-theme">{cat.catName}</Card.Title>
                                 <Card.Text className="brown-theme">{cat.catDescription}</Card.Text>
-                                <Button variant="danger" className="brown-btn" onClick={() => removeItem(cat.cid)}>
+                                <Button variant="danger" className="brown-btn" onClick={() => removeItem(cat)}>
                                     Delete
                                 </Button>
                             </Card.Body>

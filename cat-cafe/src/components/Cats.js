@@ -27,8 +27,12 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
         return saved ? JSON.parse(saved) : {};
     });
 
+    
+
     useEffect(() => {
         reloadData();
+        console.log('Favorite cats')
+        console.log(favoritedCats)
       // Save to localStorage when favoritedCats changes
       localStorage.setItem("favoritedCats", JSON.stringify(favoritedCats));
         // Clear localStorage when the page is unloaded
@@ -41,16 +45,18 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
 
 
   const reloadData = () => {
-    DataService.searchData("whishlist",loginUser.id).then(
-        (response)=>{
-          setWishlist(response.data);
-        },
-        (rej)=>{
-            let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
-            setMsg(msg || "An error occurred while reloading the data.");
-            setAlertType('danger');
-        }
-    )
+    if(loginUser){
+        DataService.searchData("whishlist",loginUser.id).then(
+            (response)=>{
+              setWishlist(response.data);
+            },
+            (rej)=>{
+                let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+                setMsg(msg || "An error occurred while reloading the data.");
+                setAlertType('danger');
+            }
+        )
+    }
   }
 
 
