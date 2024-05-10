@@ -5,7 +5,7 @@
       "menuDescription": "Rich espresso with hot water for a smooth, robust coffee.",
       "menuPrice": 2.50,
       "menuCategory": "Coffee",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/ Americano-01.png"
     },
     {
       "mid": 2,
@@ -13,7 +13,7 @@
       "menuDescription": "Freshly steamed milk with vanilla-flavored syrup, marked with espresso and caramel drizzle.",
       "menuPrice": 3.75,
       "menuCategory": "Coffee",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/caramel macchiato-02.png"
     },
     {
       "mid": 3,
@@ -21,7 +21,7 @@
       "menuDescription": "Intensely bold and flavorful espresso shot with a golden crema on top.",
       "menuPrice": 1.95,
       "menuCategory": "Espresso",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/espresso-shot-03.png"
     },
     {
       "mid": 4,
@@ -29,7 +29,7 @@
       "menuDescription": "Moist, fluffy muffin filled with juicy blueberries.",
       "menuPrice": 2.25,
       "menuCategory": "Pastry",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/blueberry muffin-04.png"
     },
     {
       "mid": 5,
@@ -37,7 +37,7 @@
       "menuDescription": "A classic combination of rich espresso topped with frothy milk foam.",
       "menuPrice": 3.00,
       "menuCategory": "Coffee",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/cappuccino-05.png"
     },
     {
       "mid": 6,
@@ -45,7 +45,7 @@
       "menuDescription": "A creamy blend of spicy chai tea and steamed milk.",
       "menuPrice": 3.50,
       "menuCategory": "Tea",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/chai latte-06.png"
     },
     {
       "mid": 7,
@@ -53,7 +53,7 @@
       "menuDescription": "Refreshing and delicate green tea sourced from the best picks.",
       "menuPrice": 2.00,
       "menuCategory": "Tea",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/greentea-07.png"
       
     },
     {
@@ -62,7 +62,7 @@
       "menuDescription": "Freshly brewed coffee served over ice for a crisp, cool taste.",
       "menuPrice": 2.50,
       "menuCategory": "Cold Brews",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/ice-coffee-08.png"
     },
     {
       "mid": 9,
@@ -70,7 +70,7 @@
       "menuDescription": "Light and zesty lemon cake dotted with poppy seeds.",
       "menuPrice": 3.00,
       "menuCategory": "Pastry",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/lemon-cake-09.png"
     },
     {
       "mid": 10,
@@ -78,7 +78,7 @@
       "menuDescription": "Iced blend of coffee, milk, and rich vanilla bean flavor.",
       "menuPrice": 4.00,
       "menuCategory": "Frappé",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/vallina-bean-frappe-10.png"
     },
     {
       "mid": 11,
@@ -86,7 +86,7 @@
       "menuDescription": "Steamed milk with chocolate syrup, topped with whipped cream.",
       "menuPrice": 2.75,
       "menuCategory": "Chocolate",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/hot-chocolate-11.png"
     },
     {
       "mid": 12,
@@ -94,7 +94,7 @@
       "menuDescription": "Finely ground matcha green tea mixed with steamed milk.",
       "menuPrice": 3.75,
       "menuCategory": "Tea",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/Matcha Latte -12.png"
     },
     {
       "mid": 13,
@@ -102,7 +102,7 @@
       "menuDescription": "Toasted bagel served with a generous spread of cream cheese.",
       "menuPrice": 2.75,
       "menuCategory": "Pastry",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/bagel-13.png"
     },
     {
       "mid": 14,
@@ -110,7 +110,7 @@
       "menuDescription": "Moist banana bread made with wholesome vegan ingredients.",
       "menuPrice": 2.95,
       "menuCategory": "Vegan",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/banana-cake-14.png"
     },
     {
       "mid": 15,
@@ -118,7 +118,7 @@
       "menuDescription": "Chilled matcha tea, lightly sweetened and served with ice.",
       "menuPrice": 3.00,
       "menuCategory": "Cold Brews",
-      "menuImage": "./data/img/cafe/Classic Americano.jpg"
+      "menuImage": "./data/img/cafe/iced matcha tea-15.png"
     }
   ]
   

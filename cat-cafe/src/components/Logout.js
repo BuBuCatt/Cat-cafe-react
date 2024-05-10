@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Logout = (props) => {
     const navigate = useNavigate();
-
+    const { loginUser, logout } = useContext(AuthContext);
 
     useEffect(() => {
         // Clear user data from the state
-        props.userLogout(null);
-        console.log("Successful logout");
+        // logout(loginUser);
 
         // Redirect to login page
-        navigate('/login');
+        // navigate('/login');
     }, []);
 
     return null;

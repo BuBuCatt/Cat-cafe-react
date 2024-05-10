@@ -3,121 +3,142 @@
       "id": 1,
       "username": "Bubu",
       "pass": "test12",
-      "email": "bubu@meowmatch.com"
+      "email": "bubu@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 2,
-      "username": "EspressoEnthusiast",
-      "pass": "hashedpass234",
-      "email": "enthusiast@meowmatch.com"
+      "username": "Admin",
+      "pass": "test12",
+      "email": "admin@meowmatch.com",
+      "type":"admin"
+
     },
     {
       "id": 3,
       "username": "LatteLover",
       "pass": "hashedpass345",
-      "email": "lover@meowmatch.com"
+      "email": "lover@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 4,
       "username": "MacchiatoMogul",
       "pass": "hashedpass456",
-      "email": "mogul@meowmatch.com"
+      "email": "mogul@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 5,
       "username": "BlackCoffeeCat",
       "pass": "hashedpass567",
-      "email": "blackcat@meowmatch.com"
+      "email": "blackcat@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 6,
       "username": "MochaMaestro",
       "pass": "hashedpass678",
-      "email": "maestro@meowmatch.com"
+      "email": "maestro@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 7,
       "username": "CappuccinoCommander",
       "pass": "hashedpass789",
-      "email": "commander@meowmatch.com"
+      "email": "commander@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 8,
       "username": "AmericanoAdmirer",
       "pass": "hashedpass890",
-      "email": "admirer@meowmatch.com"
+      "email": "admirer@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 9,
       "username": "CortadoConnoisseur",
       "pass": "hashedpass901",
-      "email": "connoisseur@meowmatch.com"
+      "email": "connoisseur@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 10,
       "username": "FrappeFanatic",
       "pass": "hashedpass012",
-      "email": "fanatic@meowmatch.com"
+      "email": "fanatic@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 11,
       "username": "AffogatoAficionado",
       "pass": "hashedpass112",
-      "email": "aficionado@meowmatch.com"
+      "email": "aficionado@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 12,
       "username": "BreveBaron",
       "pass": "hashedpass212",
-      "email": "baron@meowmatch.com"
+      "email": "baron@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 13,
       "username": "DoppioDuke",
       "pass": "hashedpass312",
-      "email": "duke@meowmatch.com"
+      "email": "duke@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 14,
       "username": "RistrettoRuler",
       "pass": "hashedpass412",
-      "email": "ruler@meowmatch.com"
+      "email": "ruler@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 15,
       "username": "PurrOverPour",
       "pass": "hashedpass512",
-      "email": "pour@meowmatch.com"
+      "email": "pour@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 16,
       "username": "SoyLatteSultan",
       "pass": "hashedpass612",
-      "email": "sultan@meowmatch.com"
+      "email": "sultan@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 17,
       "username": "ChaiCuddler",
       "pass": "hashedpass712",
-      "email": "cuddler@meowmatch.com"
+      "email": "cuddler@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 18,
       "username": "PiccoloPatron",
       "pass": "hashedpass812",
-      "email": "patron@meowmatch.com"
+      "email": "patron@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 19,
       "username": "FlatWhiteFiend",
       "pass": "hashedpass912",
-      "email": "fiend@meowmatch.com"
+      "email": "fiend@meowmatch.com",
+      "type":"customer"
     },
     {
       "id": 20,
       "username": "TeaTemptress",
       "pass": "hashedpass102",
-      "email": "temptress@meowmatch.com"
+      "email": "temptress@meowmatch.com",
+      "type":"customer"
     }
   ]
   

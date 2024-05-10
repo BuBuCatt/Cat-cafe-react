@@ -1,0 +1,54 @@
+/* WishlistStyles.css */
+.brown-theme {
+    font-weight: 700;
+    color: #633819f4;
+   
+}
+
+h1{
+    font-weight: 900;
+    color: #633819f4;
+    font-size: 60px;
+    margin-bottom: 2rem;
+}
+
+.brown-btn {
+    background-color: #6D4C41; /* Brown shade for buttons */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brown-btn:hover {
+    background-color: #5D4037; /* Darker brown when hovered */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-custom {
+    border-color: #6D4C41; 
+    transform: scale(1.02);
+}
+
+.centered-container {
+    text-align: center; /* Center the text inside the container */
+}
+
+.centered-row {
+    justify-content: center; /* Center the grid columns horizontally */
+}
+
+/* FAQ specific styling */
+.accordion-button {
+    background-color: #D7CCC8; /* Light brown background for consistency */
+    color: #3E2723; /* Darker text for readability */
+}
+
+.accordion-button:focus {
+    box-shadow: none; /* Remove focus outline to clean up style */
+}
+
+.accordion-body {
+    font-size: 0.95rem; /* Appropriate text size for readability */
+    color: #5D4037; /* Maintain color theme */
+}

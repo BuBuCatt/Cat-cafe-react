@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Container, Row, Col, Image, Alert } from 'react-bootstrap';
-
+import "../styles/LoginPage.css";
+import "../styles/Alert.css"
 import { useNavigate } from 'react-router-dom';
+import AuthService from '../services/AuthService';
 
 export default function LoginPage(props){
 
     const [user,setUser] = useState({email:"",pass:""});
+    const [msg,setMsg] = useState(null);
+    const [alertType,setAlertType] = useState("");
     const navigate = useNavigate(); 
+
+    useEffect(()=>{
+
+      if(msg){
+          setTimeout(()=> setMsg(null),5000)
+        }
+    },[msg])
 
     const changeHandler = (e)=>{
         setUser(prev=>{
@@ -14,31 +25,41 @@ export default function LoginPage(props){
         })
     }
 
-
-
     const submitHandler = (e)=>{
-        e.preventDefault();
-        props.auth(user);
-        
-        console.log(" login success"+ user.email);
-        navigate('/home');
+      e.preventDefault();
+      const formData = new FormData(e.target);
       
-           
-
-      
-        
+      AuthService.login(formData).then(
+        (response)=>{
+          //console.log("Type of response.data:", typeof response.data);
+          console.log("Type of response.data:", response.data);
+          if(typeof response.data !== 'string'){
+            props.auth(response.data)
+            console.log("User login from MySQL: " + response.data);
+            navigate('/home')
+            
+          } else {
+            setMsg('An error occurred while trying to login');
+            setAlertType('danger')
+          }
+        },
+        (rej)=>{
+          console.log(rej);// Log errors if login fails
+          let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
+          setMsg(msg || 'An error occurred while trying to login');
+          setAlertType('danger')
+        }
+      )
     }
-    console.log("here is Login" + props.loginUser);
-
-
-
-
-
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
-
-      <Form onSubmit={submitHandler } className="w-50">
+    <Container className="d-flex justify-content-center align-items-center login-container" style={{ height: '60vh' }}>
+      {
+        msg ? (
+          <Alert className='alert-msg top' variant={alertType}>{msg}</Alert>
+        ) : null
+      }
+      <Form onSubmit={submitHandler} className="w-50">
 
         <Row className="mb-4">
           <Col className="d-flex justify-content-center">

@@ -49,7 +49,7 @@
   
 
   .btn-cute {
-    position: fixed; 
+    padding-bottom: 100px;
     right: 20px; 
     bottom: 20px;
     background-color: #FFB6C1; 
@@ -68,7 +68,7 @@
   }
 
   .container {
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   
   .sponsor-cat-img {
@@ -123,8 +123,29 @@
   }
 
   .spn-cat-container {
-    display: flex; /* Enable Flexbox */
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    height: 100vh; /* Make the container take up the full viewport height */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
   }
+
+
+  .amount-text {
+    font-size: 1.5rem; 
+    font-weight: 600;
+  }
+
+  .amount-title{
+    font-size: 1.2rem;
+    color: #8B5E3C;
+  }
+
+  .parent-container {
+    position: relative; /* Position the container relative to its normal position */
+  }
+  .back-to-home-btn {
+    position: fixed; /* Position the button relative to the viewport */
+    right: 20px; /* Align the button 20px from the right of the viewport */
+    bottom: 60px; 
+  }
+

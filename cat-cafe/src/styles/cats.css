@@ -1,0 +1,50 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.cat-img{
+    transition: opacity 0.5s ease-in-out;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 5px solid #6F4E37;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+}
+
+.cat-img:hover{
+    opacity: 0.7;
+}
+
+.cat-name {
+    color: #6F4E37; 
+    font-size: 1.5em; 
+    text-align: center; 
+  }
+  
+  .cat-details {
+    color: #6F4E37; 
+    line-height: 1.5; 
+  }
+  
+  .cat-detail-title {
+    font-weight: bold; 
+   
+  }
+
+  .breed-filter{
+    color: #6F4E37;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-weight: bold; 
+  }
+
+  .cat-form-select{
+    color: #6F4E37;
+    margin-top: 10px;
+  }
+
+  .row-container{
+    margin-bottom: 50px;
+  }
+
+  .brown-bg {
+    background-color: #6F4E37; /* A shade of brown */
+  }
