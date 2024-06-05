@@ -18,3 +18,27 @@
     transform: translate(-50%);
 }
 
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-amount {
+    padding: 0 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.quantity-controls .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.quantity-controls .btn:hover {
+    background-color: #6d4c41;
+    color: white;
+}
+
+

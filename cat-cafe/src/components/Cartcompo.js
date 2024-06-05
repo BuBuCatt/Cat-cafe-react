@@ -5,6 +5,7 @@ import CartService from "../services/CartService";
 import '../styles/Alert.css';
 import CartObj, { ProductObj } from "../classes/Cart";
 import { AuthContext } from "../context/AuthContext";
+import Footer from '../components/Footer';
 
 export default function Cartcompo({ carts }){
 
@@ -159,66 +160,68 @@ export default function Cartcompo({ carts }){
     }
 
     <Container className="mt-4">
-            <Row className="justify-content-center">
-                <Col lg={8}>
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                        <h2>Your Cart</h2>
-                        <div>
-                            {/* <Button variant="primary" onClick={saveHandler} className="me-2">
-                                Save Cart
-                            </Button> */}
-                            <Button variant="secondary" onClick={goHomeHandler}>
-                                Back to Home
-                            </Button>
-                        </div>
+        <Row className="justify-content-center">
+            <Col lg={8}>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Your Cart</h2>
+                    <div>
+                        {/* <Button variant="primary" onClick={saveHandler} className="me-2">
+                            Save Cart
+                        </Button> */}
+                        <Button variant="secondary" onClick={goHomeHandler}>
+                            Back to Home
+                        </Button>
                     </div>
-                    <Table hover>
-                        <thead className="table-light">
-                            <tr>
-                               
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
-                                <th>Total</th>
-                                <th>Action</th>
+                </div>
+                <Table hover>
+                    <thead className="table-light">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cart && cart.cart && cart.cart.length > 0 ? cart.cart.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item.pname}</td>
+                                <td>${item.price.toFixed(2)}</td>
+                                <td className="d-flex align-items-center quantity-controls">
+                                    <Button variant="outline-secondary" size="sm" onClick={() => updateItemQuantity(item, -1)}>-</Button>
+                                    <span className="mx-2 quantity-amount">{item.amount}</span>
+                                    <Button variant="outline-secondary" size="sm" onClick={() => updateItemQuantity(item, 1)}>+</Button>
+                                </td>
+                                <td>{item.amount}</td>
+                                <td>${(item.price * item.amount).toFixed(2)}</td>
+                                <td>
+                                    <Button variant="danger" size="sm" onClick={() => removeItem(item.id)}>
+                                        Remove
+                                    </Button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {cart && cart.cart && cart.cart.length > 0 ? cart.cart.map((item, index) => (
-                                <tr key={index}>
-                                   
-                                    <td>{item.pname}</td>
-                                    <td>${item.price.toFixed(2)}</td>
-                                    <td>
-                                            <Button variant="outline-secondary" size="sm" onClick={() => updateItemQuantity(item,-1)}>-</Button>
-                                            {' '}
-                                            {item.amount}
-                                            {' '}
-                                            <Button variant="outline-secondary" size="sm" onClick={() => updateItemQuantity(item,1)}>+</Button>
-                                        </td>
-                                    <td>{item.amount} </td>
-                                    <td>${(item.price * item.amount).toFixed(2)}</td>
-                                    <td>
-                                        <Button variant="danger" size="sm" onClick={() => removeItem(item.id)}>
-                                            Remove
-                                        </Button>
-                                    </td>
-                                </tr>
-                            )) : (
-                                <tr>
-                                    <td colSpan="6" className="text-center">No items in cart</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </Table>
-                    <div className="d-grid gap-2 w-50 mx-auto">
-                        <Alert variant="secondary">Total: ${totalCost.toFixed(2)}</Alert>
-                        <Button variant="primary" onClick={()=> resetCart()}>Reset Cart</Button>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+                        )) : (
+                            <tr>
+                                <td colSpan="6" className="text-center">No items in cart</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+                <div className="d-grid gap-2 w-50 mx-auto">
+                    <Alert variant="secondary">Total: ${totalCost.toFixed(2)}</Alert>
+                    <Button variant="primary" onClick={() => resetCart()}>Reset Cart</Button>
+                </div>
+            </Col>
+           
+        </Row>
+
+    </Container>
+
+
+
+
 </>
 
     )

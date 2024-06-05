@@ -15,9 +15,12 @@ const ShoppingCart = (props) => {
       <Cartcompo  carts={props.shoppingCart}/>
       : <p className='text-center my-2 mx-auto'>Please login to access your cart</p>
     }
-    <Footer/>
+
+
 
     </>
+
+   
   
   );
 }
