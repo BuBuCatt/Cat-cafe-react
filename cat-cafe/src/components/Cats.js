@@ -152,7 +152,7 @@ export default function Cats({cats, addToWishlist ,removeFromWishlist}) {
                         Filter by Breed:
                     </label>
                     <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic" className="brown-bg">
+                        <Dropdown.Toggle variant="success" id="dropdown-basic" className="brown-bg  ">
                         {filter}
                         </Dropdown.Toggle>
 

@@ -85,12 +85,13 @@ const SponsorCat = ({addProductObj}) => {
           <p className="text-secondary amount-text ">{selectedAmount}.00 CAD</p>
           <div>
             <span className='amount-title'>Amount</span>
-            <div className="my-2">
+            <div className="my-2 button-container">
               {/* Amount Buttons */}
               {[1, 3, 5, 10, 20,30, 50,100].map((amount) => (
                 <button 
                   key={amount} 
-                  className={`btn ${selectedAmount === amount ? 'btn-secondary' : 'btn-outline-secondary'} mx-1 `} 
+                  className={`btn ${selectedAmount === amount ? 'btn-secondary' : 'btn-outline-secondary'} mx-1 pretty-button`
+                  }
                   onClick={() => handleAmountSelect(amount)}
                 >
                   ${amount}
@@ -100,10 +101,10 @@ const SponsorCat = ({addProductObj}) => {
           </div>
           <div className="my-4">
             <span className='quantity-title'>Quantity</span>
-            <div className="input-group w-50 my-2">
-              <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(false)}>-</button>
-              <input type="text" className="form-control text-center " value={quantity} readOnly />
-              <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange(true)}>+</button>
+            <div className="input-group w-50 my-2 quantity-container">
+              <button className="btn btn-outline-secondary quantity-btn" onClick={() => handleQuantityChange(false)}>-</button>
+              <input type="text" className="form-control text-center quantity-input " value={quantity} readOnly />
+              <button className="btn btn-outline-secondary quantity-btn" onClick={() => handleQuantityChange(true)}>+</button>
             </div>
           </div>
           <button className="btn btn-primary w-50   my-2  add-to-cart-btn " onClick={handleAddToCart}>Add to cart</button>

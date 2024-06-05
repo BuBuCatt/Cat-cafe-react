@@ -141,10 +141,15 @@
   .amount-title{
     font-size: 1.2rem;
     color: #8B5E3C;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   .parent-container {
-    position: relative; /* Position the container relative to its normal position */
+    display: flex;
+  flex-wrap: wrap; /* Wrap the buttons to the next line if necessary */
+  gap: 10px; /* Space between buttons */
+  justify-content: center; /* Center the buttons *//* Position the container relative to its normal position */
   }
   .back-to-home-btn {
     position: fixed; /* Position the button relative to the viewport */
@@ -152,3 +157,71 @@
     bottom: 60px; 
   }
 
+  .pretty-button {
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    flex: 1 1 100px; /* Make buttons flexible with a minimum width */
+    max-width: 150px; /* Set a maximum width for buttons */
+  }
+  
+  .pretty-button:hover {
+    background-color: #6d4c41; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  }
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between buttons */
+    justify-content: center; /* Center buttons */
+  }
+  
+
+  
+  .quantity-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content */
+    gap: 10px; /* Add space between elements */
+  }
+  
+  .quantity-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    flex: 1; /* Make buttons flexible */
+  }
+  
+  .quantity-btn:hover {
+    background-color: #6d4c41;
+    color: white;
+  }
+  
+  .quantity-input {
+    border-radius: 8px; /* Add rounded corners */
+    text-align: center;
+    width: 60px; /* Fixed width for the input */
+  }
+  
+  .add-to-cart-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: 100%; /* Full width */
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
