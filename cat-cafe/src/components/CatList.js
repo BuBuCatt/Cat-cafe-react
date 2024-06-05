@@ -37,7 +37,7 @@ export default function CatList({cats}) {
           </div>
 
             <div className="text-center mt-1">
-              <Link to="/adopt" className="btn btn-custom">View More</Link> 
+              <Link to="/adopt" className="btn-custom">View More</Link> 
             </div>
         </div>
         

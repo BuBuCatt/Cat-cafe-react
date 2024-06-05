@@ -16,6 +16,8 @@ h1{
     background-color: #6D4C41; /* Brown shade for buttons */
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 45%; 
+    margin-top: 10px;
 }
 
 .brown-btn:hover {

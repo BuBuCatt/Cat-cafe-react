@@ -22,7 +22,7 @@
     top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffa500;
+    background-color: #ffa600a5;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -30,6 +30,7 @@
     border-radius:25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 40%;
   }
 
   .sponsor-banner img {
@@ -40,6 +41,7 @@
   }
   .sponsor-btn:hover {
     background-color: #6F4E37; /* Change the background color when the button is hovered */
+  
   }
 
   .banner-title{
@@ -92,6 +94,7 @@
   .btn {
     border-radius: 50px;
     transition: all 0.3s ease;
+
   }
   
   .btn:hover {
