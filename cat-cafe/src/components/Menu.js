@@ -27,8 +27,8 @@ export default function Menu(props) {
 
         //create request to send data to backend
         let itemData = new FormData();
-        alert(loginUser.id);
-        alert(item.mid);
+        // alert(loginUser.id);
+        // alert(item.mid);
 
        
         itemData.append("uid",user.id)
@@ -50,22 +50,7 @@ export default function Menu(props) {
         )
 
       }
-      // console.log("Product details : " + item.mid, item.menuName, item.menuPrice);
-      // console.log("item obj" + item);
-      // const productObj = new ProductObj(item.mid, item.menuName, item.menuPrice); // Create a new product object
-      // props.addProObj(productObj); // Call the function passed via props
-
-      // console.log("added coffee name ." +item.menuName);
-      // console.log("added coffee obj name"+productObj.pname)
-
-      // console.log("cart item " + props.cart.cart);
-
-        // If props.cart and props.cart.cart exist, log them
-        // if (props.cart && props.cart.cart) {
-        //   console.log("Cart items:", props.cart.cart);
-        // } else {
-        //   console.log("Cart or cart items are undefined");
-        // }
+      
     };
 
   return (

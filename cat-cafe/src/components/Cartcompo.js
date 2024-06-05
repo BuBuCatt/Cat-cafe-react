@@ -43,56 +43,7 @@ export default function Cartcompo({ carts }){
         });
     }
 
-    // function updateQuantity(mid, change) {
-    //     setCart((prevCarts) => {
-    //         return {
-    //             ...prevCarts,
-    //             cart: prevCarts.cart.map(item => 
-    //                 item.mid === mid ? { ...item, amount: Math.max(1, item.amount + change) } : item
-    //             )
-    //         };
-    //     });
-    // }
-
-    // const incrementQuantity = (mid) => {
-    //     // updateQuantity(mid, 1); // Assuming updateQuantity handles increment by 1
-    // };
-    
-    // const decrementQuantity = (mid) => {
-    //     // updateQuantity(mid, -1); // Assuming updateQuantity handles decrement by 1
-    // };
-
-    
-    // const removeItemFunction = (id) => {
-    //     setCart(prevCart => {
-    //         const newCart = new CartObj(prevCart.uid);
-        
-    //         prevCart.cart.forEach((product, key) => {
-    //             console.log("This is key" + key);
-    //             if (key !== id ) {
-    //                 newCart.addProduct(new ProductObj(key, product.pname, product.price, product.amount));
-    //             }
-    //         });
-        
-    //         return newCart;
-    //     });
-    // }
-    
-    // const saveHandler = ()=>{
-    //     carts.toSave();
-    //     alert("Cart saved!!!!!!:D");
-    // }
-
-    // console.log("Here is cart compo: " + carts);
-    // console.log("Here is cart compo: " + JSON.stringify(carts, null, 2));
-
-    // console.log("carts: ", carts);
-    // console.log("carts.cart: ", carts?.cart);
-    // carts.cart && carts.cart.forEach(item => {
-    //     console.log("item: ", item);
-    //     console.log("item.menuName: ", item.menuName);
-    //     console.log("item.menuPrice: ", item.menuPrice);
-    // });
+   
 
     useEffect(()=>{
         reloadData();
@@ -112,7 +63,7 @@ export default function Cartcompo({ carts }){
             CartService.getCart(user.id, user.sessionID).then(
                 (response)=>{
                   setCart(new CartObj(user.id));
-                  console.log('Cart from sql: '+response.data)
+                  //console.log('Cart from sql: '+response.data)
                   response.data.forEach(prod => {
                     if(prod.mid){
                       let productObj = new ProductObj(prod.id, prod.mid, null, prod.pname, prod.price, prod.amount); // Create a new product object
@@ -141,7 +92,7 @@ export default function Cartcompo({ carts }){
                     // removeItemFunction(id);
                 },
                 (rej)=>{
-                    console.log(rej);// Log errors if file reading fails
+                    //console.log(rej);// Log errors if file reading fails
                     let msg = rej.response && rej.response.data ? rej.response.data : rej.response;
                     setMsg(msg || "An error occurred while removing the item.");
                     setAlertType('danger');
